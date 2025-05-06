@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuizGame – Host Waiting Room</title>
+</head>
+<body>
+    <h1>Waiting for Players…</h1>
+    <ul id="players-list">
+        <li><em>(no one yet)</em></li>
+    </ul>
+    <button id="start_game">Start Game</button>
+
+    <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>
+</body>
+</html>
