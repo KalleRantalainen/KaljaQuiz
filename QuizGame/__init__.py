@@ -1,0 +1,1 @@
+# Ei tarvita koodia. Init tiedosto siksi, että python tunnistaa moduuliksi. Toimii ehkä ilmankin joskus?
