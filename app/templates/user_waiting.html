@@ -7,5 +7,23 @@
 </head>
 <body>
     <p>Waiting for host...</p>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+    <!--Scripti joka kuuntelee next_question tapahtumaa. Jos tälläinen pamahtaa
+    QuizGamesta, niin pelaajan näkymä muuttuu. En tiedä onko paras mahdollinen tapa
+    koska pitääkö täällä kuunnella sitten myös kolikkopeliä samalla tavalla?-->
+    <script>
+        const socket = io();
+        
+        console.log("EMITTING join_game from app/templates/user_waiting.html");
+        // Tell server we joined (optional)
+        socket.emit("join_game", { player_id: "{{ user_id }}" });
+        console.log("Emit went through?");
+        // When host emits next_question, go to game screen
+        socket.on("next_question", (data) => {
+            console.log("Received next_question event from server, in user_waiting.html");
+            window.location.href = "/quizgame/play";
+        });
+    </script>
 </body>
 </html>

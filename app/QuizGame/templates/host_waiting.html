@@ -5,15 +5,68 @@
     <title>QuizGame – Host Waiting Room</title>
 </head>
 <body>
-    <h1>Waiting for Players…</h1>
-    <ul id="players-list">
-        <li><em>(no one yet)</em></li>
-    </ul>
-    <button id="start_game">Start Game</button>
+    <!-- include Socket.IO client -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
-    <h2>Join link:</h2>
-    <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code should be here">
+    <!-- Waiting Room -->
+    <section id="waiting-screen">
+        <h1>Waiting for Players…</h1>
+        <ul id="players-list">
+            <li><em>(no one yet)</em></li>
+        </ul>
+        <button id="start-game">Start Game</button>
 
-    <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>
+        <h2>Join link:</h2>
+        <img 
+            src="data:image/png;base64,{{ qr_code }}" 
+            alt="QR Code for players to join" 
+        >
+    </section>
+
+    <!-- Game Screen (hidden until the host clicks “Start Game”) -->
+    <section id="game-screen" style="display: none;">
+        <h1 id="question">Waiting for question…</h1>
+        <div id="timer">Timer: --</div>
+    </section>
+
+    <!-- Host logic: swap views & wire up socket events -->
+    <script>
+        const socket = io();
+        const hostId = "{{ hostId }}";
+
+        // join the shared "players" room
+        socket.emit("join_game", { player_id: hostId });
+
+        // start button handler
+        document
+            .getElementById("start-game")
+            .addEventListener("click", () => {
+                // tell server to kick off the loop
+                socket.emit("start_game_loop", {"test": 123});
+
+                // swap the UI
+                document.getElementById("waiting-screen").style.display = "none";
+                document.getElementById("game-screen").style.display    = "block";
+            });
+
+        // receive questions on the same connection
+        socket.on("next_question", (data) => {
+            document.getElementById("question").textContent = data.question;
+            startCountdown(data.time_limit);
+        });
+
+        // countdown helper
+        function startCountdown(seconds) {
+            const timerEl = document.getElementById("timer");
+            let timeLeft = seconds;
+
+            const interval = setInterval(() => {
+                timerEl.textContent = `Timer: ${timeLeft}s`;
+                if (timeLeft-- <= 0) {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    </script>
 </body>
 </html>

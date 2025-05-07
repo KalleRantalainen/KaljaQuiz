@@ -1,6 +1,7 @@
 # Init flask app
 from flask import Flask
 from flask_session import Session
+from .extensions import socketio
 
 from .QuizGame import quizgame_bp
 
@@ -17,5 +18,7 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(quizgame_bp)
+
+    socketio.init_app(app, async_mode='eventlet')
 
     return app

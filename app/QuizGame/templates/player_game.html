@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuizGame</title>
+</head>
+<body>
+    <h2 id="question">Waiting...</h2>
+    <input type="text" id="answer-input" placeholder="Your answer">
+    <button id="submit-btn">Submit</button>
+    <div id="timer">Timer: --</div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    
+    <script>
+        const socket = io();
+        const playerId = "{{ user_id }}";
+
+        // Join the 'players' room
+        socket.emit("join_game", { player_id: playerId });
+
+        socket.on("next_question", (data) => {
+            document.getElementById("question").textContent = data.question;
+            document.getElementById("answer-input").value = "";
+            startCountdown(data.time_limit);
+        });
+
+        document.getElementById("submit-btn").addEventListener("click", () => {
+            const answer = document.getElementById("answer-input").value;
+            socket.emit("answer_submitted", {
+                player_id: playerId,
+                answer: answer
+            });
+        });
+
+        function startCountdown(seconds) {
+            const timerEl = document.getElementById("timer");
+            let timeLeft = seconds;
+            const interval = setInterval(() => {
+                timerEl.textContent = `Timer: ${timeLeft}s`;
+                if (timeLeft-- <= 0) clearInterval(interval);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
