@@ -11,6 +11,9 @@
     </ul>
     <button id="start_game">Start Game</button>
 
+    <h2>Join link:</h2>
+    <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code should be here">
+
     <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>
 </body>
 </html>

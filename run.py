@@ -22,4 +22,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     host_ip = get_host_ip()
     print(f"User URL: http://{host_ip}:{port}/user")
+    # Tallennetaan osoite, jonka kautta käyttäjät pääsee liittymään.
+    app.config['HOST_IP'] = host_ip
+    app.config['PORT'] = port
     app.run(host="0.0.0.0", port=port, debug=True)
