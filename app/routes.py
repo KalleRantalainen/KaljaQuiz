@@ -18,7 +18,9 @@ def host_waiting_room():
     if game == "coinflipperZ":
         return render_template("host_waiting_room.html")
     elif game == "quizgame":
-        return render_template("host_waiting.html")
+        # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
+        # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
+        return redirect("/quizgame/waiting")
     else:
         return "Unknown game", 400
 
