@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CoinflipperZ – Host Waiting Room</title>
+</head>
+<body>
+    <h1>Waiting for Players…</h1>
+    <ul id="players-list">
+        <li><em>(no one yet)</em></li>
+    </ul>
+    <button id="start_game">Start Game</button>
+
+    <script>
+        // Tee niin että pelin aloittaminen aloittaa pelin myös userille.
+        document.getElementById("start_game").addEventListener("click", () => {
+          window.location.href = "/coinflipperZ/coin";  // This should match your coinflipper route
+        });
+    </script>
+    <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer>
+        //Tällä hetkellä ottaa quizgamen kautta ihmiset jotka liittynyt
+    </script>
+</body>
+</html>

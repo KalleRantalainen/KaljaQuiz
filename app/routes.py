@@ -11,6 +11,19 @@ main = Blueprint("main", __name__)
 def host():
     return render_template('host.html')
 
+@main.route("/host/waiting")
+def host_waiting_room():
+    game = request.args.get("game")
+    
+    if game == "coinflipperZ":
+        return render_template("host_waiting_room.html")
+    elif game == "quizgame":
+        # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
+        # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
+        return redirect("/quizgame/waiting")
+    else:
+        return "Unknown game", 400
+
 
 # Route for the players to register/give their name
 @main.route('/user', methods=["GET"])

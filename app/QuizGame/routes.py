@@ -19,6 +19,8 @@ def waiting_screen_host():
     port = current_app.config.get("PORT", 8080)
     url = f"http://{host_ip}:{port}/user"
 
+    print("URL:", url, flush=True)
+    
     qr_code = generate_qr(url)
 
     return render_template("host_waiting.html", qr_code=qr_code)
