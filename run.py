@@ -4,6 +4,7 @@ import os
 import socket
 
 from app import create_app
+from app import socketio
 
 app = create_app()
 
@@ -26,3 +27,4 @@ if __name__ == "__main__":
     app.config['HOST_IP'] = host_ip
     app.config['PORT'] = port
     app.run(host="0.0.0.0", port=port, debug=True)
+    socketio.run(app, host="0.0.0.0", port=port, debug=True)

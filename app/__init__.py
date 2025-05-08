@@ -5,6 +5,8 @@ from flask_session import Session
 from .QuizGame import quizgame_bp
 from .coinflipperZ import coinflipperZ_bp
 
+from .extensions import socketio
+
 
 def create_app():
     app = Flask(__name__, static_folder="static", template_folder="templates")
@@ -19,5 +21,7 @@ def create_app():
     app.register_blueprint(main)
     app.register_blueprint(quizgame_bp)
     app.register_blueprint(coinflipperZ_bp)
+    
+    socketio.init_app(app, async_mode='eventlet')
 
     return app
