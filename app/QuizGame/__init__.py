@@ -9,3 +9,4 @@ quizgame_bp = Blueprint(
 )
 
 from . import routes
+from . import sockets

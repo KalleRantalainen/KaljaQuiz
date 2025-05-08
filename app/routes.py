@@ -16,7 +16,7 @@ def host_waiting_room():
     game = request.args.get("game")
     
     if game == "coinflipperZ":
-        return render_template("host_waiting_room.html")
+        return redirect("/coinflipperZ/waiting")
     elif game == "quizgame":
         # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
         # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
@@ -46,7 +46,7 @@ def register():
 # Route to the user waiting screen
 @main.route('/user-waiting', methods=["GET"])
 def user_waiting():
-    return render_template("user_waiting.html")
+    return render_template("user_waiting.html", user_id=session['user_id'])
 
 
 # JSON endpoint to get the player names

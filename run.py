@@ -26,5 +26,4 @@ if __name__ == "__main__":
     # Tallennetaan osoite, jonka kautta käyttäjät pääsee liittymään.
     app.config['HOST_IP'] = host_ip
     app.config['PORT'] = port
-    app.run(host="0.0.0.0", port=port, debug=True)
     socketio.run(app, host="0.0.0.0", port=port, debug=True)
