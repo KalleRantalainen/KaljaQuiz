@@ -14,7 +14,7 @@ def host():
 @main.route("/host/waiting")
 def host_waiting_room():
     game = request.args.get("game")
-
+    
     if game == "coinflipperZ":
         return render_template("host_waiting_room.html")
     elif game == "quizgame":
