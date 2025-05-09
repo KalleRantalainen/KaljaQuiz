@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, abort, current_app
+from flask import render_template, redirect, url_for, abort, current_app, session
 import io
 import base64
 import qrcode
@@ -23,4 +23,14 @@ def waiting_screen_host():
     
     qr_code = generate_qr(url)
 
-    return render_template("host_waiting.html", qr_code=qr_code)
+    host_id = "host_id_should_be_here"
+    if 'host_id' in session:
+        host_id = session['host_id']
+
+    return render_template("host_waiting.html", qr_code=qr_code, host_id=host_id)
+
+
+# Pelaajien näkymä pelissä, route ei muutu pelin aikana, näkymä päivittyy dynaamisesti.
+@quizgame_bp.route("/player_game")
+def player_game():
+    return render_template("quizgame_player.html")
