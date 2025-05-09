@@ -2,8 +2,13 @@ from flask import render_template, redirect, url_for, abort, current_app, sessio
 import io
 import base64
 import qrcode
+from threading import Lock
 
 from . import quizgame_bp
+from app.player_store import players
+from .game_state_store import gameStateStore
+
+ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
 def generate_qr(url):
     img = qrcode.make(url)
@@ -33,4 +38,12 @@ def waiting_screen_host():
 # Pelaajien näkymä pelissä, route ei muutu pelin aikana, näkymä päivittyy dynaamisesti.
 @quizgame_bp.route("/player_game")
 def player_game():
+    print("PLAYERS IN PLAYER_STORE:", players, flush=True)
+    print("  PREVIOUS PLAYER COUNT:", gameStateStore.get_player_count(), flush=True)
+    # Käytetään lukkoa ettei tule concurrency ongelmia.
+    # Useampi pelaaja ohjataan tänne kerralla eikä moni
+    # saa muokata samaa muuttujaa yhtäaikaa.
+    with ready_lock:
+        gameStateStore.increase_player_count()
+    print("  UPDATED PLAYER COUNT:", gameStateStore.get_player_count(), flush=True)
     return render_template("quizgame_player.html")
