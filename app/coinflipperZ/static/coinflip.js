@@ -1,16 +1,31 @@
-const coin = document.getElementById("coin");
-const resultText = document.getElementById("result");
+const socket = io();
+        
+console.log("player_coins js file");
 
-coin.addEventListener("click", async () => {
-  const selected = document.querySelector('input[name="side"]:checked').value;
+// Server should embed this as a JS variable
+const isHost = document.body.dataset.isHost === "true";
 
-  coin.classList.add("flip");
-  resultText.textContent = "";
-  setTimeout(() => coin.classList.remove("flip"), 1000);
+if (isHost) {
+    document.getElementById("coin").style.display = "block";
+    document.getElementById("coin").addEventListener("click", () => {
+        socket.emit("flip_coin");
+    });
+}
 
-  const res = await fetch("/api/flip?choice=" + selected);
-  const data = await res.json();
-  setTimeout(() => {
-    resultText.textContent = `Result: ${data.result} — You ${data.win ? "won!" : "lost."}`;
-  }, 1000);
+document.querySelectorAll('input[name="side"]').forEach(radio => {
+    radio.addEventListener("change", e => {
+      socket.emit("player_choice", { choice: e.target.value });
+    });
+  });
+
+
+socket.on("animate_flip", (data) => {
+    const coin = document.getElementById("coin");
+    coin.classList.add("flip");
+    setTimeout(() => coin.classList.remove("flip"), 1000);
+  });
+  
+socket.on("flip_result", (data) => {
+  document.getElementById("result").textContent =
+    `Result: ${data.result} — You ${data.win ? "won!" : "lost."}`;
 });

@@ -10,10 +10,19 @@
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
         const socket = io();
+
+        socket.on("connect", () => {
+            console.log("Connected to server as user");
+        });
         
         console.log("EMITTING join_game from app/templates/user_waiting.html");
         // Emit event join_game
         socket.emit("join_game", { player_id: "{{ user_id }}" });
+        
+        socket.on("start_game", () => {
+            console.log("Received start_game, redirecting...");
+            window.location.href = "/coinflipperZ/coin";
+        });
     </script>
 </body>
 </html>

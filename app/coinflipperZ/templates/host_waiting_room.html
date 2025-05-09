@@ -11,11 +11,19 @@
     </ul>
     <button id="start_game">Start Game</button>
 
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
-        // Tee niin että pelin aloittaminen aloittaa pelin myös userille.
-        document.getElementById("start_game").addEventListener("click", () => {
-          window.location.href = "/coinflipperZ/coin";  // This should match your coinflipper route
-        });
+      const socket = io();
+    
+      socket.on("connect", () => {
+        console.log("Connected as host");
+    });
+    
+      document.getElementById("start_game").addEventListener("click", () => {
+        socket.emit("start_game");  // Tell server to begin
+        console.log("Emitted start_game from host");
+        window.location.href = "/coinflipperZ/coin?host=1";  // Still redirect host
+      });
     </script>
     <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer>
         //Tällä hetkellä ottaa quizgamen kautta ihmiset jotka liittynyt

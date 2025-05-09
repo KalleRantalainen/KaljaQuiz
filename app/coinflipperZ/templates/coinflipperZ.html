@@ -29,8 +29,9 @@
     }
   </style>
 </head>
-<body>
-  <div class="coin" id="coin">Flip</div>
+
+<body data-is-host="{{ is_host | lower }}">
+  <div class="coin" id="coin" style="display: none;">Flip</div>
   <label style="display:block; text-align:center;">
     <input type="radio" name="side" value="Heads" checked> Heads
     <input type="radio" name="side" value="Tails"> Tails

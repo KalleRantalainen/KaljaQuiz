@@ -8,4 +8,4 @@ from app.player_store import players
 def handle_join(data):
     player_id = data["player_id"]
     join_room("players")
-    print(f" !!! {player_id} joined game", flush=True)
+    print(f" !!!--@--!!! {player_id} joined game", flush=True)
