@@ -1,5 +1,6 @@
 from flask_socketio import emit, join_room
 from time import sleep
+import eventlet
 
 from app.extensions import socketio
 from app.player_store import players
@@ -31,5 +32,14 @@ def handle_player_ready(data):
     print(" - Current count:", current_count, flush=True)
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
-        sleep(1)
         emit('start_game', room=QUIZGAME_ROOM)
+        emit('next_question') 
+
+# Next question pitää fixaa. Jos tekee tällä tavalla
+# niin clientit saa kiinni mut host ei. Jos emittaa
+# hostin js koodista niin host saa kiinni mutta clientit ei.
+# Nyt menen nukkumaan.
+@socketio.on('next_question')
+def handle_next_question():
+    print("HANDLING NEXT QUESTION")
+    emit("next_question", room=QUIZGAME_ROOM)

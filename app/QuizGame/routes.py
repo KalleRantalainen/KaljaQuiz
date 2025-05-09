@@ -47,3 +47,19 @@ def player_game():
         gameStateStore.increase_player_count()
     print("  UPDATED PLAYER COUNT:", gameStateStore.get_player_count(), flush=True)
     return render_template("quizgame_player.html", user_id=session['user_id'])
+
+# Route hostin partial viewien lataamista varten
+@quizgame_bp.route("/host_partial/<view_name>")
+def get_host_partial(view_name):
+    host_ip = current_app.config.get("HOST_IP", "127.0.0.1")
+    port = current_app.config.get("PORT", 8080)
+    url = f"http://{host_ip}:{port}/user"
+    
+    qr_code = generate_qr(url)
+
+    if view_name == "waiting":
+        return render_template("/partials/host_waiting_view.html", qr_code=qr_code)
+    elif view_name == "game":
+        return render_template("/partials/host_game_view.html")
+    else:
+        return "Not Found", 404
