@@ -9,8 +9,8 @@ choices = {}
 
 @socketio.on("start_game")
 def handle_start_game():
-    print("Received start_game from host") 
-    socketio.emit("start_game")  # Send to everyone
+    print("!!! start_game received from host, broadcasting to users", flush=True)
+    emit("start_game", broadcast=True, to="players")
 
 @socketio.on("connect")
 def handle_connect():
