@@ -1,4 +1,5 @@
 from flask_socketio import emit, join_room
+from time import sleep
 
 from app.extensions import socketio
 from app.player_store import players
@@ -30,4 +31,5 @@ def handle_player_ready(data):
     print(" - Current count:", current_count, flush=True)
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
+        sleep(1)
         emit('start_game', room=QUIZGAME_ROOM)

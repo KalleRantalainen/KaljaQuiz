@@ -10,7 +10,12 @@
         const socket = io();
         socket.on('connect', () => {
             console.log('Connected to server, emitting player_ready');
+            socket.emit('join_game', { player_id: "{{ user_id }}" });
             socket.emit('player_ready', {"test": "test"});
+        });
+
+        socket.on('start_game', () => {
+            console.log("Pelaaja otti vastaan start_game eventin");
         });
     </script>
 </body>

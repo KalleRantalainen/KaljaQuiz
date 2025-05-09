@@ -46,4 +46,4 @@ def player_game():
     with ready_lock:
         gameStateStore.increase_player_count()
     print("  UPDATED PLAYER COUNT:", gameStateStore.get_player_count(), flush=True)
-    return render_template("quizgame_player.html")
+    return render_template("quizgame_player.html", user_id=session['user_id'])
