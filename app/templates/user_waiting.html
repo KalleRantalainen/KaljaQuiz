@@ -15,6 +15,13 @@
         console.log("EMITTING join_game from app/templates/user_waiting.html");
         // Emit event join_waiting_room
         socket.emit("join_waiting_room", { player_id: "{{ user_id }}" });
+
+        
+        socket.on("switch_to_game_room", (data) => {
+            const room = data.room;
+            console.log("Switching to room:", room);
+            socket.emit("join_game_room", { room: room, player_id: "{{ user_id }}" });
+        });
         
         // Kuunnellaan start_quizgame eventtiä ja siirrytään oikeaan näkymään
         // -> Muillekkin peleille voi tehdä tänne samanlaisen eventin kuuntelun

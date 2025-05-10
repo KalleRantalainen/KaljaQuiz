@@ -5,16 +5,8 @@ import eventlet
 from app.extensions import socketio
 from app.player_store import players
 from .game_state_store import gameStateStore
+from app.rooms import QUIZGAME_ROOM
 
-QUIZGAME_ROOM = "quizgame_room"
-
-# Tämä socket ottaa lukee join_game eventin.
-# event tulee kun pelaaja antaa nimensä ja painaa nappia.
-@socketio.on("join_quizgame")
-def handle_join(data):
-    player_id = data["player_id"]
-    join_room(QUIZGAME_ROOM)
-    print(f" !!!--@--!!! {player_id} joined quizgame", flush=True)
 
 @socketio.on('start_quizgame')
 def handle_start_quizgame(data):
