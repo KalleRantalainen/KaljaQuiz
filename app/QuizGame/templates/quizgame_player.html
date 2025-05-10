@@ -9,6 +9,10 @@
         <!-- Question partial will be loaded here -->
     </div>
 
+    <div id="result-container">
+        <!-- Result (Correct/Incorrect) will be displayed here -->
+    </div>
+
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
         const socket = io();
@@ -27,19 +31,38 @@
          socket.on('next_question', () => {
             console.log("Pelaajat otti vastaan next_question")
             loadQuestion(0);  // Later: use server state or timer to pass the real question index
+            console.log("Kysymys 1 näytillä")
+
          })
     
-         // Partiaali
+         // Partiaali kysymyksen nyttämiselle
          function loadQuestion(index) {
             fetch(`/quizgame/quest_partial/${index}`)
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('player-question-container').innerHTML = html;
                 });
+
+            console.log("Kysymyksen lataaminen onnistui!")
         }
 
-            function submitAnswer(choice) {
-            socket.emit("submit_answer", { answer: choice });
+         // Kun kysymykseen on vastattu, pelaaja näkee näytöllään saiko hän oikein vai ei
+         // 10.5.2025 klo 20:26 vastaus nappulat eivät toimi
+         socket.on('answer_result', (data) => {
+            console.log("Pelaaja emittasi answer_resulttiin")
+            //Load result tähän
+            loadResult(data['result'])
+         })
+
+        //Ladataan menikö vastaus oikein
+        // 10.5.2025 klo 20:26 vastaus nappulat eivät toimi
+        function loadResult(result) {
+            const resultContainer = document.getElementById('result-container');
+            resultContainer.innerHTML = `<p>Your answer is: ${result}</p>`;
+        }
+
+        function submitAnswer(choice) {
+        socket.emit("submit_answer", { answer: choice });
         }
 
         // Make submitAnswer globally accessible

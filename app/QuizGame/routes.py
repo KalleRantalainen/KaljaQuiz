@@ -9,7 +9,7 @@ from types import SimpleNamespace
 from . import quizgame_bp
 from app.player_store import players
 from .game_state_store import gameStateStore
-from QuizGameLogic import getQuestions
+from .QuizGameLogic import getQuestions
 
 ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
