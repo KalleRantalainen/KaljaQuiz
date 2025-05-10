@@ -7,10 +7,10 @@ from flask import request
 # Store choices by user_id or socket id
 choices = {}
 
-@socketio.on("start_game")
+@socketio.on("start_coinflip")
 def handle_start_game():
-    print("!!! start_game received from host, broadcasting to users", flush=True)
-    emit("start_game", broadcast=True, to="players")
+    print("!!! start_coinflip received from host, broadcasting to users", flush=True)
+    emit("start_coinflip", broadcast=True, to="players")
 
 @socketio.on("connect")
 def handle_connect():
