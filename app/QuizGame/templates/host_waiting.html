@@ -36,8 +36,10 @@
         function startGame() {
             socket.emit('start_quizgame', {"test": "test"});
             console.log("HOST EMIT start_quizgame");
-            socket.emit("join_game", { player_id: "{{ host_id }}" });
-            console.log("HOST EMIT join_game (host joins the game room)");
+
+            //Ei tarvita join game enään kun se tehdään sockets_lobbyn kautta
+            //socket.emit("join_game", { player_id: "{{ host_id }}" });
+            //console.log("HOST EMIT join_game (host joins the game room)");
         }
 
         socket.on('start_game', () => {

@@ -16,10 +16,11 @@
         // Emit event join_waiting_room
         socket.emit("join_waiting_room", { player_id: "{{ user_id }}" });
 
-
+        
+        // Vaihetaan waiting room pelin roomiin
         socket.on("switch_to_game_room", (data) => {
             const room = data.room;
-            console.log("Switching to room:", room);
+            console.log("???????? Switching to room:", room);
             socket.emit("join_game_room", { room: room, player_id: "{{ user_id }}" });
         });
         

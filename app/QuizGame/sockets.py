@@ -5,7 +5,7 @@ import eventlet
 from app.extensions import socketio
 from app.player_store import players
 from .game_state_store import gameStateStore
-from app.rooms import QUIZGAME_ROOM
+from ..rooms import QUIZGAME_ROOM
 
 
 @socketio.on('start_quizgame')
