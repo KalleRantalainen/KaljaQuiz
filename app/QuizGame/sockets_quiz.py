@@ -7,20 +7,24 @@ from app.player_store import players
 from .game_state_store import gameStateStore
 from ..rooms import LOBBY
 
-# Tämä socket ottaa lukee join_game eventin.
-# event tulee kun pelaaja antaa nimensä ja painaa nappia.
-@socketio.on("join_game")
-def handle_join(data):
-    player_id = data["player_id"]
-    join_room(LOBBY)
-    print(f" !!! {player_id} joined game", flush=True)
+"""Join_game on nyt join_lobby ja käytetään kaikkiin peleihin"""
 
-
+# Quizgamen aloitus, muille peleille voi tehdä samanlaisen joskus
 @socketio.on('start_quizgame')
 def handle_start_quizgame(data):
     print("Host started quiz game (server)")
     # Emittoidaan pelaajille täältä sama eventti (huoneeseen players, koska pelaajat ovat siellä)
     emit('start_quizgame', room=LOBBY)
+
+
+# Next question pitää fixaa. Jos tekee tällä tavalla
+# niin clientit saa kiinni mut host ei. Jos emittaa
+# hostin js koodista niin host saa kiinni mutta clientit ei.
+# Nyt menen nukkumaan.
+@socketio.on('next_question')
+def handle_next_question():
+    print("HANDLING NEXT QUESTION")
+    emit("next_question", room=LOBBY)
 
 @socketio.on('player_ready')
 def handle_player_ready(data):
@@ -34,13 +38,3 @@ def handle_player_ready(data):
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
         emit('next_question') 
-
-# Next question pitää fixaa. Jos tekee tällä tavalla
-# niin clientit saa kiinni mut host ei. Jos emittaa
-# hostin js koodista niin host saa kiinni mutta clientit ei.
-# Nyt menen nukkumaan.
-@socketio.on('next_question')
-def handle_next_question():
-    print("HANDLING NEXT QUESTION")
-    emit("next_question", room=LOBBY)
-
