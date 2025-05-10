@@ -20,9 +20,10 @@
         // Vaihetaan waiting room pelin roomiin
         socket.on("switch_to_game_room", (data) => {
             const room = data.room;
-            console.log("???????? Switching to room:", room);
+            console.log(" Switching to room:", room);
             socket.emit("join_game_room", { room: room, player_id: "{{ user_id }}" });
         });
+
         
         // Kuunnellaan start_quizgame eventtiä ja siirrytään oikeaan näkymään
         // -> Muillekkin peleille voi tehdä tänne samanlaisen eventin kuuntelun

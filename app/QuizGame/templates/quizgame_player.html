@@ -10,7 +10,8 @@
         const socket = io();
         socket.on('connect', () => {
             console.log('Connected to server, emitting player_ready');
-            socket.emit('join_game', { player_id: "{{ user_id }}" });
+            //Tällä hetkellä vain host käyttää join_game
+            //socket.emit('join_game', { player_id: "{{ user_id }}" });
             socket.emit('player_ready', {"test": "test"});
         });
 
