@@ -13,13 +13,20 @@
             socket.emit('player_ready', {"test": "test"});
         });
 
+        // ALoittaa pelin
         socket.on('start_game', () => {
             console.log("Pelaaja otti vastaan start_game eventin");
         });
 
-        socket.on('next_question', () => {
-            console.log("Pelaaja otti vastaan next_question");
+        // Aloittaa kysmysten latomisen pelaajille
+        socket.on('start_questions', () => {
+            console.log("Pelaaja otti vastaan start_questions");
          });
+
+         // Aloittaa seuraavan kysymyksen
+         socket.on('next_question', () => {
+            console.log("Pelaajat otti vastaan next_question")
+         })
     </script>
 </body>
 </html>

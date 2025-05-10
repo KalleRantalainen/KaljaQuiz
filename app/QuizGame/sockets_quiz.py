@@ -16,16 +16,7 @@ def handle_start_quizgame(data):
     # Emittoidaan pelaajille täältä sama eventti (huoneeseen players, koska pelaajat ovat siellä)
     emit('start_quizgame', room=LOBBY)
 
-
-# Next question pitää fixaa. Jos tekee tällä tavalla
-# niin clientit saa kiinni mut host ei. Jos emittaa
-# hostin js koodista niin host saa kiinni mutta clientit ei.
-# Nyt menen nukkumaan.
-@socketio.on('next_question')
-def handle_next_question():
-    print("HANDLING NEXT QUESTION")
-    emit("next_question", room=LOBBY)
-
+# Alustaa pelin aloittamalla
 @socketio.on('player_ready')
 def handle_player_ready(data):
     print()
@@ -37,4 +28,21 @@ def handle_player_ready(data):
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
-        emit('next_question') 
+        emit('start_questions')
+
+
+@socketio.on('start_questions')
+def start_questions():
+    return
+
+# Next question pitää fixaa. Jos tekee tällä tavalla
+# niin clientit saa kiinni mut host ei. Jos emittaa
+# hostin js koodista niin host saa kiinni mutta clientit ei.
+# Nyt menen nukkumaan.
+@socketio.on('next_question')
+def handle_next_question():
+    print("HANDLING NEXT QUESTION")
+    emit("next_question", room=LOBBY)
+
+
+ 

@@ -1,0 +1,15 @@
+<div id="question-container">
+    <h2>{{ question.text }}</h2>
+    <ul>
+        {% for choice in question.choices %}
+            <li><button onclick="submitAnswer('{{ choice }}')">{{ choice }}</button></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+    function submitAnswer(choice) {
+        const socket = io();
+        socket.emit("submit_answer", { answer: choice });
+    }
+</script>

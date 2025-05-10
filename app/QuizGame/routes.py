@@ -7,6 +7,7 @@ from threading import Lock
 from . import quizgame_bp
 from app.player_store import players
 from .game_state_store import gameStateStore
+from ...QuizGameLogic import getQuestions
 
 ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
@@ -63,3 +64,10 @@ def get_host_partial(view_name):
         return render_template("/partials/host_game_view.html")
     else:
         return "Not Found", 404
+    
+
+@quizgame_bp.route("/quest_partial/<quest_num>")
+def get_example_question(quest_num):
+    question = getQuestions.example_get_questions
+
+    return render_template("/partials/question.html", question=question)
