@@ -1,4 +1,6 @@
 
+let fetchInterval = null;
+
 async function fetchPlayers() {
     const res = await fetch("/players");
     if (!res.ok) return;
@@ -17,6 +19,20 @@ async function fetchPlayers() {
     }
 }
 
-// poll every 2s
-setInterval(fetchPlayers, 2000);
-fetchPlayers();
+// Start polling
+function startPollingPlayers() {
+    fetchPlayers();
+    fetchInterval = setInterval(fetchPlayers, 2000);
+}
+
+// Stop polling
+function stopPollingPlayers() {
+    if (fetchInterval) {
+        clearInterval(fetchInterval);
+        fetchInterval = null;
+        console.log("Stopped polling players");
+    }
+}
+
+window.startPollingPlayers = startPollingPlayers;
+window.stopPollingPlayers = stopPollingPlayers;

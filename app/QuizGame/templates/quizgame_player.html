@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuizGame</title>
+</head>
+<body>
+    <h1>Player game screen</h1>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+        socket.on('connect', () => {
+            console.log('Connected to server, emitting player_ready');
+            socket.emit('join_game', { player_id: "{{ user_id }}" });
+            socket.emit('player_ready', {"test": "test"});
+        });
+
+        socket.on('start_game', () => {
+            console.log("Pelaaja otti vastaan start_game eventin");
+        });
+
+        socket.on('next_question', () => {
+            console.log("Pelaaja otti vastaan next_question");
+         });
+    </script>
+</body>
+</html>
