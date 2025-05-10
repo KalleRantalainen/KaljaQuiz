@@ -8,8 +8,24 @@
 <body>
     <h1>Host Screen</h1>
     <p>Select a game</p>
-    <a href="/host/waiting?game=coinflipperZ">CoinflipperZ</a>
-    <a href="/host/waiting?game=quizgame">KaljaQuiz</a>
+
+    <button id="select_coinflip">CoinflipperZ</button>
+    <button id="select_quizgame">KaljaQuiz</button>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        document.getElementById("select_quizgame").addEventListener("click", () => {
+            socket.emit("game_selected", { game: "quizgame" });
+            window.location.href = "/host/waiting?game=quizgame";
+        });
+
+        document.getElementById("select_coinflip").addEventListener("click", () => {
+            socket.emit("game_selected", { game: "coinflipperZ" });
+            window.location.href = "/host/waiting?game=coinflipperZ";
+        });
+    </script>
 
 </body>
 </html>

@@ -10,12 +10,11 @@
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
         // TÄnne täytyy saada socket io event joka kuuntelee start_quiz_game eventtiä
-        // TÄnne täytyy saada socket io event joka kuuntelee start_quiz_game eventtiä
         const socket = io();
         
         console.log("EMITTING join_game from app/templates/user_waiting.html");
-        // Emit event join_game
-        socket.emit("join_game", { player_id: "{{ user_id }}" });
+        // Emit event join_waiting_room
+        socket.emit("join_waiting_room", { player_id: "{{ user_id }}" });
         
         // Kuunnellaan start_quizgame eventtiä ja siirrytään oikeaan näkymään
         // -> Muillekkin peleille voi tehdä tänne samanlaisen eventin kuuntelun
