@@ -39,6 +39,8 @@
 
             socket.emit("join_game", { player_id: "{{ host_id }}" });
             console.log("HOST EMIT join_game (host joins the game room)");
+
+            
         }
 
         socket.on('start_game', () => {

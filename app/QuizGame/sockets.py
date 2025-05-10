@@ -5,22 +5,22 @@ import eventlet
 from app.extensions import socketio
 from app.player_store import players
 from .game_state_store import gameStateStore
-from ..rooms import QUIZGAME_ROOM
+from ..rooms import LOBBY
 
 # Tämä socket ottaa lukee join_game eventin.
 # event tulee kun pelaaja antaa nimensä ja painaa nappia.
 @socketio.on("join_game")
 def handle_join(data):
     player_id = data["player_id"]
-    join_room(QUIZGAME_ROOM)
+    join_room(LOBBY)
     print(f" !!! {player_id} joined game", flush=True)
-    
+
 
 @socketio.on('start_quizgame')
 def handle_start_quizgame(data):
     print("Host started quiz game (server)")
     # Emittoidaan pelaajille täältä sama eventti (huoneeseen players, koska pelaajat ovat siellä)
-    emit('start_quizgame', room=QUIZGAME_ROOM)
+    emit('start_quizgame', room=LOBBY)
 
 @socketio.on('player_ready')
 def handle_player_ready(data):
@@ -32,7 +32,7 @@ def handle_player_ready(data):
     print(" - Current count:", current_count, flush=True)
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
-        emit('start_game', room=QUIZGAME_ROOM)
+        emit('start_game', room=LOBBY)
         emit('next_question') 
 
 # Next question pitää fixaa. Jos tekee tällä tavalla
@@ -42,5 +42,5 @@ def handle_player_ready(data):
 @socketio.on('next_question')
 def handle_next_question():
     print("HANDLING NEXT QUESTION")
-    emit("next_question", room=QUIZGAME_ROOM)
+    emit("next_question", room=LOBBY)
 

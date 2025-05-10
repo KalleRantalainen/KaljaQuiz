@@ -9,5 +9,3 @@ class GameStateStore():
         return self.current_player_count
 
 gameStateStore = GameStateStore()
-
-CURRENT_GAME_ROOM = None

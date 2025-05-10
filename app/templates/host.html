@@ -8,31 +8,8 @@
 <body>
     <h1>Host Screen</h1>
     <p>Select a game</p>
-
-    <button id="select_coinflip">CoinflipperZ</button>
-    <button id="select_quizgame">KaljaQuiz</button>
-
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <script>
-        console.log(document.getElementById("select_quizgame")); // Should NOT be null
-    document.addEventListener("DOMContentLoaded", () => {
-        const socket = io();
-
-        document.getElementById("select_quizgame").addEventListener("click", () => {
-            socket.emit("game_selected", { game: "quizgame" });
-            console.log("QUIZGAME peli valittu onnistuneesti");
-            // delay testin vuoksi
-            setTimeout(() => {
-                window.location.href = "/host/waiting?game=quizgame";
-            }, 3000);
-        });
-
-        document.getElementById("select_coinflip").addEventListener("click", () => {
-            socket.emit("game_selected", { game: "coinflipperZ" });
-            window.location.href = "/host/waiting?game=coinflipperZ";
-        });
-    });
-    </script>
+    <a href="/host/waiting?game=coinflipperZ">CoinflipperZ</a>
+    <a href="/host/waiting?game=quizgame">KaljaQuiz</a>
 
 </body>
 </html>
