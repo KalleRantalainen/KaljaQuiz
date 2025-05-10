@@ -28,21 +28,20 @@ def handle_player_ready(data):
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
-        emit('start_questions')
+        emit('next_question')
 
 
-@socketio.on('start_questions')
-def start_questions():
-    return
 
 # Next question pitää fixaa. Jos tekee tällä tavalla
 # niin clientit saa kiinni mut host ei. Jos emittaa
 # hostin js koodista niin host saa kiinni mutta clientit ei.
 # Nyt menen nukkumaan.
 @socketio.on('next_question')
-def handle_next_question():
+def handle_next_question(data):
     print("HANDLING NEXT QUESTION")
     emit("next_question", room=LOBBY)
 
 
- 
+@socketio.on('submit_answer')
+def handle_answers(data):
+    print("Answer received:", data['answer'])

@@ -5,9 +5,14 @@
 </head>
 <body>
     <h1>Player game screen</h1>
+    <div id="player-question-container">
+        <!-- Question partial will be loaded here -->
+    </div>
+
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
         const socket = io();
+
         socket.on('connect', () => {
             console.log('Connected to server, emitting player_ready');
             socket.emit('player_ready', {"test": "test"});
@@ -18,15 +23,28 @@
             console.log("Pelaaja otti vastaan start_game eventin");
         });
 
-        // Aloittaa kysmysten latomisen pelaajille
-        socket.on('start_questions', () => {
-            console.log("Pelaaja otti vastaan start_questions");
-         });
-
          // Aloittaa seuraavan kysymyksen
          socket.on('next_question', () => {
             console.log("Pelaajat otti vastaan next_question")
+            loadQuestion(0);  // Later: use server state or timer to pass the real question index
          })
+    
+         // Partiaali
+         function loadQuestion(index) {
+            fetch(`/quizgame/quest_partial/${index}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('player-question-container').innerHTML = html;
+                });
+        }
+
+            function submitAnswer(choice) {
+            socket.emit("submit_answer", { answer: choice });
+        }
+
+        // Make submitAnswer globally accessible
+        window.submitAnswer = submitAnswer;
+
     </script>
 </body>
 </html>

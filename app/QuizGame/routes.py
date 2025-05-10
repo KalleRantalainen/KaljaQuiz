@@ -3,11 +3,13 @@ import io
 import base64
 import qrcode
 from threading import Lock
+from types import SimpleNamespace
+
 
 from . import quizgame_bp
 from app.player_store import players
 from .game_state_store import gameStateStore
-from ...QuizGameLogic import getQuestions
+from QuizGameLogic import getQuestions
 
 ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
@@ -66,8 +68,13 @@ def get_host_partial(view_name):
         return "Not Found", 404
     
 
-@quizgame_bp.route("/quest_partial/<quest_num>")
+@quizgame_bp.route("/quest_partial/<int:quest_num>")
 def get_example_question(quest_num):
-    question = getQuestions.example_get_questions
+    question_data = getQuestions.example_get_questions(quest_num)
 
-    return render_template("/partials/question.html", question=question)
+    question_data["choices"] = question_data.pop("choices", [])
+
+    # Wrap into a SimpleNamespace so we can use dot-notation in the template
+    question = SimpleNamespace(**question_data)
+
+    return render_template("partials/question.html", question=question)

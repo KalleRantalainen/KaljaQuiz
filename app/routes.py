@@ -1,6 +1,5 @@
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 import uuid
-from QuizGameLogic.getQuestions import example_get_questions
 
 from app.player_store import players
 

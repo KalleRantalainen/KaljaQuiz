@@ -9,7 +9,6 @@
 
 <script>
     function submitAnswer(choice) {
-        const socket = io();
         socket.emit("submit_answer", { answer: choice });
     }
 </script>
