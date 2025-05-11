@@ -59,6 +59,12 @@
         function loadResult(result) {
             const resultContainer = document.getElementById('result-container');
             resultContainer.innerHTML = `<p>Your answer is: ${result}</p>`;
+
+                // Hide the question container
+            const questionContainer = document.getElementById('player-question-container');
+            if (questionContainer) {
+                questionContainer.style.display = 'none';
+            }
         }
 
         function submitAnswer(choice) {

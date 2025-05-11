@@ -5,6 +5,10 @@ from app.player_store import players
 
 main = Blueprint("main", __name__)
 
+@main.route('/')
+def frontpage():
+    return render_template('frontpage.html')
+
 # Main route for the host. Tää pitäs ehkä suojata jotenkin, ettei useempi pääse liittymään?
 @main.route('/host')
 def host():

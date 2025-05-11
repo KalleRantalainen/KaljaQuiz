@@ -2,13 +2,14 @@
     <h2>{{ question.text }}</h2>
     <ul>
         {% for choice in question.choices %}
-            <li><button onclick="submitAnswer('4')">{{ choice }}</button></li>
+            <li><button onclick="submitAnswer({choices})">{{ choice }}</button>
+            </li>
         {% endfor %}
     </ul>
 </div>
 
 <script>
-    function submitAnswer(choice) {
+    window.submitAnswer = function(choice) {
         socket.emit("submit_answer", { answer: choice });
         console.log("VASTAUSNAPPIA PAINETTU ONNISTUNEESTI !!!!!!!!!!!!!!!")
     }
