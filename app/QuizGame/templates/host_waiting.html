@@ -5,14 +5,58 @@
     <title>QuizGame – Host Waiting Room</title>
 </head>
 <body>
-    <h1>Waiting for Players…</h1>
-    <ul id="players-list">
-        <li><em>(no one yet)</em></li>
-    </ul>
-    <button id="start_game">Start Game</button>
+    <div id="main-container">
+        <!--Tähän ladataan dynaamisesti kontenttia partials kansiosta pelin vaiheesta riippuen-->
+    </div>
 
-    <h2>Join link:</h2>
-    <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code should be here">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+    <script>
+        // Tänne täytyy tehdä socket io event joka emittoi start_quiz_game eventin kun painetaan start_game nappia
+        const socket = io();
+
+        function loadView(viewName) {
+            fetch(`/quizgame/host_partial/${viewName}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('main-container').innerHTML = html;
+
+                    if (viewName === "waiting") {
+                        document.getElementById("start_game").addEventListener("click", startGame);
+                        if (typeof startPollingPlayers === "function") startPollingPlayers();
+                    } else {
+                        if (typeof stopPollingPlayers === "function") stopPollingPlayers();
+                    }
+                });
+        }
+
+        // Emittoi start_quizgame, kun host painaa nappia.
+        // Pelaajat ottavat tämän vastaan waiting roomissa ja siirtyvät quizgame_player näkymään.
+        // itse eventin broadcastays tapahtuu sockets.py tiedostosta, että se lähtee pelaajille.
+        function startGame() {
+            socket.emit('start_quizgame', {"test": "test"});
+            console.log("HOST EMIT start_quizgame");
+
+            //Host liittyy lobbyyn
+            socket.emit("join_lobby", { player_id: "{{ host_id }}" });
+            console.log("HOST EMIT join_game (host joins the game room)");
+
+            
+        }
+
+        socket.on('start_game', () => {
+            console.log("HOST otti vastaan start_game eventin");
+            loadView("game");
+        });
+
+         socket.on('next_question', () => {
+            console.log("Host otti vastaan next_question");
+         });
+
+        window.addEventListener("DOMContentLoaded", () => {
+            loadView("waiting");
+        });
+    </script>
 
     <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>
 </body>

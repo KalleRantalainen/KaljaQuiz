@@ -6,14 +6,9 @@ from . import coinflipperZ_bp
 
 @coinflipperZ_bp.route("/coin")
 def coin_page():
-    return render_template("coinflipperZ.html")
+    is_host = request.args.get("host") == "1"
+    return render_template("coinflipperZ.html", is_host=is_host)
 
-@coinflipperZ_bp.route("/api/flip")
-def flip_coin():
-    user_choice = request.args.get("choice")
-    result = random.choice(["Heads", "Tails"])
-    win = (user_choice == result)
-    return jsonify({"result": result, "win": win})
 
 @coinflipperZ_bp.route("/waiting")
 def waiting_screen_host():

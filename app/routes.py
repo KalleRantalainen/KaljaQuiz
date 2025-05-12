@@ -1,14 +1,21 @@
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 import uuid
-from QuizGameLogic.getQuestions import example_get_questions
 
 from app.player_store import players
 
 main = Blueprint("main", __name__)
 
+@main.route('/')
+def frontpage():
+    return render_template('frontpage.html')
+
 # Main route for the host. Tää pitäs ehkä suojata jotenkin, ettei useempi pääse liittymään?
 @main.route('/host')
 def host():
+    if 'host_id' not in session:
+        session['host_id'] = str(uuid.uuid4())
+        print("HOST ID GENERATED:", session['host_id'], flush=True)
+    print("TEST", flush=True)
     return render_template('host.html')
 
 @main.route("/host/waiting")

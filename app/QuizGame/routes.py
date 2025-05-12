@@ -1,9 +1,17 @@
-from flask import render_template, redirect, url_for, abort, current_app
+from flask import render_template, redirect, url_for, abort, current_app, session
 import io
 import base64
 import qrcode
+from threading import Lock
+from types import SimpleNamespace
+
 
 from . import quizgame_bp
+from app.player_store import players
+from .game_state_store import gameStateStore
+from .QuizGameLogic import getQuestions
+
+ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
 def generate_qr(url):
     img = qrcode.make(url)
@@ -23,4 +31,50 @@ def waiting_screen_host():
     
     qr_code = generate_qr(url)
 
-    return render_template("host_waiting.html", qr_code=qr_code)
+    host_id = "host_id_should_be_here"
+    if 'host_id' in session:
+        host_id = session['host_id']
+
+    return render_template("host_waiting.html", qr_code=qr_code, host_id=host_id)
+
+
+# Pelaajien näkymä pelissä, route ei muutu pelin aikana, näkymä päivittyy dynaamisesti.
+@quizgame_bp.route("/player_game")
+def player_game():
+    print("PLAYERS IN PLAYER_STORE:", players, flush=True)
+    print("  PREVIOUS PLAYER COUNT:", gameStateStore.get_player_count(), flush=True)
+    # Käytetään lukkoa ettei tule concurrency ongelmia.
+    # Useampi pelaaja ohjataan tänne kerralla eikä moni
+    # saa muokata samaa muuttujaa yhtäaikaa.
+    with ready_lock:
+        gameStateStore.increase_player_count()
+    print("  UPDATED PLAYER COUNT:", gameStateStore.get_player_count(), flush=True)
+    return render_template("quizgame_player.html", user_id=session['user_id'])
+
+# Route hostin partial viewien lataamista varten
+@quizgame_bp.route("/host_partial/<view_name>")
+def get_host_partial(view_name):
+    host_ip = current_app.config.get("HOST_IP", "127.0.0.1")
+    port = current_app.config.get("PORT", 8080)
+    url = f"http://{host_ip}:{port}/user"
+    
+    qr_code = generate_qr(url)
+
+    if view_name == "waiting":
+        return render_template("/partials/host_waiting_view.html", qr_code=qr_code)
+    elif view_name == "game":
+        return render_template("/partials/host_game_view.html")
+    else:
+        return "Not Found", 404
+    
+
+@quizgame_bp.route("/quest_partial/<int:quest_num>")
+def get_example_question(quest_num):
+    question_data = getQuestions.example_get_questions(quest_num)
+
+    question_data["choices"] = question_data.pop("choices", [])
+
+    # Wrap into a SimpleNamespace so we can use dot-notation in the template
+    question = SimpleNamespace(**question_data)
+
+    return render_template("partials/question.html", question=question)
