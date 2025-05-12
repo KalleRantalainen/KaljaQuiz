@@ -68,7 +68,8 @@
         }
 
         function submitAnswer(choice) {
-        socket.emit("submit_answer", { answer: choice });
+            console.log("TEST2");
+            socket.emit("submit_answer", { answer: choice });
         }
 
         // Make submitAnswer globally accessible
