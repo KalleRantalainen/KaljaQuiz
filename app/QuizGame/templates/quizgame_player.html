@@ -20,6 +20,8 @@
         socket.on('connect', () => {
             console.log('Connected to server, emitting player_ready');
             socket.emit('player_ready', {"test": "test"});
+            socket.emit("join_lobby", { player_id: "{{ user_id }}" });
+            console.log(" === Pelaaja {{ user_id }} liittyi lobbyyn");
         });
 
         // ALoittaa pelin
