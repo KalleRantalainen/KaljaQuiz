@@ -1,17 +1,35 @@
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 import uuid
-from QuizGameLogic.getQuestions import example_get_questions
 
 from app.player_store import players
 
 main = Blueprint("main", __name__)
+
+@main.route('/')
+def frontpage():
+    return render_template('frontpage.html')
 
 # Main route for the host. Tää pitäs ehkä suojata jotenkin, ettei useempi pääse liittymään?
 @main.route('/host')
 def host():
     if 'host_id' not in session:
         session['host_id'] = str(uuid.uuid4())
+        print("HOST ID GENERATED:", session['host_id'], flush=True)
+    print("TEST", flush=True)
     return render_template('host.html')
+
+@main.route("/host/waiting")
+def host_waiting_room():
+    game = request.args.get("game")
+    
+    if game == "coinflipperZ":
+        return redirect("/coinflipperZ/waiting")
+    elif game == "quizgame":
+        # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
+        # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
+        return redirect("/quizgame/waiting")
+    else:
+        return "Unknown game", 400
 
 
 # Route for the players to register/give their name
@@ -35,7 +53,7 @@ def register():
 # Route to the user waiting screen
 @main.route('/user-waiting', methods=["GET"])
 def user_waiting():
-    return render_template("user_waiting.html")
+    return render_template("user_waiting.html", user_id=session['user_id'])
 
 
 # JSON endpoint to get the player names

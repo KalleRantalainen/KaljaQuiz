@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuizGame</title>
+    <title>Game Waiting Room</title>
 </head>
 <body>
     <p>Waiting for host...</p>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-
-    <!--Scripti joka kuuntelee next_question tapahtumaa. Jos tälläinen pamahtaa
-    QuizGamesta, niin pelaajan näkymä muuttuu. En tiedä onko paras mahdollinen tapa
-    koska pitääkö täällä kuunnella sitten myös kolikkopeliä samalla tavalla?-->
     <script>
+        // TÄnne täytyy saada socket io event joka kuuntelee start_quiz_game eventtiä
         const socket = io();
         
-        console.log("EMITTING join_game from app/templates/user_waiting.html");
-        // Tell server we joined (optional)
-        socket.emit("join_game", { player_id: "{{ user_id }}" });
-        console.log("Emit went through?");
-        // When host emits next_question, go to game screen
-        socket.on("next_question", (data) => {
-            console.log("Received next_question event from server, in user_waiting.html");
-            window.location.href = "/quizgame/play";
+        console.log("@@@@@@@EMITTING join_lobby from app/templates/user_waiting.html");
+        // Emit event join lobby
+        socket.emit("join_lobby", { player_id: "{{ user_id }}" });
+
+        
+        // Kuunnellaan start_quizgame eventtiä ja siirrytään oikeaan näkymään
+        // -> Muillekkin peleille voi tehdä tänne samanlaisen eventin kuuntelun
+        //    jos ne vaatii socketteja
+        socket.on('start_quizgame', () => {
+            console.log("Pelaaja otti vastaan start_quizgame eventin");
+            window.location.href = '/quizgame/player_game';
+        });
+        
+        socket.on("start_coinflip", () => {
+            console.log("Received start_coinflip, redirecting...");
+            window.location.href = "/coinflipperZ/coin";
         });
     </script>
 </body>

@@ -9,4 +9,5 @@ quizgame_bp = Blueprint(
 )
 
 from . import routes
-from . import sockets
+from . import sockets_quiz
+from . import game_state_store
