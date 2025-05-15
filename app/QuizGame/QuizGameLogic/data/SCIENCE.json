@@ -1,0 +1,44 @@
+{
+    "questions": [
+        {
+            "id": 0,
+            "question_en": "What is the purpose of the Van de Graaff generator?",
+            "question_fi": "Mihin Van de Graaff -generaattoria käytetään?",
+            "answer_en": "A Van de Graaff generator accumulates and transfers high-voltage static electricity, often to demonstrate hair-raising electrostatic effects in classrooms.",
+            "answer_fi": "Van de Graaff -generaattori kerää ja siirtää suuria määriä staattista sähköä. Sitä käytetään usein hiuksia pystyyn nostattavien sähköilmiöiden esittelyyn luokkahuoneissa.",
+            "category": "SCIENCE"
+        },
+        {
+            "id": 1,
+            "question_en": "Why do some lizards shoot blood out of their eyes?",
+            "question_fi": "Miksi jotkut liskot ampuvat verta silmistään?",
+            "answer_en": "Certain lizards, like the horned lizard, can shoot blood from their eyes as a defense mechanism to scare off predators — especially if the predator finds blood gross.",
+            "answer_fi": "Tietyt liskot, kuten sarvilisko, voivat puolustautuessaan ruiskuttaa verta silmistään pelottaakseen saalistajia — erityisesti niitä, jotka inhoavat verta.",
+            "category": "SCIENCE"
+        },
+        {
+            "id": 2,
+            "question_en": "What is a tardigrade and why is it basically invincible?",
+            "question_fi": "Mikä on karhukainen ja miksi se on käytännössä voittamaton?",
+            "answer_en": "A tardigrade is a microscopic creature that can survive boiling, freezing, radiation, and even the vacuum of space by entering a dehydrated, dormant state called cryptobiosis.",
+            "answer_fi": "Karhukainen on mikroskooppinen eliö, joka voi selviytyä kiehuvasta kuumuudesta, pakkasesta, säteilystä ja jopa avaruuden tyhjiöstä vaipumalla kuivuneeseen, horrosmaiseen tilaan nimeltä kryptobioosi.",
+            "category": "SCIENCE"
+        },
+        {
+            "id": 3,
+            "question_en": "What was the function of the 'duck test' in nuclear bomb development?",
+            "question_fi": "Mitä tarkoitti 'ankkatesti' ydinasekehityksessä?",
+            "answer_en": "The 'duck test' was an informal term scientists used during nuclear testing — if something looked like a bomb, acted like a bomb, and exploded like a bomb… well, it probably was a bomb.",
+            "answer_fi": "'Ankkatesti' oli epävirallinen ilmaus ydinasekehityksessä: jos jokin näytti pommilta, toimi kuin pommi ja räjähti kuin pommi... se oli todennäköisesti pommi.",
+            "category": "SCIENCE"
+        },
+        {
+            "id": 4,
+            "question_en": "Why do cats appear to defy the laws of physics when they land on their feet?",
+            "question_fi": "Miksi kissat näyttävät rikkovan fysiikan lakeja laskeutuessaan jaloilleen?",
+            "answer_en": "Cats use an innate ability called the 'cat righting reflex', which allows them to twist their bodies mid-air without violating angular momentum — physics just has to accept it.",
+            "answer_fi": "Kissoilla on synnynnäinen 'kissan oikaisurefleksi', jonka avulla ne voivat kiertyä ilmassa jaloilleen ilman, että ne rikkoisivat kulmamomentin säilymistä — fysiikka joutuu vain hyväksymään sen.",
+            "category": "SCIENCE"
+        }
+    ]
+}
