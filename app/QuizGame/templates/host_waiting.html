@@ -46,18 +46,23 @@
             
         }
 
-        socket.on('start_game', () => {
+        socket.on('start_game', async () => {
             console.log("HOST otti vastaan start_game eventin");
             loadView("game");
+            // Tää vois olla countdown pelaajille 5..4..3..2..1
+            await sleep(4000);
+            loadView("host_question")
         });
 
-         socket.on('next_question', () => {
-            console.log("Host otti vastaan next_question");
-         });
+
 
         window.addEventListener("DOMContentLoaded", () => {
             loadView("waiting");
         });
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
     </script>
 
     <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>

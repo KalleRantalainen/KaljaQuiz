@@ -28,6 +28,7 @@ def handle_player_ready(data):
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
+
         emit('next_question')
 
 

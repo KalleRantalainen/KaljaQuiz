@@ -64,6 +64,8 @@ def get_host_partial(view_name):
         return render_template("/partials/host_waiting_view.html", qr_code=qr_code)
     elif view_name == "game":
         return render_template("/partials/host_game_view.html")
+    elif view_name == "host_question":
+        return render_template("/partials/host_question_view.html")
     else:
         return "Not Found", 404
     
