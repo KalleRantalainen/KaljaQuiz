@@ -70,6 +70,7 @@ def get_host_partial(view_name):
         return "Not Found", 404
     
 
+#Tähän uudesta questionAPIsta
 @quizgame_bp.route("/quest_partial/<int:quest_num>")
 def get_example_question(quest_num):
     question_data = getQuestions.example_get_questions(quest_num)

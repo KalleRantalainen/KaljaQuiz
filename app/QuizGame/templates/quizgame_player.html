@@ -29,24 +29,7 @@
             console.log("Pelaaja otti vastaan start_game eventin");
         });
 
-         // Aloittaa seuraavan kysymyksen
-         socket.on('next_question', () => {
-            console.log("Pelaajat otti vastaan next_question")
-            loadQuestion(0);  // Later: use server state or timer to pass the real question index
-            console.log("Kysymys 1 näytillä")
 
-         })
-    
-         // Partiaali kysymyksen nyttämiselle
-         function loadQuestion(index) {
-            fetch(`/quizgame/quest_partial/${index}`)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('player-question-container').innerHTML = html;
-                });
-
-            console.log("Kysymyksen lataaminen onnistui!")
-        }
 
          // Kun kysymykseen on vastattu, pelaaja näkee näytöllään saiko hän oikein vai ei
          // 10.5.2025 klo 20:26 vastaus nappulat eivät toimi

@@ -29,7 +29,8 @@ def handle_player_ready(data):
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
 
-        emit('next_question')
+        sleep(8)
+        emit('next_question', room=LOBBY)
 
 
 
@@ -41,15 +42,3 @@ def handle_player_ready(data):
 def handle_next_question(data):
     print("HANDLING NEXT QUESTION")
     emit("next_question", room=LOBBY)
-
-
-# 10.5.2025 klo 20:26 vastaus nappulat eivät toimi
-@socketio.on('submit_answer')
-def handle_answers(data):
-    print("Answer received:", data['answer'])
-
-    correct_answer = "4"  # Just an example, replace with actual logic
-    if data['answer'] == correct_answer:
-        emit("answer_result", {"result": "Correct!"}, to=LOBBY)
-    else:
-        emit("answer_result", {"result": "Incorrect!"}, to=LOBBY)
