@@ -4,6 +4,7 @@ import base64
 import qrcode
 from threading import Lock
 from types import SimpleNamespace
+from flask import request
 
 
 from . import quizgame_bp
@@ -71,6 +72,15 @@ def get_host_partial(view_name):
     else:
         return "Not Found", 404
     
+    
+
+@quizgame_bp.route('/show_answers_partial')
+def show_answers_partial():
+    answer = request.args.get('answer', '')
+    return render_template('partials/show_answers.html', answer=answer)
+
+
+
 
 #Tähän uudesta questionAPIsta
 @quizgame_bp.route("/quest_partial/<int:quest_num>")

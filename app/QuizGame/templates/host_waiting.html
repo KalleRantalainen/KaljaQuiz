@@ -75,6 +75,31 @@
         }
 
 
+        //vastaukset
+        function loadAnswersView(answer) {
+            fetch(`/quizgame/show_answers_partial?answer=${encodeURIComponent(answer)}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('main-container').innerHTML = html;
+        });
+}
+        socket.on('answers', (data) => {
+            console.log("LADATAAN PELAAJIEN VASTAUKSET:", data.answer);
+            loadAnswersView(data.answer);
+        });
+
+
+        function on_show_answers(button) {
+            const choice = button.getAttribute('data-choice');
+            console.log("Answer being sent to server:", choice);
+
+            // Emit the answer to server (you can change event name if needed)
+            socket.emit('show_answers', { answer: choice });
+
+            // Optionally load view (if local rendering is needed)
+            //loadView('show_answers');
+        }
+
 
         window.addEventListener("DOMContentLoaded", () => {
             loadView("waiting");

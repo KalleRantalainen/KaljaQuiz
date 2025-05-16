@@ -44,3 +44,11 @@ def handle_next_question(data):
     random_quest = questionRajapinta.get_rand_question()
     print("HANDLING NEXT QUESTION")
     emit("next_question", {"question": random_quest}, room=LOBBY)
+
+
+@socketio.on('show_answers')
+def handle_show_answers(data):
+    answer = data.get('answer')
+    print("Host sent answer:", answer)
+
+    emit('answers', { 'answer': answer }, room=LOBBY)  # To everyone in lobby
