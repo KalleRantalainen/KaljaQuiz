@@ -1,0 +1,76 @@
+{
+    "questions": [
+        {
+            "id": 0,
+            "question_en": "What was/is an adze usually used for?",
+            "question_fi": "Mihin koverokirvestä yleensä käytettiin/käytetään?", 
+            "answer_en": "An adze or adz is an ancient and versatile cutting tool similar to an axe but with the cutting edge perpendicular to the handle rather than parallel.",
+            "answer_fi": "Kouru- tai koverokirves on ikivanha ja monipuolinen leikkaustyökalu joka muistuttaa kirvestä. Leikkaava terä on kuitenkin kohtisuorassa vartta vasten, eikä varren suuntaisesti, kuten kirveessä.", 
+            "category": "HISTORY"
+        },
+        {
+            "id": 1,
+            "question_en": "What was trepanation, and why did people do it?",
+            "question_fi": "Mitä oli trepanaatio ja miksi sitä tehtiin?",
+            "answer_en": "Trepanation is the practice of drilling or scraping a hole into the human skull, often done to relieve pressure or release 'evil spirits'.",
+            "answer_fi": "Trepanaatio tarkoittaa kallon poraamista tai kaapimista, yleensä paineen vähentämiseksi tai 'pahojen henkien' vapauttamiseksi.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 2,
+            "question_en": "What was the purpose of a medieval 'ducking stool'?",
+            "question_fi": "Mikä oli keskiaikaisen upotustuolin tarkoitus?",
+            "answer_en": "A ducking stool was used to punish and publicly humiliate people, often women accused of being witches or scolds, by repeatedly dunking them into water.",
+            "answer_fi": "Upostustuolilla rangaistiin ja nöyryytettiin julkisesti usein noidiksi, tai suulaiksi syytettyjä naisia, upottamalla heidät toistuvasti veteen.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 3,
+            "question_en": "What did people use as toilet paper in ancient Rome?",
+            "question_fi": "Mitä muinaiset roomalaiset käyttivät vessapaperin sijaan?",
+            "answer_en": "In public toilets, Romans used a sponge on a stick—shared by everyone and rinsed in salt water.",
+            "answer_fi": "Roomalaisissa julkisissa käymälöissä käytettiin suolaveteen huuhdeltavaa sientä kepin päässä, jonka kaikki jakoivat.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 4,
+            "question_en": "Why did Napoleon supposedly prefer not to bathe often?",
+            "question_fi": "Miksi Napoleon ei ilmeisesti halunnut peseytyä usein?",
+            "answer_en": "Napoleon is believed to have thought that his natural scent was appealing and discouraged his lovers from bathing too frequently as well.",
+            "answer_fi": "Napoleonin uskotaan pitäneen omaa luonnollista hajuaan viehättävänä ja kehottaneen myös rakastajiaan välttelemään liiallista peseytymistä.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 5,
+            "question_en": "What unusual item was once used in Europe to diagnose pregnancy?",
+            "question_fi": "Mitä erikoista esinettä käytettiin Euroopassa raskauden toteamiseen?",
+            "answer_en": "In the Middle Ages, women would urinate on barley and wheat seeds. If the seeds sprouted, it was thought to indicate pregnancy.",
+            "answer_fi": "Keskiajalla naiset virtsasivat ohran ja vehnän siemenien päälle. Jos siemenet alkoivat itää, uskottiin naisen olevan raskaana.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 6,
+            "question_en": "What bizarre item did Napoleon supposedly carry with him into battle?",
+            "question_fi": "Mikä outo esine Napoleonilla väitetään olleen mukanaan taistelukentällä?",
+            "answer_en": "Napoleon is rumored to have carried a small vial containing poison in case of capture. Not your usual battlefield accessory.",
+            "answer_fi": "Nössöluuseri kanto mukanaan myrkkypulloa siltä varalta, että vihu ottas vanginks. Velliperse.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 7,
+            "question_en": "What was 'Dancing Mania'?",
+            "question_fi": "Mikä oli 'tanssimania'?",
+            "answer_en": "Dancing Mania was a strange social phenomenon in medieval Europe where groups of people danced uncontrollably, sometimes to exhaustion or death. Nobody really knows why.",
+            "answer_fi": "Tanssimania oli outo ilmiö keskiajan Euroopassa, jossa ihmiset tanssivat hallitsemattomasti, joskus jopa kuolemaan saakka. Kukaan ei tiedä varmasti miksi.",
+            "category": "HISTORY"
+        },
+        {
+            "id": 8,
+            "question_en": "What was used as 'toothpaste' in ancient Rome?",
+            "question_fi": "Mitä käytettiin hammastahnana antiikin Roomassa?",
+            "answer_en": "Roman toothpaste included ingredients like crushed bones, oyster shells, and even urine. Yes, urine.",
+            "answer_fi": "Roomalaisessa hammastahnassa saatettiin käyttää murskattuja luita, osterinkuoria ja virtsaa.",
+            "category": "HISTORY"
+        }
+    ]
+}

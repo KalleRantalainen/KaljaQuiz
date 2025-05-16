@@ -1,0 +1,52 @@
+{
+    "questions": [
+        {
+            "id": 0,
+            "question_en": "How many Eva Braun Celebration Meads did Juuso 'CheeseMon' consume during wappu 2024?",
+            "question_fi": "Kuinka monta Eva Braun juhlasimaa Cheeseman joi Wappuna 2024?",
+            "answer_en": "At least 24 bottles of Eva Braun Celebration Mead were consumed by Juuso 'CheeseMon' during Wappu 2024. Some say it was 30 bottles, but the official count is 24.",
+            "answer_fi": "Hyvin monta vaikka olikin kauhean makuista.",
+            "category": "MISCELLANEOUS"
+        },
+        {
+            "id": 1,
+            "question_en": "",
+            "question_fi": "Mikä on tärkein sääntö Bussikuski juomapelissä?",
+            "answer_en": "",
+            "answer_fi": "Pitää juoda kaikki huikat, muuten ei oo mitään järkee.",
+            "category": "MISCELLANEOUS"
+        },
+        {
+            "id": 2,
+            "question_en": "",
+            "question_fi": "Voisiko Vihdin kuningas ajatella asuvansa Lohjalla?",
+            "answer_en": "",
+            "answer_fi": "Mieluummin nyrkki perseessä kuin asua Lohjalla.",
+            "category": "MISCELLANEOUS"
+        },
+        {
+            "id": 3,
+            "question_en": "",
+            "question_fi": "Voisko Sly antaa keppinsä Tohtori M:lle?",
+            "answer_en": "",
+            "answer_fi": "Tohtori M voi hakea korvikkeen lahjatavarapuodista.",
+            "category": "MISCELLANEOUS"
+        },
+        {
+            "id": 4,
+            "question_en": "",
+            "question_fi": "Kuinka monesti Kalle on voittanut Juuson kolikonheitossa?",
+            "answer_en": "",
+            "answer_fi": "Perimätiedon mukaan Kalle on voittanut Juuson jokaisella pelikerralla.",
+            "category": "MISCELLANEOUS"
+        },
+        {
+            "id": 5,
+            "question_en": "",
+            "question_fi": "Kuhmon Lepojen basisti väittää olevansa kovakin juomaan. Kuinka monen kaljan jälkeen basisti yleensä nukkuu?",
+            "answer_en": "",
+            "answer_fi": "Noin neljän kaljan jälkeen.",
+            "category": "MISCELLANEOUS"
+        }
+    ]
+}
