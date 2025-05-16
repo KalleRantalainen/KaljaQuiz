@@ -6,6 +6,7 @@ from app.extensions import socketio
 from app.player_store import players
 from .game_state_store import gameStateStore
 from ..rooms import LOBBY
+from .quizgame_running import questionRajapinta
 
 """Join_game on nyt join_lobby ja käytetään kaikkiin peleihin"""
 
@@ -40,5 +41,6 @@ def handle_player_ready(data):
 # Nyt menen nukkumaan.
 @socketio.on('next_question')
 def handle_next_question(data):
+    random_quest = questionRajapinta.get_rand_question()
     print("HANDLING NEXT QUESTION")
-    emit("next_question", room=LOBBY)
+    emit("next_question", {"question": random_quest}, room=LOBBY)

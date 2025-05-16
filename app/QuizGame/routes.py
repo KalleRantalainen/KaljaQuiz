@@ -9,7 +9,9 @@ from types import SimpleNamespace
 from . import quizgame_bp
 from app.player_store import players
 from .game_state_store import gameStateStore
-from .QuizGameLogic import getQuestions
+from .QuizGameLogic import getQuestions #ota poijes
+from .quizgame_running import questionRajapinta
+
 
 ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
@@ -73,11 +75,8 @@ def get_host_partial(view_name):
 #Tähän uudesta questionAPIsta
 @quizgame_bp.route("/quest_partial/<int:quest_num>")
 def get_example_question(quest_num):
-    question_data = getQuestions.example_get_questions(quest_num)
+    #---------------
+    random_quest = questionRajapinta.get_rand_question()
+    answer = questionRajapinta.get_answer_by_question(random_quest)
 
-    question_data["choices"] = question_data.pop("choices", [])
-
-    # Wrap into a SimpleNamespace so we can use dot-notation in the template
-    question = SimpleNamespace(**question_data)
-
-    return render_template("partials/question.html", question=question)
+    return render_template("partials/question.html", question=random_quest, answer=answer)

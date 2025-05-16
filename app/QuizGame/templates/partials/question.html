@@ -1,14 +1,6 @@
 <div id="question-container">
-    <h2>{{ question.text }}</h2>
-    <ul>
-        {% for choice in question.choices %}
-            <li>
-                <button data-choice="{{ choice }}" onclick="submitAnswer(this.dataset.choice)">
-                    {{ choice }}
-                </button>
-            </li>
-        {% endfor %}
-    </ul>
+    <h2>{{ question }}</h2>
+    <h3>{{ answer }}</h3>
 </div>
 
 <script>
