@@ -108,6 +108,11 @@
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
+
+        function next_question(button) {
+            console.log("Host pressed next game after answer was shown")
+            emit('next_question')
+        }
     </script>
 
     <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>
