@@ -1,21 +1,5 @@
 <div id="question-container">
-    <h2>{{ question.text }}</h2>
-    <ul>
-        {% for choice in question.choices %}
-            <li>
-                <button data-choice="{{ choice }}" onclick="submitAnswer(this.dataset.choice)">
-                    {{ choice }}
-                </button>
-            </li>
-        {% endfor %}
-    </ul>
+    <h2>{{ question }}</h2>
 </div>
 
-<script>
-    // Tämä on ylimääräinen funktio? Yliajetaan quizgame_player.html tiedostossa samannimisellä funktiolla.
-    window.submitAnswer = function(choice) {
-        console.log("-- TEST --");
-        socket.emit("submit_answer", { answer: choice });
-        console.log("VASTAUSNAPPIA PAINETTU ONNISTUNEESTI !!!!!!!!!!!!!!!");
-    }
-</script>
+<button data-choice="{{ answer }}" onclick="on_show_answers(this)">Next</button>

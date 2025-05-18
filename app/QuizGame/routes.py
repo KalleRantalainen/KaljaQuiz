@@ -4,12 +4,15 @@ import base64
 import qrcode
 from threading import Lock
 from types import SimpleNamespace
+from flask import request
 
 
 from . import quizgame_bp
 from app.player_store import players
 from .game_state_store import gameStateStore
-from .QuizGameLogic import getQuestions
+from .QuizGameLogic import getQuestions #ota poijes
+from .quizgame_running import questionRajapinta
+
 
 ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
@@ -64,17 +67,26 @@ def get_host_partial(view_name):
         return render_template("/partials/host_waiting_view.html", qr_code=qr_code)
     elif view_name == "game":
         return render_template("/partials/host_game_view.html")
+    elif view_name == "host_question":
+        return render_template("/partials/host_question_view.html")
     else:
         return "Not Found", 404
     
+    
 
+@quizgame_bp.route('/show_answers_partial')
+def show_answers_partial():
+    answer = request.args.get('answer', '')
+    return render_template('partials/show_answers.html', answer=answer)
+
+
+
+
+#Tähän uudesta questionAPIsta
 @quizgame_bp.route("/quest_partial/<int:quest_num>")
 def get_example_question(quest_num):
-    question_data = getQuestions.example_get_questions(quest_num)
+    #---------------
+    random_quest = questionRajapinta.get_rand_question()
+    answer = questionRajapinta.get_answer_by_question(random_quest)
 
-    question_data["choices"] = question_data.pop("choices", [])
-
-    # Wrap into a SimpleNamespace so we can use dot-notation in the template
-    question = SimpleNamespace(**question_data)
-
-    return render_template("partials/question.html", question=question)
+    return render_template("partials/question.html", question=random_quest, answer=answer)

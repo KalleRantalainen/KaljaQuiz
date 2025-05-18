@@ -6,6 +6,7 @@ from app.extensions import socketio
 from app.player_store import players
 from .game_state_store import gameStateStore
 from ..rooms import LOBBY
+from .quizgame_running import questionRajapinta
 
 """Join_game on nyt join_lobby ja käytetään kaikkiin peleihin"""
 
@@ -28,7 +29,9 @@ def handle_player_ready(data):
     if current_count == expected_count:
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
-        emit('next_question')
+
+        sleep(8)
+        emit('next_question', room=LOBBY)
 
 
 
@@ -38,17 +41,14 @@ def handle_player_ready(data):
 # Nyt menen nukkumaan.
 @socketio.on('next_question')
 def handle_next_question(data):
+    random_quest = questionRajapinta.get_rand_question()
     print("HANDLING NEXT QUESTION")
-    emit("next_question", room=LOBBY)
+    emit("next_question", {"question": random_quest}, room=LOBBY)
 
 
-# 10.5.2025 klo 20:26 vastaus nappulat eivät toimi
-@socketio.on('submit_answer')
-def handle_answers(data):
-    print("Answer received:", data['answer'])
+@socketio.on('show_answers')
+def handle_show_answers(data):
+    answer = data.get('answer')
+    print("Host sent answer:", answer)
 
-    correct_answer = "4"  # Just an example, replace with actual logic
-    if data['answer'] == correct_answer:
-        emit("answer_result", {"result": "Correct!"}, to=LOBBY)
-    else:
-        emit("answer_result", {"result": "Incorrect!"}, to=LOBBY)
+    emit('answers', { 'answer': answer }, room=LOBBY)  # To everyone in lobby
