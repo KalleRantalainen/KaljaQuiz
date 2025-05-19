@@ -32,9 +32,7 @@ function startGame() {
 
 socket.on('start_game', async () => {
     console.log("HOST otti vastaan start_game eventin");
-    loadView("game");
     // Tää vois olla countdown pelaajille 5..4..3..2..1
-    await sleep(4000);
     loadView("host_question")
 });
 
@@ -42,17 +40,17 @@ socket.on('start_game', async () => {
 // Aloittaa seuraavan kysymyksen      
     socket.on('next_question', () => {
     console.log("Pelaajat otti vastaan next_question")
-    loadQuestion(0);  // Later: use server state or timer to pass the real question index
-    console.log("Kysymys 1 näytillä")
+    loadQuestion();  // Later: use server state or timer to pass the real question index
+    console.log("Kysymys näkyvissä")
 
     })
 
     // Partiaali kysymyksen näyttämiselle
-    function loadQuestion(index) {
-    fetch(`/quizgame/quest_partial/${index}`)
+    function loadQuestion() {
+    fetch(`/quizgame/quest_partial`)
         .then(response => response.text())
         .then(html => {
-            document.getElementById('main-container').innerHTML = html;
+            document.getElementById('question-container').innerHTML = html;
         });
 
     console.log("Kysymyksen lataaminen onnistui!")
@@ -64,7 +62,18 @@ function loadAnswersView(answer) {
     fetch(`/quizgame/show_answers_partial?answer=${encodeURIComponent(answer)}`)
         .then(response => response.text())
         .then(html => {
-            document.getElementById('main-container').innerHTML = html;
+            document.getElementById('question-container').innerHTML = html;
+
+        // Ladataan seuraava nappi tässä
+        const nextBtn = document.getElementById("next-question-btn");
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                console.log("Host pressed next game after answer was shown");
+                loadQuestion();
+            });
+        } else {
+            console.log("Next Question button not found");
+        }
     });
 }
 
@@ -81,8 +90,6 @@ function on_show_answers(button) {
     // Emit the answer to server (you can change event name if needed)
     socket.emit('show_answers', { answer: choice });
 
-    // Optionally load view (if local rendering is needed)
-    //loadView('show_answers');
 }
 
 

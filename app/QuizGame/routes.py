@@ -65,8 +65,6 @@ def get_host_partial(view_name):
 
     if view_name == "waiting":
         return render_template("/partials/host_waiting_view.html", qr_code=qr_code)
-    elif view_name == "game":
-        return render_template("/partials/host_game_view.html")
     elif view_name == "host_question":
         return render_template("/partials/host_question_view.html")
     else:
@@ -83,8 +81,8 @@ def show_answers_partial():
 
 
 #Tähän uudesta questionAPIsta
-@quizgame_bp.route("/quest_partial/<int:quest_num>")
-def get_example_question(quest_num):
+@quizgame_bp.route("/quest_partial")
+def get_example_question():
     #---------------
     random_quest = questionRajapinta.get_rand_question()
     answer = questionRajapinta.get_answer_by_question(random_quest)

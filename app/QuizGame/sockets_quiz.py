@@ -30,20 +30,9 @@ def handle_player_ready(data):
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
 
-        sleep(8)
+        sleep(4)
         emit('next_question', room=LOBBY)
 
-
-
-# Next question pitää fixaa. Jos tekee tällä tavalla
-# niin clientit saa kiinni mut host ei. Jos emittaa
-# hostin js koodista niin host saa kiinni mutta clientit ei.
-# Nyt menen nukkumaan.
-@socketio.on('next_question')
-def handle_next_question(data):
-    random_quest = questionRajapinta.get_rand_question()
-    print("HANDLING NEXT QUESTION")
-    emit("next_question", {"question": random_quest}, room=LOBBY)
 
 
 @socketio.on('show_answers')
