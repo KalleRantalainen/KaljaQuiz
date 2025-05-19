@@ -32,6 +32,7 @@ def handle_player_ready(data):
 
         sleep(4)
         emit('next_question', room=LOBBY)
+        emit('next_submit', room=LOBBY)
 
 
 
@@ -41,3 +42,9 @@ def handle_show_answers(data):
     print("Host sent answer:", answer)
 
     emit('answers', { 'answer': answer }, room=LOBBY)  # To everyone in lobby
+
+
+
+@socketio.on('next_submit')
+def handle_next_submit(data):
+    emit('next_submit', room=LOBBY)

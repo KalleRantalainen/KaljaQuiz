@@ -89,7 +89,7 @@ def get_example_question():
 
 
 @quizgame_bp.route("/player_partial/<view_name>")
-def get_host_partial(view_name):
+def get_player_partial(view_name):
 
     if view_name == "submit":
         return render_template("/partials/player_submit.html")

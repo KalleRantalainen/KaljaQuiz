@@ -38,15 +38,15 @@ socket.on('start_game', async () => {
 
 
 // Aloittaa seuraavan kysymyksen      
-    socket.on('next_question', () => {
+socket.on('next_question', () => {
     console.log("Pelaajat otti vastaan next_question")
     loadQuestion();  // Later: use server state or timer to pass the real question index
     console.log("Kysymys näkyvissä")
 
-    })
+})
 
-    // Partiaali kysymyksen näyttämiselle
-    function loadQuestion() {
+// Partiaali kysymyksen näyttämiselle
+function loadQuestion() {
     fetch(`/quizgame/quest_partial`)
         .then(response => response.text())
         .then(html => {
@@ -70,6 +70,8 @@ function loadAnswersView(answer) {
             nextBtn.addEventListener("click", () => {
                 console.log("Host pressed next game after answer was shown");
                 loadQuestion();
+                // Pelaajille submit näkymä
+                socket.emit('next_submit')
             });
         } else {
             console.log("Next Question button not found");
