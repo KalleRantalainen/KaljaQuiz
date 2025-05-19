@@ -3,40 +3,19 @@ const socket = io();
 socket.on('connect', () => {
     console.log('Connected to server, emitting player_ready');
     socket.emit('player_ready', {"test": "test"});
-    socket.emit("join_lobby", { player_id: "{{ user_id }}" });
+
+    //Tyylii turha emit join lobby
+    //socket.emit("join_lobby", { player_id: "{{ user_id }}" });
     console.log(" === Pelaaja {{ user_id }} liittyi lobbyyn");
 });
 
-// ALoittaa pelin
-socket.on('start_game', () => {
-    console.log("Pelaaja otti vastaan start_game eventin");
-});
 
-    // Kun kysymykseen on vastattu, pelaaja näkee näytöllään saiko hän oikein vai ei
-    // 10.5.2025 klo 20:26 vastaus nappulat eivät toimi
-    socket.on('answer_result', (data) => {
-    console.log("Pelaaja emittasi answer_resulttiin")
-    //Load result tähän
-    loadResult(data['result'])
-    })
+// Functiot ja tulevat alle -------------------
 
-//Ladataan menikö vastaus oikein
-// 10.5.2025 klo 20:26 vastaus nappulat eivät toimi
-function loadResult(result) {
-    const resultContainer = document.getElementById('result-container');
-    resultContainer.innerHTML = `<p>Your answer is: ${result}</p>`;
-
-    // Hide the question container
-    const questionContainer = document.getElementById('player-question-container');
-    if (questionContainer) {
-        questionContainer.style.display = 'none';
-    }
+function loadPlayerView(viewName) {
+    fetch(`/quizgame/player_partial/${viewName}`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('submit-container').innerHTML = html;
+        });
 }
-
-function submitAnswer(choice) {
-    console.log("TEST2");
-    socket.emit("submit_answer", { answer: choice });
-}
-
-// Make submitAnswer globally accessible
-window.submitAnswer = submitAnswer;

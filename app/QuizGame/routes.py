@@ -78,8 +78,6 @@ def show_answers_partial():
     return render_template('partials/show_answers.html', answer=answer)
 
 
-
-
 #Tähän uudesta questionAPIsta
 @quizgame_bp.route("/quest_partial")
 def get_example_question():
@@ -88,3 +86,14 @@ def get_example_question():
     answer = questionRajapinta.get_answer_by_question(random_quest)
 
     return render_template("partials/question.html", question=random_quest, answer=answer)
+
+
+@quizgame_bp.route("/player_partial/<view_name>")
+def get_host_partial(view_name):
+
+    if view_name == "submit":
+        return render_template("/partials/player_submit.html")
+    elif view_name == "voting":
+        return render_template("/partials/player_voting.html")
+    else:
+        return "Not Found", 404
