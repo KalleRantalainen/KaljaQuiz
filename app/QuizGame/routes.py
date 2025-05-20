@@ -83,9 +83,9 @@ def show_answers_partial():
 def get_example_question():
     #---------------
     random_quest = questionRajapinta.get_rand_question()
-    answer = questionRajapinta.get_answer_by_question(random_quest)
+    #answer = questionRajapinta.get_answer_by_question(random_quest)
 
-    return render_template("partials/question.html", question=random_quest, answer=answer)
+    return render_template("partials/question.html", question=random_quest)
 
 
 @quizgame_bp.route("/player_partial/<view_name>")
@@ -95,5 +95,8 @@ def get_player_partial(view_name):
         return render_template("/partials/player_submit.html")
     elif view_name == "voting":
         return render_template("/partials/player_voting.html")
+    elif view_name == "answerSubmitted":
+        # Kun vastaus lähetetty --> oottelu näkymä
+        return render_template("/partials/submit_waiting.html")
     else:
         return "Not Found", 404

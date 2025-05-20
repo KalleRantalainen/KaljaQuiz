@@ -35,16 +35,22 @@ def handle_player_ready(data):
         emit('next_submit', room=LOBBY)
 
 
-
+# Tämässä näytetään vastaukset hostin näytölle
 @socketio.on('show_answers')
 def handle_show_answers(data):
-    answer = data.get('answer')
-    print("Host sent answer:", answer)
+
+    question = data.get('question')
+    answer = questionRajapinta.get_answer_by_question(question)
+
+    #Hankitaan pelaajien vastaukset jotenkin niin saadaan ne näkyville myös
 
     emit('answers', { 'answer': answer }, room=LOBBY)  # To everyone in lobby
-
 
 
 @socketio.on('next_submit')
 def handle_next_submit(data):
     emit('next_submit', room=LOBBY)
+
+@socketio.on('return_player_answer')
+def handle_player_answer(data):
+    return

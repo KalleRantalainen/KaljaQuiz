@@ -86,11 +86,11 @@ socket.on('answers', (data) => {
 
 
 function on_show_answers(button) {
-    const choice = button.getAttribute('data-choice');
-    console.log("Answer being sent to server:", choice);
+    const question = button.getAttribute('data-question');
+    console.log("Host pressed show answers");
 
-    // Emit the answer to server (you can change event name if needed)
-    socket.emit('show_answers', { answer: choice });
+    // Kuljetetaan kysymys jotta sen avulla saadaan vastaus
+    socket.emit('show_answers', { question: question });
 
 }
 

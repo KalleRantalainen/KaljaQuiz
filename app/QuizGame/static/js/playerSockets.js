@@ -12,7 +12,6 @@ socket.on('connect', () => {
 // Pelaajat saavat vastauslaatikon
 socket.on('next_submit', () => {
     console.log("Pelaaja otti vastaan next_question, submit box esillä")
-
     loadPlayerView("submit")
 })
 
@@ -31,11 +30,12 @@ function submitAnswer() {
     const answer = document.getElementById('player-answer').value.trim();
     if (answer) {
         // TODO: emit via Socket.IO, for example:
-        // socket.emit('player_answer', { answer });
+        socket.emit('return_player_answer', { answer });
 
         console.log("Submitted answer:", answer);
         
         // Optionally clear input or show confirmation
         document.getElementById('player-answer').value = '';
+        loadPlayerView("answerSubmitted")
     }
 }
