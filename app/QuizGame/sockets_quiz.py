@@ -1,6 +1,7 @@
 from flask_socketio import emit, join_room
 from time import sleep
 import eventlet
+from flask import session
 
 from app.extensions import socketio
 from app.player_store import players
@@ -40,11 +41,26 @@ def handle_player_ready(data):
 def handle_show_answers(data):
 
     question = data.get('question')
-    answer = questionRajapinta.get_answer_by_question(question)
+    correct_answer = questionRajapinta.get_answer_by_question(question)
 
-    #Hankitaan pelaajien vastaukset jotenkin niin saadaan ne näkyville myös
+    # Collect quizgame answers
+    answers_payload = [
+        {
+            "name": p["name"],
+            "answer": p.get("quizgame", {}).get("answer", "")
+        }
+        for p in players.values()
+    ]
 
-    emit('answers', { 'answer': answer }, room=LOBBY)  # To everyone in lobby
+    emit('answers', {
+        'correct_answer': correct_answer,
+        'player_answers': answers_payload
+    }, room=LOBBY)
+
+    # Reset for next round
+    for p in players.values():
+        if "quizgame" in p:
+            p["quizgame"]["answer"] = None
 
 
 @socketio.on('next_submit')
@@ -53,4 +69,12 @@ def handle_next_submit(data):
 
 @socketio.on('return_player_answer')
 def handle_player_answer(data):
-    return
+    answer = data.get("answer")
+    user_id = session.get("user_id")
+
+    if user_id in players:
+        players[user_id]["quizgame"]["answer"] = answer
+        print(f"Player '{players[user_id]['name']}' answered: {answer}")
+    else:
+        print("Unknown user tried to submit an answer.")
+    
