@@ -80,6 +80,8 @@ function votingPhase(correctAnswer, playerAnswers) {
             button.onclick = () => {
                 //TODO !!!!!!
                 console.log("Pelaaja valitsi tietokoneen vastauksen")
+                "Väliaikainen loadPlayerViev. Pitää saada piste tästä"
+                loadPlayerView('afterVotingScreen')
             }
             li.appendChild(button);
             answersList.appendChild(li);
