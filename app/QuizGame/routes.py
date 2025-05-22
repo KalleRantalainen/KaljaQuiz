@@ -98,6 +98,8 @@ def get_player_partial(view_name):
     elif view_name == "answerSubmitted":
         # Kun vastaus lähetetty --> oottelu näkymä
         return render_template("/partials/submit_waiting.html")
+    elif view_name == "afterVotingScreen":
+        return render_template("partials/after_vote_screen.html")
     else:
         return "Not Found", 404
     
@@ -105,3 +107,9 @@ def get_player_partial(view_name):
 @quizgame_bp.route("/voting_phase_partial")
 def get_player_voting_phase():
     return render_template("partials/voting_phase.html")
+
+
+@quizgame_bp.route("/round_result_partial")
+def get_player_points():
+
+    return render_template("partials/round_results.html", player_data=players)

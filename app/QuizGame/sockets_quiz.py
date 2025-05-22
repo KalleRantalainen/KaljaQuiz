@@ -46,10 +46,11 @@ def handle_show_answers(data):
     # Collect quizgame answers
     answers_payload = [
         {
+            "user_id": user_id,
             "name": p["name"],
             "answer": p.get("quizgame", {}).get("answer", "")
         }
-        for p in players.values()
+        for user_id, p in players.items()
     ]
 
     emit('answers', {
@@ -77,4 +78,16 @@ def handle_player_answer(data):
         print(f"Player '{players[user_id]['name']}' answered: {answer}")
     else:
         print("Unknown user tried to submit an answer.")
-    
+
+@socketio.on("voted_a_player")
+def handle_vote(data):
+    voted_player = data.get("voted_player")
+
+    if voted_player in players:
+        players[voted_player]["quizgame"]["points"] += 1
+        print("###################################")
+        print("Pelaaja ", players[voted_player]["name"], " sai äänen pelaajalta ", players[session.get("user_id")])
+        print("Pelaajalla on nyt ", players[voted_player]["quizgame"]["points"], " pistettä")
+        print("###################################")
+    else:
+        print("PELAAJA ÄÄNESTI TUNTEMATONTA")

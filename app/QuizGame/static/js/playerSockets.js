@@ -62,8 +62,10 @@ function votingPhase(correctAnswer, playerAnswers) {
 
                 button.textContent = player.answer;
                 button.onclick = () => {
-                    // TODO!
-                    console.log("PELAAJA ÄÄNESTI NAPISTA")
+                    // 
+                    vote(player);
+                    
+                    console.log("PELAAJA ÄÄNESTI PELAAJAN ", player.name, " VASTAUSTA");
                 };
 
                 li.appendChild(button);
@@ -75,10 +77,17 @@ function votingPhase(correctAnswer, playerAnswers) {
             const button = document.createElement("button");
             button.textContent = correctAnswer;
             button.onclick = () => {
-                //TODO
+                //TODO !!!!!!
+                console.log("Pelaaja valitsi tietokoneen vastauksen")
             }
             li.appendChild(button);
             answersList.appendChild(li);
             //-------------------------------------------------------------
         });
+}
+
+// PLayer voted
+function vote(player){
+    socket.emit("voted_a_player", {voted_player: player.user_id})
+    loadPlayerView('afterVotingScreen')
 }

@@ -76,13 +76,12 @@ function loadAnswersView(correctAnswer, playerAnswers) {
                 item.textContent = `${player.name}: ${player.answer || '—'}`;
                 answersList.appendChild(item);
             });
-
-            const nextBtn = document.getElementById("next-question-btn");
+            
+            const nextBtn = document.getElementById("round-results-btn");
             if (nextBtn) {
                 nextBtn.addEventListener("click", () => {
-                    console.log("Host pressed next game after answer was shown");
-                    loadQuestion();
-                    socket.emit('next_submit');
+                    console.log("Host pressed load round results button");
+                    loadRoundResult();
                 });
             } else {
                 console.log("Next Question button not found");
@@ -112,4 +111,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+function loadRoundResult() {
+        fetch(`/quizgame/round_result_partial`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('question-container').innerHTML = html;
+            
+            const nextBtn = document.getElementById("next-question-btn");
+            if (nextBtn) {
+                nextBtn.addEventListener("click", () => {
+                    console.log("Host pressed next game after answer was shown");
+                    loadQuestion();
+                    socket.emit('next_submit');
+                });
+            } else {
+                console.log("Next Question button not found");
+            }
+        });
 }
