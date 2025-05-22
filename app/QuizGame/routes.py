@@ -100,3 +100,8 @@ def get_player_partial(view_name):
         return render_template("/partials/submit_waiting.html")
     else:
         return "Not Found", 404
+    
+
+@quizgame_bp.route("/voting_phase_partial")
+def get_player_voting_phase():
+    return render_template("partials/voting_phase.html")

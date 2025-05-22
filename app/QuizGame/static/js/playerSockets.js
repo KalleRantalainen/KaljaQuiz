@@ -16,6 +16,11 @@ socket.on('next_submit', () => {
 })
 
 
+socket.on('answers', (data) => {
+    //Pelaajien äänestysvaihe alkaa tästä
+    votingPhase(data.correct_answer, data.player_answers);
+});
+
 // Functiot ja tulevat alle -------------------
 
 function loadPlayerView(viewName) {
@@ -38,4 +43,42 @@ function submitAnswer() {
         document.getElementById('player-answer').value = '';
         loadPlayerView("answerSubmitted")
     }
+}
+
+function votingPhase(correctAnswer, playerAnswers) {
+    fetch(`/quizgame/voting_phase_partial`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('submit-container').innerHTML = html;
+
+            // Luodaan lista vastauksille --------------------------------
+            const answersList = document.getElementById('answers');
+            answersList.innerHTML = ''; // Clear previous
+
+            playerAnswers.forEach(player => {
+
+                const li = document.createElement("li");
+                const button = document.createElement("button");
+
+                button.textContent = player.answer;
+                button.onclick = () => {
+                    // TODO!
+                    console.log("PELAAJA ÄÄNESTI NAPISTA")
+                };
+
+                li.appendChild(button);
+                answersList.appendChild(li);
+            });
+
+            //Lisätään oikea vastaus myös listaan
+            const li = document.createElement("li");
+            const button = document.createElement("button");
+            button.textContent = correctAnswer;
+            button.onclick = () => {
+                //TODO
+            }
+            li.appendChild(button);
+            answersList.appendChild(li);
+            //-------------------------------------------------------------
+        });
 }
