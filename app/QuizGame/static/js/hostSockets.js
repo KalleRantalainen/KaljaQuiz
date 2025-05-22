@@ -123,7 +123,7 @@ function loadRoundResult() {
             const nextBtn = document.getElementById("next-question-btn");
             if (nextBtn) {
                 nextBtn.addEventListener("click", () => {
-                    console.log("Host pressed next game after answer was shown");
+                    console.log("Host pressed next question after results where shown");
                     loadQuestion();
                     socket.emit('next_submit');
                 });

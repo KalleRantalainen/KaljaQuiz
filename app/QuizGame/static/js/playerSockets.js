@@ -24,6 +24,7 @@ socket.on('answers', (data) => {
 // Functiot ja tulevat alle -------------------
 
 function loadPlayerView(viewName) {
+    console.log("Loading partial for", viewName); // DEBUG
     fetch(`/quizgame/player_partial/${viewName}`)
         .then(response => response.text())
         .then(html => {

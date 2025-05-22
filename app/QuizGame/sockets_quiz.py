@@ -13,14 +13,14 @@ from .quizgame_running import questionRajapinta
 
 # Quizgamen aloitus, muille peleille voi tehdä samanlaisen joskus
 @socketio.on('start_quizgame')
-def handle_start_quizgame(data):
+def handle_start_quizgame():
     print("Host started quiz game (server)")
     # Emittoidaan pelaajille täältä sama eventti (huoneeseen players, koska pelaajat ovat siellä)
     emit('start_quizgame', room=LOBBY)
 
 # Alustaa pelin aloittamalla
 @socketio.on('player_ready')
-def handle_player_ready(data):
+def handle_player_ready():
     print()
     print("In player_ready:", flush=True)
     expected_count = len(players)
@@ -65,7 +65,7 @@ def handle_show_answers(data):
 
 
 @socketio.on('next_submit')
-def handle_next_submit(data):
+def handle_next_submit():
     emit('next_submit', room=LOBBY)
 
 @socketio.on('return_player_answer')
