@@ -27,7 +27,7 @@ def handle_player_ready(data):
     print(" - Expected count:", expected_count, flush=True)
     current_count = gameStateStore.get_player_count()
     print(" - Current count:", current_count, flush=True)
-    if current_count == expected_count:
+    if current_count >= expected_count:
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
 
