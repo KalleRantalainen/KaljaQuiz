@@ -78,9 +78,9 @@ function votingPhase(correctAnswer, playerAnswers) {
             const button = document.createElement("button");
             button.textContent = correctAnswer;
             button.onclick = () => {
-                //TODO !!!!!!
                 console.log("Pelaaja valitsi tietokoneen vastauksen")
-                "Väliaikainen loadPlayerViev. Pitää saada piste tästä"
+                // +1 piste
+                socket.emit("voted_real_answer")
                 loadPlayerView('afterVotingScreen')
             }
             li.appendChild(button);

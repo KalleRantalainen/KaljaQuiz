@@ -64,9 +64,9 @@ def get_host_partial(view_name):
     qr_code = generate_qr(url)
 
     if view_name == "waiting":
-        return render_template("/partials/host_waiting_view.html", qr_code=qr_code)
+        return render_template("/partials/host_partials/host_waiting_view.html", qr_code=qr_code)
     elif view_name == "host_question":
-        return render_template("/partials/host_question_view.html")
+        return render_template("/partials/host_partials/host_question_view.html")
     else:
         return "Not Found", 404
     
@@ -75,7 +75,7 @@ def get_host_partial(view_name):
 @quizgame_bp.route('/show_answers_partial')
 def show_answers_partial():
     answer = request.args.get('answer', '')
-    return render_template('partials/show_answers.html', answer=answer)
+    return render_template('partials/host_partials/show_answers.html', answer=answer)
 
 
 #Tähän uudesta questionAPIsta
@@ -85,31 +85,29 @@ def get_example_question():
     random_quest = questionRajapinta.get_rand_question()
     #answer = questionRajapinta.get_answer_by_question(random_quest)
 
-    return render_template("partials/question.html", question=random_quest)
+    return render_template("partials/host_partials/question.html", question=random_quest)
 
 
 @quizgame_bp.route("/player_partial/<view_name>")
 def get_player_partial(view_name):
 
     if view_name == "submit":
-        return render_template("/partials/player_submit.html")
-    elif view_name == "voting":
-        return render_template("/partials/player_voting.html")
+        return render_template("/partials/player_partials/player_submit.html")
     elif view_name == "answerSubmitted":
         # Kun vastaus lähetetty --> oottelu näkymä
-        return render_template("/partials/submit_waiting.html")
+        return render_template("/partials/player_partials/submit_waiting.html")
     elif view_name == "afterVotingScreen":
-        return render_template("partials/after_vote_screen.html")
+        return render_template("partials/player_partials/after_vote_screen.html")
     else:
         return "Not Found", 404
     
 
 @quizgame_bp.route("/voting_phase_partial")
 def get_player_voting_phase():
-    return render_template("partials/voting_phase.html")
+    return render_template("partials/player_partials/voting_phase.html")
 
 
 @quizgame_bp.route("/round_result_partial")
 def get_player_points():
 
-    return render_template("partials/round_results.html", player_data=players)
+    return render_template("partials/host_partials/round_results.html", player_data=players)

@@ -91,3 +91,8 @@ def handle_vote(data):
         print("###################################")
     else:
         print("PELAAJA ÄÄNESTI TUNTEMATONTA")
+
+@socketio.on("voted_real_answer")
+def handle_real_vote():
+    players[session.get("user_id")]["quizgame"]["points"] += 1
+    print("Pelaaja valitsi oikean vastauksen")
