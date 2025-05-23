@@ -1,0 +1,12 @@
+<h1>ROUND COMPLETED</h1>
+
+<div>
+    <h2>Tämän hetkinen pelitilanne</h2>
+    <ul id="current-standings">
+        {% for user_id, player in player_data.items() %}
+            <li>{{ player.name }}: {{ player.quizgame.points }} pistettä</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<button id="next-question-btn" data-role="host">Next Question</button>

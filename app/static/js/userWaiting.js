@@ -3,6 +3,7 @@ const socket = io();
 
 console.log("@@@@@@@EMITTING join_lobby from app/templates/user_waiting.html");
 // Emit event join lobby
+
 socket.emit("join_lobby", { player_id: "{{ user_id }}" });
 
 

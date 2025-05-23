@@ -46,7 +46,16 @@ def user():
 def register():
     name = request.form.get("name", "").strip()
     if name:
-        players[session["user_id"]] = name
+        players[session["user_id"]] = {
+            "name": name,
+            "quizgame": {
+                "answer": None,
+                "points": 0
+            },
+            "coingame":{
+                # Jos tarvii muille peleille
+            }
+        }
     return redirect(url_for("main.user_waiting"))
 
 
@@ -59,5 +68,5 @@ def user_waiting():
 # JSON endpoint to get the player names
 @main.route("/players", methods=["GET"])
 def list_players():
-    return jsonify(list(players.values()))
+    return jsonify([data["name"] for data in players.values()])
 

@@ -1,6 +1,7 @@
 from flask_socketio import emit, join_room
 from time import sleep
 import eventlet
+from flask import session
 
 from app.extensions import socketio
 from app.player_store import players
@@ -30,25 +31,68 @@ def handle_player_ready(data):
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
 
-        sleep(8)
+        sleep(4)
         emit('next_question', room=LOBBY)
+        emit('next_submit', room=LOBBY)
 
 
-
-# Next question pitää fixaa. Jos tekee tällä tavalla
-# niin clientit saa kiinni mut host ei. Jos emittaa
-# hostin js koodista niin host saa kiinni mutta clientit ei.
-# Nyt menen nukkumaan.
-@socketio.on('next_question')
-def handle_next_question(data):
-    random_quest = questionRajapinta.get_rand_question()
-    print("HANDLING NEXT QUESTION")
-    emit("next_question", {"question": random_quest}, room=LOBBY)
-
-
+# Tämässä näytetään vastaukset hostin näytölle
 @socketio.on('show_answers')
 def handle_show_answers(data):
-    answer = data.get('answer')
-    print("Host sent answer:", answer)
 
-    emit('answers', { 'answer': answer }, room=LOBBY)  # To everyone in lobby
+    question = data.get('question')
+    correct_answer = questionRajapinta.get_answer_by_question(question)
+
+    # Collect quizgame answers
+    answers_payload = [
+        {
+            "user_id": user_id,
+            "name": p["name"],
+            "answer": p.get("quizgame", {}).get("answer", "")
+        }
+        for user_id, p in players.items()
+    ]
+
+    emit('answers', {
+        'correct_answer': correct_answer,
+        'player_answers': answers_payload
+    }, room=LOBBY)
+
+    # Reset for next round
+    for p in players.values():
+        if "quizgame" in p:
+            p["quizgame"]["answer"] = None
+
+
+@socketio.on('next_submit')
+def handle_next_submit():
+    emit('next_submit', room=LOBBY)
+
+@socketio.on('return_player_answer')
+def handle_player_answer(data):
+    answer = data.get("answer")
+    user_id = session.get("user_id")
+
+    if user_id in players:
+        players[user_id]["quizgame"]["answer"] = answer
+        print(f"Player '{players[user_id]['name']}' answered: {answer}")
+    else:
+        print("Unknown user tried to submit an answer.")
+
+@socketio.on("voted_a_player")
+def handle_vote(data):
+    voted_player = data.get("voted_player")
+
+    if voted_player in players:
+        players[voted_player]["quizgame"]["points"] += 1
+        print("###################################")
+        print("Pelaaja ", players[voted_player]["name"], " sai äänen pelaajalta ", players[session.get("user_id")])
+        print("Pelaajalla on nyt ", players[voted_player]["quizgame"]["points"], " pistettä")
+        print("###################################")
+    else:
+        print("PELAAJA ÄÄNESTI TUNTEMATONTA")
+
+@socketio.on("voted_real_answer")
+def handle_real_vote():
+    players[session.get("user_id")]["quizgame"]["points"] += 1
+    print("Pelaaja valitsi oikean vastauksen")
