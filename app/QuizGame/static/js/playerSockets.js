@@ -40,6 +40,7 @@ function loadPlayerView(viewName) {
                         if (display) {
                             module.startTimer(60, display, () => {
                                 console.log("Timer ended!");
+                                submitAnswer();
                             });
                         } else {
                             console.warn("No #timer element found.");

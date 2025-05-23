@@ -8,7 +8,7 @@ export function startTimer(duration, displayElement, onEnd = null) {
 
         if (timer <= 0) {
             clearInterval(interval);
-            displayElement.textContent = "Time's up!";
+            displayElement.textContent = "AIKA LOPPU PAVIAANIT!";
             if (onEnd) onEnd();
         }
     }, 1000);

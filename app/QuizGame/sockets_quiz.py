@@ -31,7 +31,7 @@ def handle_player_ready(data):
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
 
-        sleep(4)
+        sleep(5)
         emit('next_question', room=LOBBY)
         emit('next_submit', room=LOBBY)
 

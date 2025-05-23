@@ -13,6 +13,22 @@ function loadView(viewName) {
             } else {
                 if (typeof stopPollingPlayers === "function") stopPollingPlayers();
             }
+
+            if (viewName === "host_question") {
+                import('/quizgame/static/js/timer.js')
+                    .then(module => {
+                        const display = document.getElementById('question-container');
+                        if (display) {
+                            module.startTimer(4, display, () => {
+                                console.log("Timer ended!");
+                                
+                            });
+                        } else {
+                            console.warn("No #timer element found.");
+                        }
+                    })
+                    .catch(err => console.error("Failed to load timer module:", err));
+            }
         });
 }
 
@@ -34,6 +50,7 @@ socket.on('start_game', async () => {
     console.log("HOST otti vastaan start_game eventin");
     // Tää vois olla countdown pelaajille 5..4..3..2..1
     loadView("host_question")
+
 });
 
 
@@ -51,6 +68,20 @@ function loadQuestion() {
         .then(response => response.text())
         .then(html => {
             document.getElementById('question-container').innerHTML = html;
+
+            import('/quizgame/static/js/timer.js')
+                    .then(module => {
+                        const display = document.getElementById('timer');
+                        if (display) {
+                            module.startTimer(60, display, () => {
+                                console.log("Timer ended!");
+                                
+                            });
+                        } else {
+                            console.warn("No #timer element found.");
+                        }
+                    })
+                    .catch(err => console.error("Failed to load timer module:", err));
         });
 
     console.log("Kysymyksen lataaminen onnistui!")
