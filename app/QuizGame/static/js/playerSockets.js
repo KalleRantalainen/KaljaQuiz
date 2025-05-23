@@ -29,7 +29,27 @@ function loadPlayerView(viewName) {
         .then(response => response.text())
         .then(html => {
             document.getElementById('submit-container').innerHTML = html;
+            // Jos partial on ladattu tälleen ^^^ niin ajastin scriptit on pakko ladata
+            // myös täälä, koska suoraan partial html tiedostossa se ei toimi
+
+            // AFTER partial is inserted, manually run any scripts:
+            if (viewName === 'submit') {
+                import('/quizgame/static/js/timer.js')
+                    .then(module => {
+                        const display = document.getElementById('timer');
+                        if (display) {
+                            module.startTimer(60, display, () => {
+                                console.log("Timer ended!");
+                            });
+                        } else {
+                            console.warn("No #timer element found.");
+                        }
+                    })
+                    .catch(err => console.error("Failed to load timer module:", err));
+            }
         });
+
+        
 }
 
 function submitAnswer() {
