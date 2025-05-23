@@ -43,7 +43,7 @@ socket.on('next_question', () => {
     loadQuestion();  // Later: use server state or timer to pass the real question index
     console.log("Kysymys näkyvissä")
 
-})
+});
 
 // Partiaali kysymyksen näyttämiselle
 function loadQuestion() {
@@ -115,20 +115,58 @@ function sleep(ms) {
 
 
 function loadRoundResult() {
-        fetch(`/quizgame/round_result_partial`)
+    fetch(`/quizgame/round_result_partial`)
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById('question-container').innerHTML = html;
+        
+        const nextBtn = document.getElementById("next-question-btn");
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                console.log("Host pressed next question after results where shown");
+                loadQuestion();
+                socket.emit('next_submit');
+            });
+        } else {
+            console.log("Next Question button not found");
+        }
+    });
+}
+
+function endGame() {
+    console.log("HOST PAINOI ENDGAME")
+    socket.emit("end_game");
+}
+
+
+socket.on('final_results', (data) => {
+    console.log("HOST VASTAANOTTI FINAL_RESULTS")
+    loadFinalResults(data.results);
+});
+
+//TODO:
+function loadFinalResults(results) {
+    fetch(`/quizgame/final_results_partial`)
         .then(response => response.text())
         .then(html => {
-            document.getElementById('question-container').innerHTML = html;
-            
-            const nextBtn = document.getElementById("next-question-btn");
-            if (nextBtn) {
-                nextBtn.addEventListener("click", () => {
-                    console.log("Host pressed next question after results where shown");
-                    loadQuestion();
-                    socket.emit('next_submit');
-                });
-            } else {
-                console.log("Next Question button not found");
+            document.getElementById('main-container').innerHTML = html;
+
+            // Hide the end game button
+            const endGameButton = document.getElementById("end-game");
+            if (endGameButton) {
+                endGameButton.style.display = "none";
             }
+
+            const tbody = document.getElementById('results-body');
+            tbody.innerHTML = '';
+            results.forEach((player, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${player.name}</td>
+                    <td>${player.points}</td>
+                `;
+                tbody.appendChild(row);
+            });
         });
 }

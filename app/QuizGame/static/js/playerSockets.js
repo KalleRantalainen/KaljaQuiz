@@ -122,3 +122,7 @@ function vote(player){
     socket.emit("voted_a_player", {voted_player: player.user_id})
     loadPlayerView('afterVotingScreen')
 }
+
+socket.on('player_finisher', () => {
+    socket.emit('load_player_ending')
+});

@@ -96,3 +96,37 @@ def handle_vote(data):
 def handle_real_vote():
     players[session.get("user_id")]["quizgame"]["points"] += 1
     print("Pelaaja valitsi oikean vastauksen")
+
+@socketio.on("end_game")
+def handle_end_game():
+    sorted_players = sorted(
+        players.items(),
+        key=lambda item: item[1]["quizgame"]["points"],
+        reverse=True  # Highest first
+    )
+
+    result_payload = [
+        {
+            "user_id": user_id,
+            "name": player['name'],
+            "points": player['quizgame']['points']
+
+        }
+        for user_id, player in sorted_players
+    ]
+
+    #Host näytölle kaikkien tulokset
+    emit('final_results', {"results": result_payload})
+
+    #Pelaajien näytölle oma sijoitus ja onnittelut ehkä
+    #emit player_finisher -> socket.emit end_players -> emit personoidut onnittelut
+    emit('player_finisher')
+    
+
+#Nyt saadaan sessionin kautta personoidut lopetukset sijoituksen mukaan
+@socketio.on("load_player_ending")
+def handle_player_end():
+    user_id = session.get("user_id")
+
+    #If position > jotain jee jos ei nii :(
+    
