@@ -115,3 +115,7 @@ def get_player_points():
 @quizgame_bp.route("/final_results_partial")
 def load_final_result():
     return render_template("partials/host_partials/final_results.html")
+
+@quizgame_bp.route("/player_ending_partial/")
+def player_ending_partial():
+    return render_template("partials/player_partials/player_ending.html")

@@ -124,5 +124,21 @@ function vote(player){
 }
 
 socket.on('player_finisher', () => {
+    console.log("PELAAJA VASTAAN OTTI PLAYER_FINISHER")
     socket.emit('load_player_ending')
+});
+
+
+socket.on('final_player_result', (data) => {
+  fetch('/quizgame/player_ending_partial/')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('submit-container').innerHTML = html;
+
+      console.log("LADATAAN PELAAJALLE LOPETUSNÄYTTÖ")
+      const messageDiv = document.getElementById('player-result-message');
+      if (messageDiv) {
+        messageDiv.innerText = data.message;
+      }
+    });
 });

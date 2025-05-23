@@ -120,13 +120,45 @@ def handle_end_game():
 
     #Pelaajien näytölle oma sijoitus ja onnittelut ehkä
     #emit player_finisher -> socket.emit end_players -> emit personoidut onnittelut
-    emit('player_finisher')
+    emit('player_finisher', room=LOBBY)
     
 
 #Nyt saadaan sessionin kautta personoidut lopetukset sijoituksen mukaan
 @socketio.on("load_player_ending")
 def handle_player_end():
     user_id = session.get("user_id")
+    if not user_id:
+        emit('final_player_result', {"message": "Session expired. Please rejoin."}, room=LOBBY)
+        return
 
-    #If position > jotain jee jos ei nii :(
+    # Sort players by points (same as before)
+    sorted_players = sorted(
+        players.items(),
+        key=lambda item: item[1]["quizgame"]["points"],
+        reverse=True
+    )
+
+    # Find the position (1-based index)
+    position = None
+    for i, (uid, _) in enumerate(sorted_players):
+        if uid == user_id:
+            position = i + 1
+            break
+
+    # Fallback if not found
+    if position is None:
+        emit('final_player_result', {"message": "You were not found in the results."}, room=LOBBY)
+        return
+
+    # Generate message
+    if position == 1:
+        message = f"🏆 You're the CHAMPION! 1st place — amazing work!"
+    elif position == 2:
+        message = f"🥈 2nd place — so close to glory!"
+    elif position == 3:
+        message = f"🥉 3rd place — a worthy podium finish!"
+    else:
+        message = f"{position}th place... maybe stick to Uno next time. 😬"
+
+    emit('final_player_result', {"message": message, "position": position}, room=LOBBY)
     
