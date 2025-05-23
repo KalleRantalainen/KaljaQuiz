@@ -53,21 +53,29 @@ function votingPhase(correctAnswer, playerAnswers) {
             document.getElementById('submit-container').innerHTML = html;
 
             // Luodaan lista vastauksille --------------------------------
+            const currentUserId = document.getElementById('answers-container').dataset.userId;
+
             const answersList = document.getElementById('answers');
             answersList.innerHTML = ''; // Clear previous
 
             playerAnswers.forEach(player => {
-
+                
                 const li = document.createElement("li");
                 const button = document.createElement("button");
-
                 button.textContent = player.answer;
-                button.onclick = () => {
-                    // 
+
+                // Näytetään pelaajalle myös oma vastaus mutta ei pysty äänestämään
+                if(player.user_id === currentUserId) {
+                    button.onclick = () => {                    
+                    console.log("PELAAJA ÄÄNESTI PELAAJAN KOITTI ÄÄNESTÄÄ ITSEÄÄN");
+                    };
+                }
+                else {
+                    button.onclick = () => {
                     vote(player);
-                    
                     console.log("PELAAJA ÄÄNESTI PELAAJAN ", player.name, " VASTAUSTA");
-                };
+                    };
+                }
 
                 li.appendChild(button);
                 answersList.appendChild(li);

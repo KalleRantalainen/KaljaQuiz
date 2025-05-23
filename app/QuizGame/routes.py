@@ -104,10 +104,10 @@ def get_player_partial(view_name):
 
 @quizgame_bp.route("/voting_phase_partial")
 def get_player_voting_phase():
-    return render_template("partials/player_partials/voting_phase.html")
+    user_id = session.get("user_id")
+    return render_template("partials/player_partials/voting_phase.html", user_id=user_id)
 
 
 @quizgame_bp.route("/round_result_partial")
 def get_player_points():
-
     return render_template("partials/host_partials/round_results.html", player_data=players)
