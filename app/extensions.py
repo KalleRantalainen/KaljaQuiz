@@ -1,7 +1,12 @@
 from flask_socketio import SocketIO
+from flask_sqlalchemy import SQLAlchemy
+
 # Alustetaan socketio täällä niin ei tule circular import
 # erroreita.
 socketio = SocketIO(cors_allowed_origins="*")
+
+# Alustetaan tietokanta
+db = SQLAlchemy()
 
 # Tässä on varmaan suurin osa muutoksista. Sen sijaan että
 # käytettiin cors_allowed_origins=["*"], käytetäänkin localhostia

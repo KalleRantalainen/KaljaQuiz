@@ -10,6 +10,10 @@
 1. Aja `python run.py` kansiossa ./kaljaQuiz
 2. Osoitteet muuttuu, muuta ne näkee konsolista
 
+## GIORGIO
+- Ohjeita ja pari tyhjää tiedostoo löytyy \app\database\
+- En koittanut tehdä itte mitään muuta kun ajoin ohjelman pystyyn ja tietokanta näytti käynnistyvän
+
 ## Sockets
 Jos route/url vaihtuu, niin kaikki socketin roomiin liitetyt taistelijat katoavat.
 Siis jos esim ollaan /waiting-room osotteessa ja pelaaja on liitetty room="room1" huoneeseen ja sitten siirrytään osotteeseen /quizgame niin pelaaja tippuu roomista ja

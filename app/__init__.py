@@ -5,7 +5,8 @@ from flask_session import Session
 from .QuizGame import quizgame_bp
 from .coinflipperZ import coinflipperZ_bp
 
-from .extensions import socketio
+from .extensions import socketio, db
+from .database import models
 
 
 def create_app(host_ip, port):
@@ -16,6 +17,17 @@ def create_app(host_ip, port):
     # Tallennetaan osoite, jonka kautta käyttäjät pääsee liittymään.
     app.config['HOST_IP'] = host_ip
     app.config['PORT'] = port
+
+    # Tietokannan configurointi
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@db:5432/mydatabase'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
+
+    # Luodaan puuttuvat taulut tietokantaan. Tätä ei kai
+    # kannata kutsua aina, sitten kun ohjelma on valmis vaan 
+    # pelkästään ensimmäisen runin yhteydessä
+    with app.app_context():
+        db.create_all()
 
     Session(app)
 

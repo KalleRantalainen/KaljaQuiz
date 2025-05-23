@@ -5,3 +5,5 @@ PyJWT>=2.10.1
 qrcode[pil]==8.2
 flask-socketio
 eventlet
+flask_sqlalchemy
+psycopg2-binary
