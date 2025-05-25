@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Host Screen</title>
+    <link id="theme-style" rel="stylesheet" href="">
+    {% include 'partials/components/import_components.html' %}
 </head>
 <body>
-    <h1>Host Screen</h1>
-    <p>Select a game</p>
-    <p>Test host_ip: {{HOST_IP}}</p>
-    <!--<a href="/host/waiting?game=coinflipperZ">CoinflipperZ</a><-->
-    <a href="/host/waiting?game=quizgame">KaljaQuiz</a>
+    <canvas id="beerCanvas"></canvas>
 
+    <div class="content">
+        <h1>Host Screen</h1>
+        <p>Select a game</p>
+        <p>Test host_ip: {{HOST_IP}}</p>
+        <!--<a href="/host/waiting?game=coinflipperZ">CoinflipperZ</a><-->
+        <a href="/host/waiting?game=quizgame">KaljaQuiz</a>
+    </div>
+    {% include 'partials/components/import_animation.html' %}
 </body>
 </html>

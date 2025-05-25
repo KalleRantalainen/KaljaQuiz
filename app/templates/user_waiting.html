@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Waiting Room</title>
+    <link id="theme-style" rel="stylesheet" href="">
+    {% include 'partials/components/import_components.html' %}
 </head>
 <body>
-    <p>Waiting for host...</p>
+    <canvas id="beerCanvas"></canvas>
+
+    <div class="content">
+        <p>Waiting for host...</p>
+    </div>
+    
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/userWaiting.js') }}"></script>
+    {% include 'partials/components/import_animation.html' %}
 </body>
 </html>

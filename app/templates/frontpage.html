@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>KaljaQuiz - Choose Role</title>
-    <link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='css/theme-default/colorPalette.css') }}">
+    <link id="theme-style" rel="stylesheet" href="">
+    <!--<link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='css/theme-default/colorPalette.css') }}">-->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/frontpage.css') }}">
     {% include 'partials/components/import_components.html' %}
 </head>
 <body>
@@ -26,7 +26,7 @@
         </select>
     </div>
     
-    <script src="{{ url_for('static', filename='js/frontpageAnimation.js') }}"></script>
+    {% include 'partials/components/import_animation.html' %}
     <script src="{{ url_for('static', filename='js/themeSwitch.js') }}"></script>
 </body>
 </html>

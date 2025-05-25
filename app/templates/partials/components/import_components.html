@@ -1,3 +1,20 @@
+<!-- Ladataan oikea theme (värit) täällä ja kaikki vaaditut css tiedostot
+ niin tämän voi lisätä jokaiseen main html tiedostoon (ei tarvi partialeihin)-->
+<!--<script>
+    const savedTheme = localStorage.getItem('theme') || 'theme-default';
+    document.write(`<link id="theme-style" rel="stylesheet" href="/static/css/${savedTheme}/colorPalette.css">`);
+</script>-->
+<script>
+    const savedTheme = localStorage.getItem('theme') || 'theme-default';
+    const themeLink = document.getElementById('theme-style');
+    if (themeLink) {
+        themeLink.href = `/static/css/${savedTheme}/colorPalette.css`;
+    } else {
+        // fallback if not found (older pages)
+        document.write(`<link id="theme-style" rel="stylesheet" href="/static/css/${savedTheme}/colorPalette.css">`);
+    }
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/textElements.css') }}">
