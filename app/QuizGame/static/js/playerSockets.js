@@ -5,7 +5,7 @@ socket.on('connect', () => {
     socket.emit('player_ready', {"test": "test"});
 
     //Tyylii turha emit join lobby
-    socket.emit("join_lobby", { player_id: "{{ user_id }}" });
+    socket.emit("join_quizgame_lobby", { player_id: "{{ user_id }}" });
     console.log(" === Pelaaja {{ user_id }} liittyi lobbyyn");
 });
 

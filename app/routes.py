@@ -23,7 +23,9 @@ def host_waiting_room():
     game = request.args.get("game")
     
     if game == "coinflipperZ":
-        return redirect("/coinflipperZ/waiting")
+        return
+        #COMING SOON
+        #return redirect("/coinflipperZ/waiting")
     elif game == "quizgame":
         # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
         # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
@@ -38,7 +40,7 @@ def user():
     # Luodaan uusi id käyttäjälle, jos ei jo ole.
     if 'user_id' not in session:
         session['user_id'] = str(uuid.uuid4())
-    return render_template("registration.html", user_id=session['user_id'])
+    return render_template("registration.html")
 
 
 # Register the user to the store
@@ -50,7 +52,8 @@ def register():
             "name": name,
             "quizgame": {
                 "answer": None,
-                "points": 0
+                "points": 0,
+                "voted": False
             },
             "coingame":{
                 # Jos tarvii muille peleille

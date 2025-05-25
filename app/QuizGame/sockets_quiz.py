@@ -1,16 +1,16 @@
 from flask_socketio import emit, join_room
 from time import sleep
 import eventlet
-from flask import session
+from flask import session, request
 import random
 
 from app.extensions import socketio
-from app.player_store import players
+from app.player_store import players, sid_to_user
 from .game_state_store import gameStateStore
 from ..rooms import LOBBY
 from .quizgame_running import questionRajapinta
 
-"""Join_game on nyt join_lobby ja käytetään kaikkiin peleihin"""
+"""Join_game on nyt join_quizgame_lobby ja käytetään kaikkiin peleihin"""
 
 # Quizgamen aloitus, muille peleille voi tehdä samanlaisen joskus
 @socketio.on('start_quizgame')
@@ -72,6 +72,7 @@ def handle_show_answers(data):
     for p in players.values():
         if "quizgame" in p:
             p["quizgame"]["answer"] = None
+            p["quizgame"]["voted"] = False
 
 
 @socketio.on('next_submit')
@@ -91,7 +92,9 @@ def handle_player_answer(data):
 
 @socketio.on("voted_a_player")
 def handle_vote(data):
+    user_id = session.get("user_id")
     voted_player = data.get("voted_player")
+    players[user_id]["quizgame"]["voted"] = True
 
     if voted_player in players:
         players[voted_player]["quizgame"]["points"] += 1
@@ -101,11 +104,24 @@ def handle_vote(data):
         print("###################################")
     else:
         print("PELAAJA ÄÄNESTI TUNTEMATONTA")
+    
+    check_all_voted()
 
 @socketio.on("voted_real_answer")
 def handle_real_vote():
+    user_id = session.get("user_id")
+    players[user_id]["quizgame"]["voted"] = True
+
     players[session.get("user_id")]["quizgame"]["points"] += 1
     print("Pelaaja valitsi oikean vastauksen")
+
+    check_all_voted()
+
+
+def check_all_voted():
+    if all(p.get("quizgame", {}).get("voted") for p in players.values()):
+        socketio.emit("everyone_voted", room=LOBBY)
+
 
 @socketio.on("end_game")
 def handle_end_game():
@@ -136,9 +152,12 @@ def handle_end_game():
 #Nyt saadaan sessionin kautta personoidut lopetukset sijoituksen mukaan
 @socketio.on("load_player_ending")
 def handle_player_end():
-    user_id = session.get("user_id")
+    #user_id = session.get("user_id")
+    sid = request.sid
+    user_id = sid_to_user.get(sid)
+
     if not user_id:
-        emit('final_player_result', {"message": "Session expired. Please rejoin."}, room=LOBBY)
+        emit('final_player_result', {"message": "Session expired. Please rejoin."}, to=sid)
         return
 
     # Sort players by points (same as before)
@@ -157,18 +176,18 @@ def handle_player_end():
 
     # Fallback if not found
     if position is None:
-        emit('final_player_result', {"message": "You were not found in the results."}, room=LOBBY)
+        emit('final_player_result', {"message": "You were not found in the results."}, to=sid)
         return
 
     # Generate message
     if position == 1:
-        message = f"🏆 You're the CHAMPION! 1st place — amazing work!"
+        message = f"🏆 Olet ansainnut illallisen jonka tarjoaa Kalle! Wohooo!"
     elif position == 2:
-        message = f"🥈 2nd place — so close to glory!"
+        message = f"🥈 Olet vähän hidas kaveri"
     elif position == 3:
-        message = f"🥉 3rd place — a worthy podium finish!"
+        message = f"🥉 Olet aika idiootti tyyppi!"
     else:
-        message = f"{position}th place... maybe stick to Uno next time. 😬"
+        message = f"{position} sija, jää vaan kotiin ensi kerralla. 😬"
 
-    emit('final_player_result', {"message": message, "position": position}, room=LOBBY)
+    emit('final_player_result', {"message": message, "position": position}, to=sid)
     
