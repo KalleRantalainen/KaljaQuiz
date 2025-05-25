@@ -38,7 +38,7 @@ def user():
     # Luodaan uusi id käyttäjälle, jos ei jo ole.
     if 'user_id' not in session:
         session['user_id'] = str(uuid.uuid4())
-    return render_template("registration.html", user_id=session['user_id'])
+    return render_template("registration.html")
 
 
 # Register the user to the store

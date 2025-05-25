@@ -11,3 +11,5 @@ players = {}
 #     },
 #     ...
 # }
+
+sid_to_user = {}

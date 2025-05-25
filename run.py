@@ -30,4 +30,4 @@ if __name__ == "__main__":
     print(f"User URL: http://{HOST_IP}:{PORT}/user")
     print(f"User URL: http://{HOST_IP}:{PORT}/host")
 
-    socketio.run(app, host="0.0.0.0", port=PORT, debug=True, log_output=True)
+    socketio.run(app, host="0.0.0.0", port=PORT, debug=True)
