@@ -18,7 +18,7 @@ socket.on('next_submit', () => {
 
 socket.on('answers', (data) => {
     //Pelaajien äänestysvaihe alkaa tästä
-    votingPhase(data.correct_answer, data.player_answers);
+    votingPhase(data.correct_answer, data.answers_list);
 });
 
 // Functiot ja tulevat alle -------------------
@@ -64,6 +64,11 @@ function submitAnswer() {
         // Optionally clear input or show confirmation
         document.getElementById('player-answer').value = '';
         loadPlayerView("answerSubmitted")
+        
+        import('/quizgame/static/js/timer.js')
+        .then(module => {
+            module.stopTimer();
+        })
     }
 }
 
@@ -91,6 +96,16 @@ function votingPhase(correctAnswer, playerAnswers) {
                     console.log("PELAAJA ÄÄNESTI PELAAJAN KOITTI ÄÄNESTÄÄ ITSEÄÄN");
                     };
                 }
+                else if (player.user_id === "computer"){
+                    button.textContent = correctAnswer;
+
+                    button.onclick = () => {
+                    console.log("Pelaaja valitsi tietokoneen vastauksen")
+                    // +1 piste
+                    socket.emit("voted_real_answer")
+                    loadPlayerView('afterVotingScreen')
+                    }
+                }
                 else {
                     button.onclick = () => {
                     vote(player);
@@ -102,18 +117,6 @@ function votingPhase(correctAnswer, playerAnswers) {
                 answersList.appendChild(li);
             });
 
-            //Lisätään oikea vastaus myös listaan
-            const li = document.createElement("li");
-            const button = document.createElement("button");
-            button.textContent = correctAnswer;
-            button.onclick = () => {
-                console.log("Pelaaja valitsi tietokoneen vastauksen")
-                // +1 piste
-                socket.emit("voted_real_answer")
-                loadPlayerView('afterVotingScreen')
-            }
-            li.appendChild(button);
-            answersList.appendChild(li);
             //-------------------------------------------------------------
         });
 }

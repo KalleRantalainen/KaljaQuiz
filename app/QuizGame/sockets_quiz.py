@@ -2,6 +2,7 @@ from flask_socketio import emit, join_room
 from time import sleep
 import eventlet
 from flask import session
+import random
 
 from app.extensions import socketio
 from app.player_store import players
@@ -52,10 +53,19 @@ def handle_show_answers(data):
         }
         for user_id, p in players.items()
     ]
+    answers_payload.append(
+        {
+            "user_id": "computer",
+            "name": "correct",
+            "answer": correct_answer
+        }
+    )
 
+    random.shuffle(answers_payload)
+    
     emit('answers', {
         'correct_answer': correct_answer,
-        'player_answers': answers_payload
+        'answers_list': answers_payload
     }, room=LOBBY)
 
     # Reset for next round

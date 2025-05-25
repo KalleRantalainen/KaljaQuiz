@@ -95,16 +95,13 @@ function loadAnswersView(correctAnswer, playerAnswers) {
         .then(html => {
             document.getElementById('question-container').innerHTML = html;
 
-            // Insert correct answer
-            document.getElementById('correct-answer').textContent = correctAnswer;
-
             // Insert player answers
             const answersList = document.getElementById('player-answers');
             answersList.innerHTML = ''; // Clear previous
 
             playerAnswers.forEach(player => {
                 const item = document.createElement('li');
-                item.textContent = `${player.name}: ${player.answer || '—'}`;
+                item.textContent = `${player.answer || '—'}`;
                 answersList.appendChild(item);
             });
             
@@ -122,7 +119,7 @@ function loadAnswersView(correctAnswer, playerAnswers) {
 
 socket.on('answers', (data) => {
     console.log("LADATAAN PELAAJIEN VASTAUKSET:", data.answer);
-    loadAnswersView(data.correct_answer, data.player_answers);
+    loadAnswersView(data.correct_answer, data.answers_list);
 });
 
 
@@ -130,6 +127,10 @@ function on_show_answers(button) {
     const question = button.getAttribute('data-question');
     console.log("Host pressed show answers");
 
+    import('/quizgame/static/js/timer.js')
+        .then(module => {
+            module.stopTimer();
+        })
     // Kuljetetaan kysymys jotta sen avulla saadaan vastaus
     socket.emit('show_answers', { question: question });
 
