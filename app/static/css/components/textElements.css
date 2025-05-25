@@ -1,0 +1,37 @@
+h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 4rem;
+    color: var(--color-text-highlight);
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+p {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 5rem;
+    }
+
+    p {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 1024px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+}
