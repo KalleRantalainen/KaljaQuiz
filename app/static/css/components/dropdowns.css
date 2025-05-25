@@ -1,0 +1,19 @@
+.dropdown {
+    background: var(--color-background);
+    color: var(--color-text-normal);
+    border: 2px solid var(--color-text-highlight);
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 250px;
+}
+
+.dropdown option {
+    background: var(--color-background);
+    color: var(--color-text-normal);
+}

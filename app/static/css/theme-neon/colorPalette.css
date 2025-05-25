@@ -1,0 +1,17 @@
+/*Paletti: https://www.color-hex.com/color-palette/74007*/
+
+:root {
+    /*Large brackground colors*/
+    --color-background: #3d144c;
+    --color-body: #faeb2c;
+
+    /*Component background colors*/
+    --color-background-button: #1685f8;
+
+    /*Text colors*/
+    --color-text-highlight: #e900ff;
+    --color-text-normal: #faeb2c;
+
+    /*Front page animation*/
+    --color-drop: rgba(245, 39, 137, 1);
+}
