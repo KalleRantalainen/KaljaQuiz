@@ -16,6 +16,7 @@ socket.on('start_quizgame', () => {
 });
 
 socket.on("start_coinflip", () => {
+    socket.emit("join_coinflip_room")
     console.log("Received start_coinflip, redirecting...");
     window.location.href = "/coinflipperZ/coin";
 });

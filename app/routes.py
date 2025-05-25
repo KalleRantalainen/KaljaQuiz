@@ -23,7 +23,9 @@ def host_waiting_room():
     game = request.args.get("game")
     
     if game == "coinflipperZ":
-        return redirect("/coinflipperZ/waiting")
+        return
+        #COMING SOON
+        #return redirect("/coinflipperZ/waiting")
     elif game == "quizgame":
         # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
         # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
