@@ -5,8 +5,14 @@
     {% include 'partials/components/import_components.html' %}
 </head>
 <body>
-    <h1>Player game screen</h1>
-    <div id="submit-container"></div>
+    <canvas id="beerCanvas"></canvas>
+
+    <div class="content">
+        <h1>Player game screen</h1>
+        <div id="submit-container"></div>
+    </div>
+    
+    {% include 'partials/components/import_animation.html' %}
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <!-- Importoidaan pelaajien socket logiikka -->
