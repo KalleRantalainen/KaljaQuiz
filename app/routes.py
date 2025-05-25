@@ -50,7 +50,8 @@ def register():
             "name": name,
             "quizgame": {
                 "answer": None,
-                "points": 0
+                "points": 0,
+                "voted": False
             },
             "coingame":{
                 # Jos tarvii muille peleille

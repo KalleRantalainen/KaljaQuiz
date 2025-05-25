@@ -72,6 +72,7 @@ def handle_show_answers(data):
     for p in players.values():
         if "quizgame" in p:
             p["quizgame"]["answer"] = None
+            p["quizgame"]["voted"] = False
 
 
 @socketio.on('next_submit')
@@ -91,7 +92,9 @@ def handle_player_answer(data):
 
 @socketio.on("voted_a_player")
 def handle_vote(data):
+    user_id = session.get("user_id")
     voted_player = data.get("voted_player")
+    players[user_id]["quizgame"]["voted"] = True
 
     if voted_player in players:
         players[voted_player]["quizgame"]["points"] += 1
@@ -101,11 +104,24 @@ def handle_vote(data):
         print("###################################")
     else:
         print("PELAAJA ÄÄNESTI TUNTEMATONTA")
+    
+    check_all_voted()
 
 @socketio.on("voted_real_answer")
 def handle_real_vote():
+    user_id = session.get("user_id")
+    players[user_id]["quizgame"]["voted"] = True
+
     players[session.get("user_id")]["quizgame"]["points"] += 1
     print("Pelaaja valitsi oikean vastauksen")
+
+    check_all_voted()
+
+
+def check_all_voted():
+    if all(p.get("quizgame", {}).get("voted") for p in players.values()):
+        socketio.emit("everyone_voted", room=LOBBY)
+
 
 @socketio.on("end_game")
 def handle_end_game():

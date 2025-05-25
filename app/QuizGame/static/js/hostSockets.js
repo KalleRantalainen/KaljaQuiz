@@ -107,6 +107,12 @@ function loadAnswersView(correctAnswer, playerAnswers) {
             
             const nextBtn = document.getElementById("round-results-btn");
             if (nextBtn) {
+                nextBtn.disabled = true; // initially disable
+
+                socket.on("everyone_voted", () => {
+                    nextBtn.disabled = false; // enable when everyone has voted
+                });
+
                 nextBtn.addEventListener("click", () => {
                     console.log("Host pressed load round results button");
                     loadRoundResult();
