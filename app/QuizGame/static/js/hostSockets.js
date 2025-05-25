@@ -40,7 +40,7 @@ function startGame() {
     console.log("HOST EMIT start_quizgame");
 
     //Host liittyy lobbyyn
-    socket.emit("join_lobby", { player_id: "{{ host_id }}" });
+    socket.emit("join_quizgame_lobby", { player_id: "{{ host_id }}" });
     console.log("HOST EMIT join_game (host joins the game room)");
 
     

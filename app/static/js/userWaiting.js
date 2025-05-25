@@ -1,10 +1,10 @@
 // TÄnne täytyy saada socket io event joka kuuntelee start_quiz_game eventtiä
 const socket = io();
 
-console.log("@@@@@@@EMITTING join_lobby from app/templates/user_waiting.html");
+console.log("@@@@@@@EMITTING join_quizgame_lobby from app/templates/user_waiting.html");
 // Emit event join lobby
 
-socket.emit("join_lobby", { player_id: "{{ user_id }}" });
+socket.emit("join_quizgame_lobby", { player_id: "{{ user_id }}" });
 
 
 // Kuunnellaan start_quizgame eventtiä ja siirrytään oikeaan näkymään

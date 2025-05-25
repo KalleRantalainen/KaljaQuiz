@@ -10,7 +10,7 @@ from .game_state_store import gameStateStore
 from ..rooms import LOBBY
 from .quizgame_running import questionRajapinta
 
-"""Join_game on nyt join_lobby ja käytetään kaikkiin peleihin"""
+"""Join_game on nyt join_quizgame_lobby ja käytetään kaikkiin peleihin"""
 
 # Quizgamen aloitus, muille peleille voi tehdä samanlaisen joskus
 @socketio.on('start_quizgame')

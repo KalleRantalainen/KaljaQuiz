@@ -7,7 +7,7 @@ from .rooms import LOBBY, COIN
 
 # Tämä socket ottaa lukee join_game eventin.
 # event tulee kun pelaaja antaa nimensä ja painaa nappia.
-@socketio.on("join_lobby")
+@socketio.on("join_quizgame_lobby")
 def handle_join(data):
     user_id = session.get("user_id")
     sid_to_user[request.sid] = user_id
