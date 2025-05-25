@@ -1,11 +1,11 @@
-html, body {
+/*html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
     height: 100%;
     font-family: 'Open Sans', sans-serif;
     color: #f0e6d2;
-}
+}*/
 
 canvas {
     position: fixed;
@@ -23,7 +23,7 @@ canvas {
     transform: translateY(-50%);
 }
 
-h1 {
+/*h1 {
     font-family: 'Cinzel Decorative', cursive;
     font-size: 3rem;
     color: #ffcc00;
@@ -33,7 +33,7 @@ h1 {
 p {
     font-size: 1.2rem;
     margin-bottom: 30px;
-}
+}*/
 
 .buttons {
     display: flex;
@@ -41,7 +41,7 @@ p {
     gap: 30px;
 }
 
-.btn {
+/*.btn {
     background: #3e2f1c;
     color: #fffbe7;
     border: 2px solid #ffcc00;
@@ -72,4 +72,4 @@ p {
 
 .btn:hover::after {
     left: 100%;
-}
+}*/

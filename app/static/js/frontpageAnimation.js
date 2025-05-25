@@ -1,5 +1,8 @@
 const canvas = document.getElementById('beerCanvas');
 const ctx = canvas.getContext('2d');
+const rootStyles = getComputedStyle(document.documentElement);
+let dropColor = rootStyles.getPropertyValue('--color-drop').trim();
+let bgColor = rootStyles.getPropertyValue('--color-background').trim();
 
 let width, height;
 function resize() {
@@ -31,14 +34,20 @@ function drawDrop(x, y, size, alpha, wobble) {
     ctx.bezierCurveTo(size * 0.5, size * 0.2, size * 0.5, size * 0.8, 0, size);
     ctx.bezierCurveTo(-size * 0.5, size * 0.8, -size * 0.5, size * 0.2, 0, 0);
     ctx.closePath();
-    ctx.fillStyle = `rgba(255, 204, 0, ${alpha})`;
+
+    ctx.fillStyle = bgColor;
+    ctx.fillStyle = dropColor.replace(/[\d\.]+\)$/, `${alpha})`);
+
+    //ctx.fillStyle = `rgba(255, 204, 0, ${alpha})`;
     ctx.fill();
     ctx.restore();
 }
 
 function draw() {
+    dropColor = rootStyles.getPropertyValue('--color-drop').trim();
+    bgColor = rootStyles.getPropertyValue('--color-background').trim();
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = '#1a1a1a';
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, width, height);
 
     for (let drop of drops) {

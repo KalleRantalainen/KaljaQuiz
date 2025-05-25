@@ -1,0 +1,15 @@
+:root {
+    /*Large brackground colors*/
+    --color-background: #01204E;
+    --color-body: #f6dcac;
+
+    /*Component background colors*/
+    --color-background-button: #028391;
+
+    /*Text colors*/
+    --color-text-highlight: #f85525;
+    --color-text-normal: #faa968;
+
+    /*Front page animation*/
+    --color-drop: rgba(2, 131, 145, 1);
+}

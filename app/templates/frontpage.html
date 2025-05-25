@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>KaljaQuiz - Choose Role</title>
+    <link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='css/theme-default/colorPalette.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/frontpage.css') }}">
+    {% include 'partials/components/import_components.html' %}
 </head>
 <body>
     <canvas id="beerCanvas"></canvas>
@@ -17,7 +19,16 @@
             <a href="{{ url_for('main.user') }}"><button class="btn">User</button></a>
         </div>
     </div>
+
+    <div class="content">
+        <select onchange="switchTheme(this.value)">
+            <option value="theme-default">Default</option>
+            <option value="theme-retro">Retro</option>
+        </select>
+    </div>
+    
     <script src="{{ url_for('static', filename='js/frontpageAnimation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/themeSwitch.js') }}"></script>
 </body>
 </html>
 

@@ -1,0 +1,21 @@
+/*
+    Määrittelee default color paltin perusvärit. Käytetään näitä css muuttujia,
+    kun halutaan määritellä joitakin värejä eri komponenteille. Voi luoda uusia
+    muuttujia tai jos haluaa luoda uuden väripaletin, niin voi luoda uuden css
+    tiedoston samoilla muuttujilla ja 
+*/
+:root {
+    /*Large brackground colors*/
+    --color-background: #1a1a1a;
+    --color-body: #f0e6d2;
+
+    /*Component background colors*/
+    --color-background-button: #3e2f1c;
+
+    /*Text colors*/
+    --color-text-highlight: #ffcc00;
+    --color-text-normal: #fffbe7;
+
+    /*Front page animation*/
+    --color-drop: rgba(255, 204, 0, 1);
+}
