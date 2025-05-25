@@ -14,12 +14,36 @@ p {
     line-height: 1.5;
 }
 
+.input {
+    background: var(--color-background);
+    color: var(--color-text-normal);
+    border: 2px solid var(--color-text-highlight);
+    padding: 12px 20px;
+    font-size: 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 250px;
+}
+
+.label {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
 @media (min-width: 768px) {
     h1 {
         font-size: 5rem;
     }
 
     p {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .label {
         font-size: 2rem;
         margin-bottom: 15px;
     }

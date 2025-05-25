@@ -19,7 +19,7 @@
             <a href="{{ url_for('main.user') }}"><button class="btn">User</button></a>
         </div>
         <p>Select your theme:</p>
-        <select class="dropdown" onchange="switchTheme(this.value)">
+        <select class="dropdown" onchange="changeThemeAndReload(this.value)">
             <option value="theme-default">Default</option>
             <option value="theme-retro">Retro</option>
             <option value="theme-neon">80s Neon</option>
