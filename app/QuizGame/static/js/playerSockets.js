@@ -18,7 +18,7 @@ socket.on('next_submit', () => {
 
 socket.on('answers', (data) => {
     //Pelaajien äänestysvaihe alkaa tästä
-    votingPhase(data.correct_answer, data.player_answers);
+    votingPhase(data.correct_answer, data.answers_list);
 });
 
 // Functiot ja tulevat alle -------------------
@@ -40,6 +40,7 @@ function loadPlayerView(viewName) {
                         if (display) {
                             module.startTimer(60, display, () => {
                                 console.log("Timer ended!");
+                                submitAnswer();
                             });
                         } else {
                             console.warn("No #timer element found.");
@@ -63,6 +64,11 @@ function submitAnswer() {
         // Optionally clear input or show confirmation
         document.getElementById('player-answer').value = '';
         loadPlayerView("answerSubmitted")
+        
+        import('/quizgame/static/js/timer.js')
+        .then(module => {
+            module.stopTimer();
+        })
     }
 }
 
@@ -90,6 +96,16 @@ function votingPhase(correctAnswer, playerAnswers) {
                     console.log("PELAAJA ÄÄNESTI PELAAJAN KOITTI ÄÄNESTÄÄ ITSEÄÄN");
                     };
                 }
+                else if (player.user_id === "computer"){
+                    button.textContent = correctAnswer;
+
+                    button.onclick = () => {
+                    console.log("Pelaaja valitsi tietokoneen vastauksen")
+                    // +1 piste
+                    socket.emit("voted_real_answer")
+                    loadPlayerView('afterVotingScreen')
+                    }
+                }
                 else {
                     button.onclick = () => {
                     vote(player);
@@ -101,18 +117,6 @@ function votingPhase(correctAnswer, playerAnswers) {
                 answersList.appendChild(li);
             });
 
-            //Lisätään oikea vastaus myös listaan
-            const li = document.createElement("li");
-            const button = document.createElement("button");
-            button.textContent = correctAnswer;
-            button.onclick = () => {
-                console.log("Pelaaja valitsi tietokoneen vastauksen")
-                // +1 piste
-                socket.emit("voted_real_answer")
-                loadPlayerView('afterVotingScreen')
-            }
-            li.appendChild(button);
-            answersList.appendChild(li);
             //-------------------------------------------------------------
         });
 }
@@ -122,3 +126,23 @@ function vote(player){
     socket.emit("voted_a_player", {voted_player: player.user_id})
     loadPlayerView('afterVotingScreen')
 }
+
+socket.on('player_finisher', () => {
+    console.log("PELAAJA VASTAAN OTTI PLAYER_FINISHER")
+    socket.emit('load_player_ending')
+});
+
+
+socket.on('final_player_result', (data) => {
+  fetch('/quizgame/player_ending_partial/')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('submit-container').innerHTML = html;
+
+      console.log("LADATAAN PELAAJALLE LOPETUSNÄYTTÖ")
+      const messageDiv = document.getElementById('player-result-message');
+      if (messageDiv) {
+        messageDiv.innerText = data.message;
+      }
+    });
+});

@@ -2,6 +2,7 @@ from flask_socketio import emit, join_room
 from time import sleep
 import eventlet
 from flask import session
+import random
 
 from app.extensions import socketio
 from app.player_store import players
@@ -27,11 +28,11 @@ def handle_player_ready(data):
     print(" - Expected count:", expected_count, flush=True)
     current_count = gameStateStore.get_player_count()
     print(" - Current count:", current_count, flush=True)
-    if current_count == expected_count:
+    if current_count >= expected_count:
         print(" - Expected count = current count, emit start")
         emit('start_game', room=LOBBY)
 
-        sleep(4)
+        sleep(5)
         emit('next_question', room=LOBBY)
         emit('next_submit', room=LOBBY)
 
@@ -52,10 +53,19 @@ def handle_show_answers(data):
         }
         for user_id, p in players.items()
     ]
+    answers_payload.append(
+        {
+            "user_id": "computer",
+            "name": "correct",
+            "answer": correct_answer
+        }
+    )
 
+    random.shuffle(answers_payload)
+    
     emit('answers', {
         'correct_answer': correct_answer,
-        'player_answers': answers_payload
+        'answers_list': answers_payload
     }, room=LOBBY)
 
     # Reset for next round
@@ -96,3 +106,69 @@ def handle_vote(data):
 def handle_real_vote():
     players[session.get("user_id")]["quizgame"]["points"] += 1
     print("Pelaaja valitsi oikean vastauksen")
+
+@socketio.on("end_game")
+def handle_end_game():
+    sorted_players = sorted(
+        players.items(),
+        key=lambda item: item[1]["quizgame"]["points"],
+        reverse=True  # Highest first
+    )
+
+    result_payload = [
+        {
+            "user_id": user_id,
+            "name": player['name'],
+            "points": player['quizgame']['points']
+
+        }
+        for user_id, player in sorted_players
+    ]
+
+    #Host näytölle kaikkien tulokset
+    emit('final_results', {"results": result_payload})
+
+    #Pelaajien näytölle oma sijoitus ja onnittelut ehkä
+    #emit player_finisher -> socket.emit end_players -> emit personoidut onnittelut
+    emit('player_finisher', room=LOBBY)
+    
+
+#Nyt saadaan sessionin kautta personoidut lopetukset sijoituksen mukaan
+@socketio.on("load_player_ending")
+def handle_player_end():
+    user_id = session.get("user_id")
+    if not user_id:
+        emit('final_player_result', {"message": "Session expired. Please rejoin."}, room=LOBBY)
+        return
+
+    # Sort players by points (same as before)
+    sorted_players = sorted(
+        players.items(),
+        key=lambda item: item[1]["quizgame"]["points"],
+        reverse=True
+    )
+
+    # Find the position (1-based index)
+    position = None
+    for i, (uid, _) in enumerate(sorted_players):
+        if uid == user_id:
+            position = i + 1
+            break
+
+    # Fallback if not found
+    if position is None:
+        emit('final_player_result', {"message": "You were not found in the results."}, room=LOBBY)
+        return
+
+    # Generate message
+    if position == 1:
+        message = f"🏆 You're the CHAMPION! 1st place — amazing work!"
+    elif position == 2:
+        message = f"🥈 2nd place — so close to glory!"
+    elif position == 3:
+        message = f"🥉 3rd place — a worthy podium finish!"
+    else:
+        message = f"{position}th place... maybe stick to Uno next time. 😬"
+
+    emit('final_player_result', {"message": message, "position": position}, room=LOBBY)
+    
