@@ -31,7 +31,7 @@ def host_waiting_room():
         #Jos host ottaa pelin, jonkun pelaajan liittymisen jälkeen tai vaihtaa peliä
         socketio.emit("set_game_room", {"ROOM": COIN_ROOM})
 
-        return redirect("/coinflipperZ/waiting")
+        return redirect("/coinflip/waiting")
     elif game == "quizgame":
         # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
         # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.

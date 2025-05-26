@@ -5,27 +5,29 @@ const socket = io();
 const currentGame = document.getElementById("game-info").dataset.game;
 console.log("EMITTING JOIN ", currentGame);
 
-
+// Varalta nyt jää tälleen
 if (currentGame === "quizgame") {
-    socket.emit("join_quizgame_lobby");
-} else if (currentGame === "coinflipperZ") {
-    socket.emit("join_coinflip_lobby");
+    socket.emit("join_game_lobby");
+} else if (currentGame === "coinflip") {
+    socket.emit("join_game_lobby");
 } else {
     console.log("HOST EI OLE VIELÄ VALINNUT PELIÄ")
 }
 
-// Jos host ei ole vielä valinnut peliä niin:
+// Jos host valitsee pelin ja pelaajia on jo liittynyt:
 socket.on("set_game_room", (data) => {
     const ROOM = data.ROOM;
     console.log("Game selected by host:", ROOM);
 
     if (ROOM === "quizgame") {
         console.log("EMITTING JOIN ", ROOM);
-        socket.emit("join_quizgame_lobby");
     } else if (ROOM === "coinflip") {
         console.log("EMITTING JOIN ", ROOM);
-        socket.emit("join_coinflip_room");
+    } else {
+        return
     }
+
+    socket.emit("join_game_lobby")
 });
 
 // Kuunnellaan start_quizgame eventtiä ja siirrytään oikeaan näkymään
@@ -38,5 +40,5 @@ socket.on('start_quizgame', () => {
 
 socket.on("start_coinflip", () => {
     console.log("Received start_coinflip, redirecting...");
-    window.location.href = "/coinflipperZ/coin";
+    window.location.href = "/coinflip/..";
 });

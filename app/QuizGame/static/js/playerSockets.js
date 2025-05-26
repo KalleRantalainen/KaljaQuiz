@@ -4,8 +4,8 @@ socket.on('connect', () => {
     console.log('Connected to server, emitting player_ready');
     socket.emit('player_ready', {"test": "test"});
 
-    //Tyylii turha emit join lobby
-    socket.emit("join_quizgame_lobby");
+    //Tärkeä join muuten ei toimi, eli user-waiting kun muuttuu quizgame_playeriksi
+    socket.emit("join_game_lobby");
     console.log(" === Pelaaja {{ user_id }} liittyi lobbyyn");
 });
 
