@@ -16,7 +16,7 @@ from .quizgame_running import questionRajapinta
 @socketio.on('start_quizgame')
 def handle_start_quizgame(data):
     print("Host started quiz game (server)")
-    # Emittoidaan pelaajille täältä sama eventti (huoneeseen players, koska pelaajat ovat siellä)
+    # Emittoidaan pelaajille täältä sama eventti
     emit('start_quizgame', room=QUIZ_ROOM)
 
 # Alustaa pelin aloittamalla

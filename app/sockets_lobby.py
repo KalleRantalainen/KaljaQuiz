@@ -8,7 +8,7 @@ from .rooms import CURRENT_ROOM
 # Tämä socket ottaa lukee join_game eventin.
 # event tulee kun pelaaja antaa nimensä ja painaa nappia.
 @socketio.on("join_quizgame_lobby")
-def handle_join(data):
+def handle_join():
     user_id = session.get("user_id")
     sid_to_user[request.sid] = user_id
     print(CURRENT_ROOM["game"])
@@ -18,6 +18,10 @@ def handle_join(data):
 
 
 @socketio.on("join_coinflip_lobby")
-def handle_join_coinflip(data):
+def handle_join_coinflip():
     join_room(CURRENT_ROOM["game"])
     print(CURRENT_ROOM["game"])
+
+@socketio.on("host_join_lobby")
+def handle_host_join_quiz():
+    join_room(CURRENT_ROOM["game"])

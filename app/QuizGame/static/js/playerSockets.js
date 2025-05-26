@@ -5,7 +5,7 @@ socket.on('connect', () => {
     socket.emit('player_ready', {"test": "test"});
 
     //Tyylii turha emit join lobby
-    socket.emit("join_quizgame_lobby", { player_id: "{{ user_id }}" });
+    socket.emit("join_quizgame_lobby");
     console.log(" === Pelaaja {{ user_id }} liittyi lobbyyn");
 });
 
@@ -41,6 +41,7 @@ function loadPlayerView(viewName) {
                             module.startTimer(60, display, () => {
                                 console.log("Timer ended!");
                                 submitAnswer();
+                                //TODO, JOS PELAAJA EI OLE KIRJOITTANUT MITÄÄN ENNEN AJANLOPPUA
                             });
                         } else {
                             console.warn("No #timer element found.");
