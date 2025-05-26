@@ -1,3 +1,4 @@
+(function () {
 console.log("bgAnimation.js loaded !!");
 const canvas = document.getElementById('beerCanvas');
 const ctx = canvas.getContext('2d');
@@ -69,3 +70,4 @@ function draw() {
 }
 
 draw();
+})();

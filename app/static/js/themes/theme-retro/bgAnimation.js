@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById('beerCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -5,7 +6,6 @@ const rootStyles = getComputedStyle(document.documentElement);
 
 let activeCellColor = rootStyles.getPropertyValue('--color-drop').trim();
 let bgColor = rootStyles.getPropertyValue('--color-background').trim();
-
 
 const cellSize = 10;
 const cols = canvas.width / cellSize;
