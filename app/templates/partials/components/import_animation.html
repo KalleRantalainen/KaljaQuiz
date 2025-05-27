@@ -1,0 +1,20 @@
+<script>
+    console.log("LOADING THEME ANIM");
+
+    const animationTheme = localStorage.getItem('theme') || 'theme-default';
+    const customScriptPath = `/static/js/themes/${animationTheme}/bgAnimation.js`;
+    const fallbackScriptPath = `/static/js/themes/theme-default/bgAnimation.js`;
+
+    const script = document.createElement('script');
+    script.src = customScriptPath;
+
+    // If theme-specific animation fails to load, fall back to default
+    script.onerror = function () {
+        console.warn(`Theme animation not found: ${customScriptPath}, falling back to default animation.`);
+        const fallbackScript = document.createElement('script');
+        fallbackScript.src = fallbackScriptPath;
+        document.body.appendChild(fallbackScript);
+    };
+
+    document.body.appendChild(script);
+</script>

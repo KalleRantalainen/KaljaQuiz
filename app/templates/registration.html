@@ -3,12 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Register</title>
+  <link id="theme-style" rel="stylesheet" href="">
+  {% include 'partials/components/import_components.html' %}
 </head>
 <body>
-  <form action="{{ url_for('main.register') }}" method="post">
-    <label>Your name</label>
-    <input type="text" name="name" placeholder="Enter your name" required>
-    <button type="submit">Ready!</button>
-  </form>
+  <canvas id="beerCanvas"></canvas>
+
+  <div class="content">
+    <form action="{{ url_for('main.register') }}" method="post">
+      <label class="label">Your name</label>
+      <input class="input" type="text" name="name" placeholder="Enter your name" required>
+      <button type="submit" class="btn">Ready!</button>
+    </form>
+  </div>
+
+  {% include 'partials/components/import_animation.html' %}
 </body>
 </html>

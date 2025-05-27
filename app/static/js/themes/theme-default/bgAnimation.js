@@ -1,4 +1,6 @@
-/*const canvas = document.getElementById('beerCanvas');
+(function () {
+console.log("bgAnimation.js loaded !!");
+const canvas = document.getElementById('beerCanvas');
 const ctx = canvas.getContext('2d');
 const rootStyles = getComputedStyle(document.documentElement);
 let dropColor = rootStyles.getPropertyValue('--color-drop').trim();
@@ -67,4 +69,5 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
-draw();*/
+draw();
+})();

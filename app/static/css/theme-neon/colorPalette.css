@@ -3,6 +3,7 @@
 :root {
     /*Large brackground colors*/
     --color-background: #3d144c;
+    --color-background-2: #000000;
     --color-body: #faeb2c;
 
     /*Component background colors*/
