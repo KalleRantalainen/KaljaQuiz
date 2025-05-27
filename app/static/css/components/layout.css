@@ -6,3 +6,15 @@ html, body {
     font-family: 'Open Sans', sans-serif;
     color: var(--color-body);
 }
+
+.final-results-container {
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+#answers-container {
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+}

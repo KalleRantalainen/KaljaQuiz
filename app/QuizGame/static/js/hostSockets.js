@@ -113,6 +113,7 @@ function loadAnswersView(correctAnswer, playerAnswers) {
             playerAnswers.forEach(player => {
                 const item = document.createElement('li');
                 item.textContent = `${player.answer || '—'}`;
+                item.classList.add('answer-item');
                 answersList.appendChild(item);
             });
             
