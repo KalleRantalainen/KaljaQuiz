@@ -18,3 +18,10 @@ html, body {
     margin: 0 auto;
     display: inline-block;
 }
+
+#qr-code {
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+}

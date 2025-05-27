@@ -1,6 +1,30 @@
 // Tänne täytyy tehdä socket io event joka emittoi start_quiz_game eventin kun painetaan start_game nappia
 const socket = io();
 
+// Requestaa python routelta qr koodia oikealla väriteemalla.
+function renderQRCode() {
+    console.log("REQUESTIN QR CODE");
+    const qrHighlight = getComputedStyle(document.documentElement)
+                        .getPropertyValue('--color-text-highlight')
+                        .trim();
+    const qrBg = getComputedStyle(document.documentElement)
+                        .getPropertyValue('--color-background')
+                        .trim();
+
+    fetch("/quizgame/generate_qr", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ colorHl: qrHighlight, colorBg: qrBg})
+    })
+    .then(res => res.json())
+    .then(data => {
+        const img = document.getElementById("qr-code");
+        if (img) {
+            img.src = `data:image/png;base64,${data.qr}`;
+        }
+    });
+}
+
 function loadView(viewName) {
     fetch(`/quizgame/host_partial/${viewName}`)
         .then(response => response.text())
@@ -10,6 +34,7 @@ function loadView(viewName) {
             if (viewName === "waiting") {
                 document.getElementById("start_game").addEventListener("click", startGame);
                 if (typeof startPollingPlayers === "function") startPollingPlayers();
+                renderQRCode();
             } else {
                 if (typeof stopPollingPlayers === "function") stopPollingPlayers();
             }
