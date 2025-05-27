@@ -40,7 +40,7 @@ function startGame() {
     console.log("HOST EMIT start_quizgame");
 
     //Host liittyy lobbyyn
-    socket.emit("join_quizgame_lobby", { player_id: "{{ host_id }}" });
+    socket.emit("host_join_lobby");
     console.log("HOST EMIT join_game (host joins the game room)");
 
     
@@ -86,6 +86,17 @@ function loadQuestion() {
 
     console.log("Kysymyksen lataaminen onnistui!")
 }
+
+socket.on('update_player_counter', () => {
+    const counter = document.getElementById("player-count");
+    if (counter) {
+        const current = parseInt(counter.textContent);
+        counter.textContent = current + 1;
+    } else {
+        console.warn("Couldn't find #answer-count to update submit count.");
+    }
+});
+
 
 
 //vastaukset

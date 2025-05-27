@@ -3,7 +3,6 @@ from flask import Flask
 from flask_session import Session
 
 from .QuizGame import quizgame_bp
-#from .coinflipperZ import coinflipperZ_bp
 
 from .extensions import socketio
 
@@ -23,7 +22,6 @@ def create_app(host_ip, port):
 
     app.register_blueprint(main)
     app.register_blueprint(quizgame_bp)
-    #app.register_blueprint(coinflipperZ_bp)
     
     origins = [
         f"http://{host_ip}:{port}",

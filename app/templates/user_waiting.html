@@ -12,8 +12,9 @@
 
     <div class="content">
         <p>Waiting for host...</p>
+        <div id="game-info" data-game="{{ current_game }}"></div>
     </div>
-    
+
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/userWaiting.js') }}"></script>
     {% include 'partials/components/import_animation.html' %}

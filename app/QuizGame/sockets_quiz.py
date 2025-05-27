@@ -7,7 +7,7 @@ import random
 from app.extensions import socketio
 from app.player_store import players, sid_to_user
 from .game_state_store import gameStateStore
-from ..rooms import LOBBY
+from ..rooms import QUIZ_ROOM
 from .quizgame_running import questionRajapinta
 
 """Join_game on nyt join_quizgame_lobby ja käytetään kaikkiin peleihin"""
@@ -16,8 +16,8 @@ from .quizgame_running import questionRajapinta
 @socketio.on('start_quizgame')
 def handle_start_quizgame(data):
     print("Host started quiz game (server)")
-    # Emittoidaan pelaajille täältä sama eventti (huoneeseen players, koska pelaajat ovat siellä)
-    emit('start_quizgame', room=LOBBY)
+    # Emittoidaan pelaajille täältä sama eventti
+    emit('start_quizgame', room=QUIZ_ROOM)
 
 # Alustaa pelin aloittamalla
 @socketio.on('player_ready')
@@ -30,11 +30,11 @@ def handle_player_ready(data):
     print(" - Current count:", current_count, flush=True)
     if current_count >= expected_count:
         print(" - Expected count = current count, emit start")
-        emit('start_game', room=LOBBY)
+        emit('start_game', room=QUIZ_ROOM)
 
         sleep(5)
-        emit('next_question', room=LOBBY)
-        emit('next_submit', room=LOBBY)
+        emit('next_question', room=QUIZ_ROOM)
+        emit('next_submit', room=QUIZ_ROOM)
 
 
 # Tämässä näytetään vastaukset hostin näytölle
@@ -66,7 +66,7 @@ def handle_show_answers(data):
     emit('answers', {
         'correct_answer': correct_answer,
         'answers_list': answers_payload
-    }, room=LOBBY)
+    }, room=QUIZ_ROOM)
 
     # Reset for next round
     for p in players.values():
@@ -77,7 +77,7 @@ def handle_show_answers(data):
 
 @socketio.on('next_submit')
 def handle_next_submit():
-    emit('next_submit', room=LOBBY)
+    emit('next_submit', room=QUIZ_ROOM)
 
 @socketio.on('return_player_answer')
 def handle_player_answer(data):
@@ -87,8 +87,11 @@ def handle_player_answer(data):
     if user_id in players:
         players[user_id]["quizgame"]["answer"] = answer
         print(f"Player '{players[user_id]['name']}' answered: {answer}")
+        
+        emit("update_player_counter", room=QUIZ_ROOM)
     else:
         print("Unknown user tried to submit an answer.")
+
 
 @socketio.on("voted_a_player")
 def handle_vote(data):
@@ -105,6 +108,7 @@ def handle_vote(data):
     else:
         print("PELAAJA ÄÄNESTI TUNTEMATONTA")
     
+    emit("update_player_counter", room=QUIZ_ROOM)
     check_all_voted()
 
 @socketio.on("voted_real_answer")
@@ -115,12 +119,13 @@ def handle_real_vote():
     players[session.get("user_id")]["quizgame"]["points"] += 1
     print("Pelaaja valitsi oikean vastauksen")
 
+    emit("update_player_counter", room=QUIZ_ROOM)
     check_all_voted()
 
 
 def check_all_voted():
     if all(p.get("quizgame", {}).get("voted") for p in players.values()):
-        socketio.emit("everyone_voted", room=LOBBY)
+        socketio.emit("everyone_voted", room=QUIZ_ROOM)
 
 
 @socketio.on("end_game")
@@ -146,7 +151,7 @@ def handle_end_game():
 
     #Pelaajien näytölle oma sijoitus ja onnittelut ehkä
     #emit player_finisher -> socket.emit end_players -> emit personoidut onnittelut
-    emit('player_finisher', room=LOBBY)
+    emit('player_finisher', room=QUIZ_ROOM)
     
 
 #Nyt saadaan sessionin kautta personoidut lopetukset sijoituksen mukaan
