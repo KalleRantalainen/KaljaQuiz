@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>QuizGame – Host Waiting Room</title>
+    <title>QuizGame – Odotusaula</title>
 </head>
 <body>
+    <h1>KaljaQuiz.fi - Suomen suosituin juomapelialusta!</h1>
     <div id="main-container">
         <!--Tähän ladataan dynaamisesti kontenttia partials kansiosta pelin vaiheesta riippuen-->
     </div>
-
-    <p>Test host_ip: {{HOST_IP}}</p>
     
-    <button id="end-game" onclick="endGame()">End Game</button>
+    <button id="end-game" onclick="endGame()">Lopeta Peli</button>
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <!-- Importataan pelaajien pollaus funktiot -->

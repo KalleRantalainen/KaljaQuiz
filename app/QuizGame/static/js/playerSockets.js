@@ -4,8 +4,8 @@ socket.on('connect', () => {
     console.log('Connected to server, emitting player_ready');
     socket.emit('player_ready', {"test": "test"});
 
-    //Tyylii turha emit join lobby
-    socket.emit("join_quizgame_lobby", { player_id: "{{ user_id }}" });
+    //Tärkeä join muuten ei toimi, eli user-waiting kun muuttuu quizgame_playeriksi
+    socket.emit("join_game_lobby");
     console.log(" === Pelaaja {{ user_id }} liittyi lobbyyn");
 });
 
@@ -41,6 +41,7 @@ function loadPlayerView(viewName) {
                             module.startTimer(60, display, () => {
                                 console.log("Timer ended!");
                                 submitAnswer();
+                                //TODO, JOS PELAAJA EI OLE KIRJOITTANUT MITÄÄN ENNEN AJANLOPPUA
                             });
                         } else {
                             console.warn("No #timer element found.");
@@ -55,21 +56,21 @@ function loadPlayerView(viewName) {
 
 function submitAnswer() {
     const answer = document.getElementById('player-answer').value.trim();
+    
     if (answer) {
-        // TODO: emit via Socket.IO, for example:
         socket.emit('return_player_answer', { answer });
-
         console.log("Submitted answer:", answer);
-        
-        // Optionally clear input or show confirmation
-        document.getElementById('player-answer').value = '';
-        loadPlayerView("answerSubmitted")
-        
-        import('/quizgame/static/js/timer.js')
+    } else {
+        socket.emit('return_player_answer', { answer: "Olen typerys joka ei vastannut mitään" });
+    }
+
+    document.getElementById('player-answer').value = '';
+    loadPlayerView("answerSubmitted");
+
+    import('/quizgame/static/js/timer.js')
         .then(module => {
             module.stopTimer();
-        })
-    }
+        });
 }
 
 function votingPhase(correctAnswer, playerAnswers) {

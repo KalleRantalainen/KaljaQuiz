@@ -75,7 +75,8 @@ def get_host_partial(view_name):
 @quizgame_bp.route('/show_answers_partial')
 def show_answers_partial():
     answer = request.args.get('answer', '')
-    return render_template('partials/host_partials/show_answers.html', answer=answer)
+    player_count = len(players)
+    return render_template('partials/host_partials/show_answers.html', answer=answer, player_count=player_count)
 
 
 #Tähän uudesta questionAPIsta
@@ -84,8 +85,8 @@ def get_example_question():
     #---------------
     random_quest = questionRajapinta.get_rand_question()
     #answer = questionRajapinta.get_answer_by_question(random_quest)
-
-    return render_template("partials/host_partials/question.html", question=random_quest)
+    player_count = len(players)
+    return render_template("partials/host_partials/question.html", question=random_quest, player_count=player_count)
 
 
 @quizgame_bp.route("/player_partial/<view_name>")

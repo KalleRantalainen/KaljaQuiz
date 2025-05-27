@@ -1,7 +1,10 @@
 from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
+from flask_socketio import emit
 import uuid
 
 from app.player_store import players
+from app.rooms import CURRENT_ROOM, QUIZ_ROOM, COIN_ROOM
+from .extensions import socketio
 
 main = Blueprint("main", __name__)
 
@@ -22,16 +25,21 @@ def host():
 def host_waiting_room():
     game = request.args.get("game")
     
-    if game == "coinflipperZ":
-        return
-        #COMING SOON
-        #return redirect("/coinflipperZ/waiting")
+    if game == "coinflip":
+        CURRENT_ROOM["game"] = COIN_ROOM
+
+        #Jos host ottaa pelin, jonkun pelaajan liittymisen jälkeen tai vaihtaa peliä
+        socketio.emit("set_game_room", {"ROOM": COIN_ROOM})
+
+        return redirect("/coinflip/waiting")
     elif game == "quizgame":
-        # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
-        # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
+        CURRENT_ROOM["game"] = QUIZ_ROOM
+
+        socketio.emit("set_game_room", {"ROOM": QUIZ_ROOM})
         return redirect("/quizgame/waiting")
     else:
         return "Unknown game", 400
+    
 
 
 # Route for the players to register/give their name
@@ -65,8 +73,7 @@ def register():
 # Route to the user waiting screen
 @main.route('/user-waiting', methods=["GET"])
 def user_waiting():
-    return render_template("user_waiting.html", user_id=session['user_id'])
-
+    return render_template("user_waiting.html", user_id=session['user_id'], current_game=CURRENT_ROOM["game"])
 
 # JSON endpoint to get the player names
 @main.route("/players", methods=["GET"])
