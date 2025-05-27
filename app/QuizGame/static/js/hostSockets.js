@@ -87,6 +87,17 @@ function loadQuestion() {
     console.log("Kysymyksen lataaminen onnistui!")
 }
 
+socket.on('update_player_counter', () => {
+    const counter = document.getElementById("player-count");
+    if (counter) {
+        const current = parseInt(counter.textContent);
+        counter.textContent = current + 1;
+    } else {
+        console.warn("Couldn't find #answer-count to update submit count.");
+    }
+});
+
+
 
 //vastaukset
 function loadAnswersView(correctAnswer, playerAnswers) {

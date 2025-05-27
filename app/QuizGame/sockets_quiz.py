@@ -87,8 +87,11 @@ def handle_player_answer(data):
     if user_id in players:
         players[user_id]["quizgame"]["answer"] = answer
         print(f"Player '{players[user_id]['name']}' answered: {answer}")
+        
+        emit("update_player_counter", room=QUIZ_ROOM)
     else:
         print("Unknown user tried to submit an answer.")
+
 
 @socketio.on("voted_a_player")
 def handle_vote(data):
@@ -105,6 +108,7 @@ def handle_vote(data):
     else:
         print("PELAAJA ÄÄNESTI TUNTEMATONTA")
     
+    emit("update_player_counter", room=QUIZ_ROOM)
     check_all_voted()
 
 @socketio.on("voted_real_answer")
@@ -115,6 +119,7 @@ def handle_real_vote():
     players[session.get("user_id")]["quizgame"]["points"] += 1
     print("Pelaaja valitsi oikean vastauksen")
 
+    emit("update_player_counter", room=QUIZ_ROOM)
     check_all_voted()
 
 

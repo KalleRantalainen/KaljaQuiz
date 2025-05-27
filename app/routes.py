@@ -33,8 +33,6 @@ def host_waiting_room():
 
         return redirect("/coinflip/waiting")
     elif game == "quizgame":
-        # Pistin tänne redirecting, että tää host käy quizgame/waiting routen kautta
-        # koska siellä lasketaan ainakin qr koodi. Jossain kohtaa ehkä jotain muutakin.
         CURRENT_ROOM["game"] = QUIZ_ROOM
 
         socketio.emit("set_game_room", {"ROOM": QUIZ_ROOM})
