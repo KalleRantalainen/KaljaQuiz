@@ -1,0 +1,38 @@
+.bar-graph {
+  display: flex;
+  justify-content: center; /* Center bars horizontally */
+  align-items: flex-end;
+  max-width: 600px;
+  margin: 20px auto; /* Center the container itself */
+  gap: 20px;
+  padding: 25px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar {
+  position: relative;
+  width: 60px;
+  background: linear-gradient(135deg, var(--color-body), var(--color-text-highlight));
+  border-radius: 10px 10px 0 0;
+  transition: height 1s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.bar-label {
+  position: absolute;
+  bottom: -25px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+}
+
+.bar-value {
+  position: absolute;
+  top: -25px;
+  color: #fff;
+  font-weight: bold;
+}

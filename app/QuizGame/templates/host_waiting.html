@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>QuizGame – Odotusaula</title>
     {% include 'partials/components/import_components.html' %}
+    <link rel="stylesheet" href="{{ url_for('quizgame.static', filename='css/barGraph.css') }}">
 </head>
 <body>
     <canvas id="beerCanvas"></canvas>
@@ -24,5 +25,6 @@
     <script src="{{ url_for('quizgame.static', filename='js/hostWaiting.js') }}" defer></script>
     <!-- Importoidaan sokettien js logiikka -->
     <script src="{{ url_for('quizgame.static', filename='js/hostSockets.js') }}" defer></script>
+    <script src="{{ url_for('quizgame.static', filename='js/barGraph.js') }}" defer></script>
 </body>
 </html>

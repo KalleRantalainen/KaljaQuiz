@@ -194,6 +194,12 @@ function loadRoundResult() {
     .then(response => response.text())
     .then(html => {
         document.getElementById('question-container').innerHTML = html;
+
+        if (window.renderBarGraph) {
+            window.renderBarGraph();
+        } else {
+            console.warn("renderBarGraph function not found");
+        }
         
         const nextBtn = document.getElementById("next-question-btn");
         if (nextBtn) {
@@ -205,6 +211,7 @@ function loadRoundResult() {
         } else {
             console.log("Next Question button not found");
         }
+        // WOULD LIKE TO USE MY BAR GRAPH FUNC HERE FROM barGraph.js
     });
 }
 

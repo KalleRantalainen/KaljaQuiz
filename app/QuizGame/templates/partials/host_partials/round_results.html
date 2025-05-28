@@ -7,6 +7,11 @@
             <li>{{ player.name }}: {{ player.quizgame.points }} pistettä</li>
         {% endfor %}
     </ul>
+    <div id="fun-bar-graph" class="bar-graph"></div>
 </div>
+
+<script id="player-data" type="application/json">
+  {{ player_data | tojson }}
+</script>
 
 <button class="btn-singular" id="next-question-btn" data-role="host">Seuraava Kysymys</button>
