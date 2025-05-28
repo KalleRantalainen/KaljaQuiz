@@ -28,9 +28,57 @@ p {
     max-width: 250px;
 }
 
+.input-long {
+    background: var(--color-background);
+    color: var(--color-text-normal);
+    border: 2px solid var(--color-text-highlight);
+    padding: 12px 20px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    height: 150px; 
+    box-sizing: border-box;
+}
+
 .label {
     font-size: 2rem;
     margin-bottom: 10px;
+}
+
+.default-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem;
+}
+
+.default-list li {
+    padding: 0.75rem 1rem;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--color-text-highlight);
+    border-radius: 8px;
+    background-color: var(--color-background);
+    max-width: 300px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.default-list li button {
+    all: unset;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    text-align: center;
+}
+
+/* On hover */
+.default-list li button:hover {
+    background-color: var(--color-background);
+    color: var(--color-text-normal);
+    box-shadow: 0 0 10px var(--color-text-highlight);
 }
 
 @media (min-width: 768px) {

@@ -43,6 +43,48 @@
     padding: 20px;
 }
 
+
+.btn-singular {
+    background: var(--color-background);
+    color: var(--color-text-normal);
+    border: 2px solid var(--color-text-highlight);
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    max-width: 250px;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-singular:hover {
+    background: var(--color-text-highlight);
+    color: #1a1a1a;
+    box-shadow: 0 0 20px var(--color-text-highlight);
+}
+
+.btn-singular::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: skewX(-45deg);
+    transition: left 0.5s;
+}
+
+.btn-singular:hover::after {
+    left: 100%;
+}
+
+
+
 /*btn-link tyyli tarkoitettu a tageille*/
 .btn-link {
     display: inline-block;

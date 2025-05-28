@@ -1,5 +1,13 @@
 # Käynnistys
 
+## Torstaiks pitäs saada nämä valmiiks jos kerkijjää
+* Listanäkymissä on tupla borderit koska laitoin sitten kaks tyyliä päällekkäin
+* Jotkut listanäkymien boxit on liian leveitä, esim pelaajien nimet hostin odotusnäytöllä
+* Tuloksien table on aika raffi, pittäs tehdä tyylit siihen
+* Pylväsdiagrammi siisteillä particle effecteillä
+* Retroteema on perseennäkönen
+* 80s neon on vielä perseemmännäkönen, mutta käyttää siistä 3d kirjastoa joten siitä ei luovuta
+
 ## Dockerilla
 1. Docker engine päälle
 2. Aja `start.ps1` kansiossa ./kaljaQuiz

@@ -1,10 +1,13 @@
-from flask import render_template, redirect, url_for, abort, current_app, session
+from flask import render_template, redirect, url_for, abort, current_app, session, jsonify
 import io
 import base64
 import qrcode
+from qrcode.image.styledpil import StyledPilImage
+from qrcode.image.styles.colormasks import SolidFillColorMask
 from threading import Lock
 from types import SimpleNamespace
 from flask import request
+import re
 
 
 from . import quizgame_bp
@@ -16,12 +19,60 @@ from .quizgame_running import questionRajapinta
 
 ready_lock = Lock() # Lukko gameStateStoren päivittämistä varten
 
-def generate_qr(url):
-    img = qrcode.make(url)
+# Muuntaa rgba, rgb tai hex värit int tupleiks
+def format_color(color):
+    if color.startswith("rgba") or color.startswith("rgb"):
+        match = re.findall(r'\d+', color)
+        if len(match) >= 3:
+            try:
+                r, g, b = int(match[0]), int(match[1]), int(match[2])
+                color = (r, g, b)  # ← tuple instead of hex
+            except ValueError:
+                color = (0, 0, 0)
+    elif re.match(r'^#[0-9a-fA-F]{6}$', color):
+        try:
+            color = tuple(int(color[i:i+2], 16) for i in (1, 3, 5))  # ← hex → RGB tuple
+        except ValueError:
+            color = (0, 0, 0)
+    else:
+        color = (0, 0, 0)
+    return color
+
+# Luo qr koodin halutuilla väreillä
+def generate_qr(url, colorBg="#000000", colorHl="#ffffff"):
+    colorBg = format_color(colorBg)
+    colorHl = format_color(colorHl)
+
+    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+    qr.add_data(url)
+    qr.make()
+
+    img = qr.make_image(
+        image_factory=StyledPilImage,
+        color_mask=SolidFillColorMask(back_color=colorBg, front_color=colorHl)
+    )
+
     buffer = io.BytesIO()
     img.save(buffer, format="PNG")
     img_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
     return img_b64
+
+# JS postaa requestin tänne kun waiting näkymä on latautunut.
+# Tämä palauttaa qr koodin oikeilla väreillä
+@quizgame_bp.route("/generate_qr", methods=["POST"])
+def generate_colored_qr():
+    data = request.get_json()
+
+    host_ip = current_app.config.get("HOST_IP", "127.0.0.1")
+    port = current_app.config.get("PORT", 8080)
+    url = f"http://{host_ip}:{port}/user"
+
+    colorHighlight = data.get("colorHl", "#000000")
+    colorBg = data.get("colorBg", "#ffffff")
+
+    qr_code = generate_qr(url, colorBg, colorHighlight)
+
+    return jsonify({"qr": qr_code})
 
 # Host waiting screen
 @quizgame_bp.route("/waiting")
@@ -32,13 +83,13 @@ def waiting_screen_host():
 
     print("URL:", url, flush=True)
     
-    qr_code = generate_qr(url)
+    #qr_code = generate_qr(url)
 
     host_id = "host_id_should_be_here"
     if 'host_id' in session:
         host_id = session['host_id']
 
-    return render_template("host_waiting.html", qr_code=qr_code, host_id=host_id)
+    return render_template("host_waiting.html", host_id=host_id) #qr_code=qr_code
 
 
 # Pelaajien näkymä pelissä, route ei muutu pelin aikana, näkymä päivittyy dynaamisesti.
@@ -61,10 +112,10 @@ def get_host_partial(view_name):
     port = current_app.config.get("PORT", 8080)
     url = f"http://{host_ip}:{port}/user"
     
-    qr_code = generate_qr(url)
+    #qr_code = generate_qr(url)
 
     if view_name == "waiting":
-        return render_template("/partials/host_partials/host_waiting_view.html", qr_code=qr_code)
+        return render_template("/partials/host_partials/host_waiting_view.html") #, qr_code=qr_code
     elif view_name == "host_question":
         return render_template("/partials/host_partials/host_question_view.html")
     else:
