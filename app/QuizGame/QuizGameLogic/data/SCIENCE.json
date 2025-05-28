@@ -39,6 +39,86 @@
             "answer_en": "Cats use an innate ability called the 'cat righting reflex', which allows them to twist their bodies mid-air without violating angular momentum — physics just has to accept it.",
             "answer_fi": "Kissoilla on synnynnäinen 'kissan oikaisurefleksi', jonka avulla ne voivat kiertyä ilmassa jaloilleen ilman, että ne rikkoisivat kulmamomentin säilymistä — fysiikka joutuu vain hyväksymään sen.",
             "category": "SCIENCE"
+        },
+        {
+            "id": 5,
+            "question_en": "",
+            "question_fi": "Mihin tarkoitukseen käytettiin aikoinaan Ludlow-kolikkomittaria?",
+            "answer_en": "",
+            "answer_fi": "Se mittasi työväen asuntojen kaasun kulutusta kolikkojen avulla",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 6,
+            "question_en": "",
+            "question_fi": "Mikä on triboluminesenssi ja missä sitä esiintyy?",
+            "answer_en": "",
+            "answer_fi": "Se on valon välähdys, joka syntyy kun aineita murskataan, esim. kun purukumia puretaan",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 7,
+            "question_en": "",
+            "question_fi": "Miksi vanhoissa sukelluspuvuissa oli painavat kengät?",
+            "answer_en": "",
+            "answer_fi": "Ne piti sukeltajan tasapainossa ja esti kellumasta hallitsemattomasti",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 8,
+            "question_en": "",
+            "question_fi": "Mikä on Zweckform 222 ja miksi se oli tärkeä 60-luvulla?",
+            "answer_en": "",
+            "answer_fi": "Se oli saksalainen lomakepohja, jota käytettiin tietokoneohjelmoinnin opettamiseen",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 9,
+            "question_en": "",
+            "question_fi": "Miksi jotkut säteilytyypit voivat ionisoida ilman mutta toiset ei?",
+            "answer_en": "",
+            "answer_fi": "Vain tarpeeksi energiset säteilyt pystyy irrottamaan elektroneja ilmamolekyyleistä",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 10,
+            "question_en": "",
+            "question_fi": "Mihin perustuu vanha tekniikka nimeltä 'herätemagnetismi'?",
+            "answer_en": "",
+            "answer_fi": "Siinä magneettisuus syntyy kun rautakappale asetetaan toisen magneetin kenttään",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 11,
+            "question_en": "",
+            "question_fi": "Mitä tarkoittaa 'kaasukromatografia' ja mihin sitä käytetään?",
+            "answer_en": "",
+            "answer_fi": "Se erottaa seoksen kaasuiksi ja analysoi niiden koostumuksen",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 12,
+            "question_en": "",
+            "question_fi": "Miksi suprajohtava materiaali hylkii magneettikenttää?",
+            "answer_en": "",
+            "answer_fi": "Koska sen sisällä ei ole sähkövastusta, kenttä ei pääse tunkeutumaan aineeseen",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 13,
+            "question_en": "",
+            "question_fi": "Mikä tekee vesinokan nenästä niin erikoisen aistinelimen?",
+            "answer_en": "",
+            "answer_fi": "Se voi aistia sähköisiä impulsseja vedessä olevista saaliista",
+            "category": "SCIENCEHARD"
+        },
+        {
+            "id": 14,
+            "question_en": "",
+            "question_fi": "Miten neutronitähti voi pyöriä tuhansia kertoja sekunnissa?",
+            "answer_en": "",
+            "answer_fi": "Koska sen koko romahtaa mutta liikemäärä säilyy, pyöriminen kiihtyy",
+            "category": "SCIENCEHARD"
         }
     ]
 }

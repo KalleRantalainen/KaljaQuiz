@@ -17,7 +17,7 @@ import os
 class QuestionAPI():
     def __init__(self, lang="fi"):
         # Kategoridoiden nimet / tiedostojen nimet, jossa kysymykset ovat
-        self.categories = ["HISTORY", "SCIENCE", "MISCELLANEOUS"]
+        self.categories = ["HISTORY", "SCIENCE", "MISCELLANEOUS", "CHATGPTRAPPA", "EXPLAIN"]
         # Pitää kirjaa käytetyistä kysymyksistä, ettei samaa kysymystä kysytä monesti
         self.used_question_ids = [] # Formaatti [{"category": "HISTORY", "used_ids": [1,3]}, {"category": "SCIENCE", "used_ids": []}, ...]
         # Kieli, jolla kysymys ja vastaus haetaan

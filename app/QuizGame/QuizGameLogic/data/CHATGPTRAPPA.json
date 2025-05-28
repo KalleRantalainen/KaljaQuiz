@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "id": 0,
+      "question_en": "",
+      "question_fi": "Miksi banaanit ovat joskus mustia sisältä?",
+      "answer_en": "",
+      "answer_fi": "Ne on saaneet kylmää tai ovat liian kypsiä",
+      "category": "MISC"
+    },
+    {
+      "id": 1,
+      "question_en": "",
+      "question_fi": "Miten postin lajittelukeskus toimii",
+      "answer_en": "",
+      "answer_fi": "Kirjeet menee hihnalla ja koneet lukee osoitteet ja lajittelee ne alueittain.",
+      "category": "MISC"
+    },
+    {
+      "id": 2,
+      "question_en": "",
+      "question_fi": "Miksi ihmiset laittaa kynttilöitä haudoille syksyllä?",
+      "answer_en": "",
+      "answer_fi": "Se on tapa kunnioittaa edesmenneitä ja muistaa heitä pimeään aikaan",
+      "category": "MISC"
+    },
+    {
+      "id": 3,
+      "question_en": "",
+      "question_fi": "Miten popcorn poksahtaa?",
+      "answer_en": "",
+      "answer_fi": "Sisällä oleva kosteus kuumenee ja paine räjäyttää kuoren auki",
+      "category": "MISC"
+    },
+    {
+      "id": 4,
+      "question_en": "",
+      "question_fi": "Miksi hammastahna vaahtoaa?",
+      "answer_en": "",
+      "answer_fi": "Siinä on aineita jotka tekee vaahtoa kun harjaa hampaita",
+      "category": "MISC"
+    },
+    {
+      "id": 5,
+      "question_en": "",
+      "question_fi": "Miksi kuuma juoma höyryää?",
+      "answer_en": "",
+      "answer_fi": "Koska neste muuttuu höyryksi kun se kohtaa viileän ilman",
+      "category": "MISC"
+    },
+    {
+      "id": 6,
+      "question_en": "",
+      "question_fi": "Miten silmälasit huurtuu?",
+      "answer_en": "",
+      "answer_fi": "Kun lämmin kostea ilma osuu kylmään linssiin niin siihen tiivistyy vesihöyry",
+      "category": "MISC"
+    },
+    {
+      "id": 7,
+      "question_en": "",
+      "question_fi": "Miksi koira pyörii ennen kuin menee makuulle?",
+      "answer_en": "",
+      "answer_fi": "Se on vanha vaisto jolla tehdään paikka mukavaks",
+      "category": "MISC"
+    },
+    {
+      "id": 8,
+      "question_en": "",
+      "question_fi": "Mistä tietää että kahvi on vanhaa",
+      "answer_en": "",
+      "answer_fi": "Se maistuu tunkkaiselta eikä tuoksu hyvältä enää",
+      "category": "MISC"
+    },
+    {
+      "id": 9,
+      "question_en": "",
+      "question_fi": "Miksi jotkut juustot haisee pahalta?",
+      "answer_en": "",
+      "answer_fi": "Ne sisältää bakteereja jotka tuottaa voimakkaita hajuja",
+      "category": "MISC"
+    },
+    {
+      "id": 10,
+      "question_en": "",
+      "question_fi": "Miten liukumäki toimii?",
+      "answer_en": "",
+      "answer_fi": "Painovoima vetää ja sileä pinta vähentää kitkaa",
+      "category": "MISC"
+    },
+    {
+      "id": 11,
+      "question_en": "",
+      "question_fi": "Miksi tietokone pitää ääntä vaikka ei tee mitään",
+      "answer_en": "",
+      "answer_fi": "Tuulettimet pyörii silti että kone ei ylikuumene",
+      "category": "MISC"
+    },
+    {
+      "id": 12,
+      "question_en": "",
+      "question_fi": "Miksi jotkut kananmunat kelluu vedessä",
+      "answer_en": "",
+      "answer_fi": "Koska ne on vanhoja ja niihin on tullut ilmaa sisälle",
+      "category": "MISC"
+    },
+    {
+      "id": 13,
+      "question_en": "",
+      "question_fi": "Miksi lumihiutaleet on erimuotoisia",
+      "answer_en": "",
+      "answer_fi": "Koska ilmankosteus ja lämpötila vaikuttaa niiden rakenteeseen",
+      "category": "MISC"
+    },
+    {
+      "id": 14,
+      "question_en": "",
+      "question_fi": "Miten kännykän sormenjälkitunnistin toimii?",
+      "answer_en": "",
+      "answer_fi": "Se lukee sormenjäljen kuvion ja vertaa tallennettuun tietoon",
+      "category": "MISC"
+    },
+    {
+      "id": 15,
+      "question_en": "",
+      "question_fi": "Miksi ihmiset haukottelee kun näkee toisen haukottelevan",
+      "answer_en": "",
+      "answer_fi": "Aivot matkii toisten tunnetiloja automaattisesti",
+      "category": "MISC"
+    },
+    {
+      "id": 16,
+      "question_en": "",
+      "question_fi": "Miksi kalat ei huku",
+      "answer_en": "",
+      "answer_fi": "Niillä on kidukset jotka ottaa happea vedestä",
+      "category": "MISC"
+    },
+    {
+      "id": 17,
+      "question_en": "",
+      "question_fi": "Miten jään päältä voi kuulua pauketta",
+      "answer_en": "",
+      "answer_fi": "Jää laajenee tai liikkuu kun lämpötila muuttuu",
+      "category": "MISC"
+    },
+    {
+      "id": 18,
+      "question_en": "",
+      "question_fi": "Miksi hississä on peili",
+      "answer_en": "",
+      "answer_fi": "Ettei tunnu niin ahtaalta ja että voi tarkistaa ulkonäkö",
+      "category": "MISC"
+    },
+    {
+      "id": 19,
+      "question_en": "",
+      "question_fi": "Miksi ikkunaan muodostuu jääkukkia",
+      "answer_en": "",
+      "answer_fi": "Kylmä ilma jäädyttää kosteuden lasin pinnalle tietyllä tavalla",
+      "category": "MISC"
+    },
+    {
+      "id": 20,
+      "question_en": "",
+      "question_fi": "Miksi jotkut ihmiset tykkää suudella silmät auki?",
+      "answer_en": "",
+      "answer_fi": "Ne haluu nähdä toisen reaktiot",
+      "category": "SPICY"
+    },
+    {
+      "id": 21,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa kun joku sanoo että on kuuma linja",
+      "answer_en": "",
+      "answer_fi": "Se tarkottaa seksikästä puhelinyhteyttä",
+      "category": "SPICY"
+    },
+    {
+      "id": 22,
+      "question_en": "",
+      "question_fi": "Miksi jotkut saa mustelmia seksin jälkeen",
+      "answer_en": "",
+      "answer_fi": "Koska iho on herkkä ja kaikki kosketus ei oo hellää",
+      "category": "SPICY"
+    },
+    {
+      "id": 23,
+      "question_en": "",
+      "question_fi": "Miten voi tietää tykkääkö toinen suutelusta",
+      "answer_en": "",
+      "answer_fi": "Jos se vastaa innokkaasti ja ei vetäydy pois",
+      "category": "SPICY"
+    },
+    {
+      "id": 24,
+      "question_en": "",
+      "question_fi": "Miksi jotkut katsoo peilistä itseään seksin aikana",
+      "answer_en": "",
+      "answer_fi": "Ne haluu nähdä miltä näyttää tai innostuu siitä",
+      "category": "SPICY"
+    },
+    {
+      "id": 25,
+      "question_en": "",
+      "question_fi": "Mitä tarkottaa kun joku on 'panokunnossa'",
+      "answer_en": "",
+      "answer_fi": "Että on valmis harrastaa seksiä heti",
+      "category": "SPICY"
+    },
+    {
+      "id": 26,
+      "question_en": "",
+      "question_fi": "Miten kondomi voi mennä rikki",
+      "answer_en": "",
+      "answer_fi": "Jos on liian kuivaa tai väärän kokonen",
+      "category": "SPICY"
+    },
+    {
+      "id": 27,
+      "question_en": "",
+      "question_fi": "Miksi jotkut nauraa seksin jälkeen",
+      "answer_en": "",
+      "answer_fi": "Jännitys purkautuu tai jotain meni hassusti",
+      "category": "SPICY"
+    },
+    {
+      "id": 28,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa että joku on 'hanska kädessä'",
+      "answer_en": "",
+      "answer_fi": "Sillä on kondomi valmiina tai jo päällä",
+      "category": "SPICY"
+    },
+    {
+      "id": 29,
+      "question_en": "",
+      "question_fi": "Miksi jotkut käyttää kirjaa sängyssä",
+      "answer_en": "",
+      "answer_fi": "Koska siinä on asento-ohjeita tai saa ideoita",
+      "category": "SPICY"
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": 0,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa sana 'jottain' vanhassa suomen kielessä?",
+      "answer_en": "",
+      "answer_fi": "Se on vanha muoto sanasta jokin tai jotakin",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 1,
+      "question_en": "",
+      "question_fi": "Mikä on 'raatarin pihdit'?",
+      "answer_en": "",
+      "answer_fi": "Ne on vanha nimi kuolleen eläimen nylkemiseen käytetyille pihdeille",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 2,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa sana 'tyräkkä'?",
+      "answer_en": "",
+      "answer_fi": "Se tarkoittaa pientä ämpäriä tai kannua",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 3,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa 'käkkäräpuu'?",
+      "answer_en": "",
+      "answer_fi": "Se on matala, kierteinen ja vänkyräinen puu, usein tuntureilla",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 4,
+      "question_en": "",
+      "question_fi": "Mikä on 'röyhyttää'?",
+      "answer_en": "",
+      "answer_fi": "Se tarkoittaa ravistaa tai puistella rajusti",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 5,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa sana 'lötjäke'?",
+      "answer_en": "",
+      "answer_fi": "Se tarkoittaa löysää tai muodotonta kappaletta, usein pilkallisesti",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 6,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa 'sikeä' unessa?",
+      "answer_en": "",
+      "answer_fi": "Syvää ja keskeytymätöntä unta",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 7,
+      "question_en": "",
+      "question_fi": "Mikä on 'hulvata' vanhassa kielessä?",
+      "answer_en": "",
+      "answer_fi": "Tarkoittaa kaatua tai läikkyä nopeasti, esim. vesi",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 8,
+      "question_en": "",
+      "question_fi": "Mikä on 'hikokas'?",
+      "answer_en": "",
+      "answer_fi": "Vanha sana, joka tarkoittaa itkuista tai nyyhkivää lasta",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 9,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa 'vetkuttaa' vanhassa murrekielessä?",
+      "answer_en": "",
+      "answer_fi": "Viivytellä tai tehdä jotain hitaasti ja vitkastellen",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 10,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa sana 'aalloppi'?",
+      "answer_en": "",
+      "answer_fi": "Se on vanha nimitys merenkäynnille tai aallokolle",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 11,
+      "question_en": "",
+      "question_fi": "Mikä on 'dallinlammas'?",
+      "answer_en": "",
+      "answer_fi": "Se on harvinainen lammaslaji, joka esiintyy tietyillä alueilla",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 12,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa sana 'bahamasaarelainen'?",
+      "answer_en": "",
+      "answer_fi": "Se viittaa Bahaman saarilta kotoisin olevaan henkilöön",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 13,
+      "question_en": "",
+      "question_fi": "Mikä on 'bassosinkki'?",
+      "answer_en": "",
+      "answer_fi": "Se on musiikissa käytetty termi, joka viittaa tiettyyn äänialaan",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 14,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa 'luote' suomalaisessa kansanperinteessä?",
+      "answer_en": "",
+      "answer_fi": "Se on voimakas loitsu tai taikasana, usein käytetty parantamiseen",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 15,
+      "question_en": "",
+      "question_fi": "Mikä on 'kalsarikännit'?",
+      "answer_en": "",
+      "answer_fi": "Se tarkoittaa kotona yksin alusvaatteissa juomista ilman aikomusta lähteä ulos",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 16,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa 'kaamos'?",
+      "answer_en": "",
+      "answer_fi": "Se on ajanjakso, jolloin aurinko ei nouse horisontin yläpuolelle",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 17,
+      "question_en": "",
+      "question_fi": "Mikä on 'vihta' tai 'vasta'?",
+      "answer_en": "",
+      "answer_fi": "Se on saunassa käytettävä koivuvasta, jolla huidotaan ihoa",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 18,
+      "question_en": "",
+      "question_fi": "Mitä tarkoittaa 'lintukoto'?",
+      "answer_en": "",
+      "answer_fi": "Se viittaa paikkaan, joka on rauhallinen ja suojassa maailman myllerryksiltä",
+      "category": "EXPLAINHARD"
+    },
+    {
+      "id": 19,
+      "question_en": "",
+      "question_fi": "Mikä on 'tokka' poronhoidossa?",
+      "answer_en": "",
+      "answer_fi": "Se on suuri porolauma",
+      "category": "EXPLAINHARD"
+    }
+  ]
+}
