@@ -141,6 +141,7 @@ function loadAnswersView(correctAnswer, playerAnswers) {
                 item.classList.add('answer-item');
                 answersList.appendChild(item);
             });
+
             
             const nextBtn = document.getElementById("round-results-btn");
             if (nextBtn) {
@@ -148,6 +149,12 @@ function loadAnswersView(correctAnswer, playerAnswers) {
 
                 socket.on("everyone_voted", () => {
                     nextBtn.disabled = false; // enable when everyone has voted
+
+                    document.querySelectorAll('.answer-item').forEach(item => {
+                        if (item.textContent.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+                            item.classList.add('correct-answer');
+                        }
+                    });
                 });
 
                 nextBtn.addEventListener("click", () => {

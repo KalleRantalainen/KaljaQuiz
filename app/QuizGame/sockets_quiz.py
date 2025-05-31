@@ -101,10 +101,8 @@ def handle_vote(data):
 
     if voted_player in players:
         players[voted_player]["quizgame"]["points"] += 1
-        print("###################################")
         print("Pelaaja ", players[voted_player]["name"], " sai äänen pelaajalta ", players[session.get("user_id")])
         print("Pelaajalla on nyt ", players[voted_player]["quizgame"]["points"], " pistettä")
-        print("###################################")
     else:
         print("PELAAJA ÄÄNESTI TUNTEMATONTA")
     
