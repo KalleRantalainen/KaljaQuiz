@@ -36,3 +36,113 @@
   color: #fff;
   font-weight: bold;
 }
+
+/* VÄliaikasesti oikean vastauksen highlight tänne.*/
+.default-list li.correct-answer {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-color: #1c6b32;
+
+    padding: 0.75rem 1rem;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--color-text-highlight);
+    border-radius: 8px;
+
+    max-width: 300px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Väliaikanen leaderboard styling tänne*/
+
+.final-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.final-results-container h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 3rem;
+    color: var(--color-text-highlight);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.results-table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    background-color: var(--color-background);
+    color: var(--color-text-normal);
+    border: 2px solid var(--color-text-highlight);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}.final-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.final-results-container h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 3rem;
+    color: var(--color-text-highlight);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.results-table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    background-color: var(--color-background);
+    color: var(--color-text-normal);
+    border: 2px solid var(--color-text-highlight);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.results-table th,
+.results-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--color-text-highlight);
+}
+
+.results-table th {
+    background-color: var(--color-text-highlight);
+    color: var(--color-background);
+    font-weight: bold;
+}
+
+.results-table tr:last-child td {
+    border-bottom: none;
+}
+
+.results-table th,
+.results-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--color-text-highlight);
+}
+
+.results-table th {
+    background-color: var(--color-text-highlight);
+    color: var(--color-background);
+    font-weight: bold;
+}
+
+.results-table tr:last-child td {
+    border-bottom: none;
+}
