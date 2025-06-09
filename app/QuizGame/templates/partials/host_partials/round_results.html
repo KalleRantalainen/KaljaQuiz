@@ -4,7 +4,7 @@
     <h2>Tämän hetkinen pelitilanne</h2>
     <ul class="default-list" id="current-standings">
         {% for user_id, player in player_data.items() %}
-            <li>{{ player.name }}: {{ player.quizgame.points }} pistettä</li>
+            <li>{{ player.name }}: {{ player.quizgame.points }} pistettä, uusia pisteitä: <span>+{{ player.quizgame.new_points }}</span></li>
         {% endfor %}
     </ul>
     <div id="fun-bar-graph" class="bar-graph"></div>
