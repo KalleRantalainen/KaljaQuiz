@@ -6,7 +6,7 @@ from . import coniflipper_bp
 def waiting_screen_host():
     return render_template("host_view.html")
 
-# Partials
+# Host waiting players partial view
 @coniflipper_bp.route("/waiting_players")
 def waiting_players():
     return render_template("partials/host_waiting.html")
