@@ -1,12 +1,13 @@
 # Käynnistys
 
-## Torstaiks pitäs saada nämä valmiiks jos kerkijjää
-* Listanäkymissä on tupla borderit koska laitoin sitten kaks tyyliä päällekkäin -> Tehty
-* Jotkut listanäkymien boxit on liian leveitä, esim pelaajien nimet hostin odotusnäytöllä -> Tehty
-* Tuloksien table on aika raffi, pittäs tehdä tyylit siihen
-* Pylväsdiagrammi siisteillä particle effecteillä -> Tehty, ei particle effectejä kyllä vielä ainakaan
-* Retroteema on perseennäkönen
-* 80s neon on vielä perseemmännäkönen, mutta käyttää siistä 3d kirjastoa joten siitä ei luovuta
+## Coinflip idea
+1. Hostin näytöllä näkyy kolikko
+2. Pelaajat liittyvät peliin ja asettavat panokset
+3. Pelaajat äänestävät flippausta
+4. Kun kaikki pelaajat äänestävät flippiä niin kolikko alkaa pyörimään.
+5. Vasemmalla lista edellisistä tuloksista -> tyhmät panostavat tämän mukaan
+6. Oikealla lista panoksista ja pelaajista
+7. Keskellä kolikko
 
 ## Dockerilla
 1. Docker engine päälle
