@@ -86,6 +86,8 @@ def handle_player_answer(data):
 
     if user_id in players:
         players[user_id]["quizgame"]["answer"] = answer
+        players[user_id]["quizgame"]["new_points"] = 0
+        print(" ======== PELAAJAN UUDET PISTEET NOLLATTU, TILANNE NYT:", players[user_id]["quizgame"]["new_points"], flush=True)
         print(f"Player '{players[user_id]['name']}' answered: {answer}")
         
         emit("update_player_counter", room=QUIZ_ROOM)
@@ -101,6 +103,8 @@ def handle_vote(data):
 
     if voted_player in players:
         players[voted_player]["quizgame"]["points"] += 1
+        players[voted_player]["quizgame"]["new_points"] += 1
+        print(" ======== PELAAJALLE +1 UUSI PISTE, TILANNE NYT:", players[voted_player]["quizgame"]["new_points"], flush=True)
         print("Pelaaja ", players[voted_player]["name"], " sai äänen pelaajalta ", players[session.get("user_id")])
         print("Pelaajalla on nyt ", players[voted_player]["quizgame"]["points"], " pistettä")
     else:
@@ -115,6 +119,8 @@ def handle_real_vote():
     players[user_id]["quizgame"]["voted"] = True
 
     players[session.get("user_id")]["quizgame"]["points"] += 1
+    players[user_id]["quizgame"]["new_points"] += 1
+    print(" ======== PELAAJALLE +1 UUSI PISTE, OIKEA VASTAUS, TILANNE NYT:", players[user_id]["quizgame"]["new_points"], flush=True)
     print("Pelaaja valitsi oikean vastauksen")
 
     emit("update_player_counter", room=QUIZ_ROOM)

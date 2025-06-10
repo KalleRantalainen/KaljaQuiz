@@ -1,0 +1,24 @@
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    /*top: 50%;*/
+    top: 10%;
+    transform: translateY(-50%);
+}
+
+.coinflip-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2%;
+    gap: 1%;
+}
+
+.coinflip-container > div {
+    flex: 1;
+    max-width: 32%;
+    box-sizing: border-box;
+    padding: 1rem;
+    /*background-color: #f0f0f0;
+    border: 1px solid #ccc;*/
+}
